@@ -55,7 +55,8 @@ namespace Portfolio.API.Controllers
         [HttpDelete("{id}")]
         public async void Delete(int id)
         {
-            //await data.DeleteProjectAsync(Get(id));
+            var projectToDelete = data.Projects.Where(project => project.id == id).FirstOrDefault();
+            await data.DeleteProjectAsync(projectToDelete);
         }
 
         [HttpGet("[action]")]
