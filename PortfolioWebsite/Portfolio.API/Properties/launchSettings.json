@@ -20,8 +20,8 @@
     "Portfolio.API": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
-      "applicationUrl": "http://localhost:5000",
+      "launchUrl": "api/project",
+      "applicationUrl": "http://localhost:5001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -8,6 +8,7 @@ namespace Portfolio.Shared
 {
     public class Project
     {
+        
         [JsonPropertyName("id")]
         public int id { get; set; }
         

@@ -27,8 +27,20 @@ namespace Portfolio.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<AppContext>(options => options.UseNpgsql(convertUrlConnectionString(Configuration["Database_URL"])));
+            var connectionString = Configuration["DATABASE_URL"];
+            services.AddDbContext<AppDBContext>(options => options.UseNpgsql(convertUrlConnectionString(Configuration["DATABASE_URL"])));
             services.AddTransient<IDataService, PostgresDataService>();
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+                    });
+            });
         }
 
         private string convertUrlConnectionString(string dbUrl)
