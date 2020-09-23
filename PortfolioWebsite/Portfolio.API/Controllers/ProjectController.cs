@@ -40,7 +40,7 @@ namespace Portfolio.API.Controllers
 
         // POST api/<ProjectController>
         [HttpPost]
-        public async void Post([FromBody] Project project)
+        public async Task Post([FromBody] Project project)
         {
             await data.AddProjectAsync(project);
         }
@@ -53,9 +53,12 @@ namespace Portfolio.API.Controllers
 
         // DELETE api/<ProjectController>/5
         [HttpDelete("{id}")]
-        public async void Delete(int id)
+        public async Task Delete(int id)
         {
             var projectToDelete = data.Projects.Where(project => project.id == id).FirstOrDefault();
+
+            Console.WriteLine("Project to delete is " + projectToDelete.Title);
+
             await data.DeleteProjectAsync(projectToDelete);
         }
 

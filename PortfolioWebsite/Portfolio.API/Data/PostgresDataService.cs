@@ -19,18 +19,24 @@ namespace Portfolio.API.Data
         public async Task AddProjectAsync(Project project)
         {
             context.Projects.Add(project);
+
+            Console.WriteLine("Added project " + project.Title);
             await context.SaveChangesAsync();
         }
 
         public async Task DeleteProjectAsync(Project project)
         {
             context.Projects.Remove(project);
+
+            Console.WriteLine("Deleted project " + project.Title);
             await context.SaveChangesAsync();
         }
 
         public async Task UpdateProjectAsync(Project project)
         {
             context.Projects.Update(project);
+
+            Console.WriteLine("Updated project " + project.Title);
             await context.SaveChangesAsync();
         }
     }
