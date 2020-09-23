@@ -17,7 +17,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var project in ProjectList??new Project[] { })
+        @foreach (var project in ProjectList?? new Project[] { })
         {
             <tr>
                 <td>@project.Title</td>
@@ -40,7 +40,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        ProjectList = await service.GetProjectsAsync();
+        ProjectList = await service.GetProjectsAsync();        
         //return base.OnInitializedAsync();
     }
 
@@ -51,7 +51,7 @@
 
     public string PageTitle { get; set; }
 
-    public IEnumerable<Project> ProjectList { get; private set; }
+    public IEnumerable<Project> ProjectList { get; set; }
 
     public void EditProject(int id, APIService service)
     {

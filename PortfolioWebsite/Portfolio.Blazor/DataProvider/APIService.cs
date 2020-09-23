@@ -22,6 +22,7 @@ namespace Portfolio.Blazor.DataProvider
 
         public async Task<IEnumerable<Project>> GetProjectsAsync()
         {
+            Console.WriteLine("\tCurrently getting projects async");
             var projects = await client.GetFromJsonAsync<IEnumerable<Project>>("api/project");
 
             return projects;
