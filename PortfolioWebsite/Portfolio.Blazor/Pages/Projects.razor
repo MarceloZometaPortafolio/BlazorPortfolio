@@ -2,7 +2,7 @@
 
 @using Portfolio.Blazor.CodeBase
 @using Portfolio.Blazor.DataProvider
-@inherits ProjectsBase
+@using Portfolio.Shared 
 @inject APIService service
 @inject HttpClient client
 <h3>@PageTitle</h3>
@@ -17,22 +17,60 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var project in Projects)
+        @foreach (var project in ProjectList??new Project[] { })
         {
             <tr>
                 <td>@project.Title</td>
                 <td>@project.Requirement</td>
                 <td>
                     <button @onclick="() => EditProject(project.id, service)">Edit</button>
-                    <button @onclick="() => DeleteProject(project.id, service)">Edit</button>
+                    <button @onclick="() => DeleteProject(project.id, service)">Delete</button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<button @onclick="ShowAddComponent">Edit</button>
+<button @onclick="ShowAddComponent">Add</button>
 
 @code{
-    service
+    public bool isAddComponentDisplayed = false;
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        ProjectList = await service.GetProjectsAsync();
+        //return base.OnInitializedAsync();
+    }
+
+    //public ProjectsBase()
+    //{
+    //    this.service = service ?? throw new ArgumentNullException(nameof(service));
+    //}
+
+    public string PageTitle { get; set; }
+
+    public IEnumerable<Project> ProjectList { get; private set; }
+
+    public void EditProject(int id, APIService service)
+    {
+    }
+
+    public async Task DeleteProject(int id, APIService service)
+    {
+        await service.DeleteProjectAsync(id);
+    }
+
+    public void ShowAddComponent()
+    {
+        if (isAddComponentDisplayed is false)
+        {
+            isAddComponentDisplayed = true;
+        }
+        else
+        {
+            isAddComponentDisplayed = false;
+        }
+    }
 }

@@ -15,6 +15,11 @@ namespace Portfolio.Blazor.CodeBase
         //private APIService service;
         public bool isAddComponentDisplayed = false;
 
+        public ProjectsBase()
+        {
+            Projects = new List<Project>();
+        }
+
         //protected override Task OnInitializedAsync()
         //{
         //    this.service = service;
