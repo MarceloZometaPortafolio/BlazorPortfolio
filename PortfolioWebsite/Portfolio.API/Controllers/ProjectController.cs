@@ -31,7 +31,12 @@ namespace Portfolio.API.Controllers
 
         // GET api/<ProjectController>/5
         [HttpGet("{id}")]
-        public Project Get(int id) => (Project)data.Projects.Where(project => project.id == id);
+        public async Task<IEnumerable<Project>> Get(int id)
+        {
+            IEnumerable<Project> projects = data.Projects.Where(project => project.id == id);
+
+            return projects;
+        }
 
         // POST api/<ProjectController>
         [HttpPost]
@@ -50,7 +55,7 @@ namespace Portfolio.API.Controllers
         [HttpDelete("{id}")]
         public async void Delete(int id)
         {
-            await data.DeleteProjectAsync(Get(id));
+            //await data.DeleteProjectAsync(Get(id));
         }
 
         [HttpGet("[action]")]
