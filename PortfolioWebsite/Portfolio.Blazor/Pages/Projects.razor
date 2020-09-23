@@ -1,0 +1,36 @@
+﻿@page "/projects"
+
+@using Portfolio.Blazor.CodeBase
+@using Portfolio.Blazor.DataProvider
+@inherits ProjectsBase
+@inject APIService service
+
+<h3>@PageTitle</h3>
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Requirement</th>
+            <th>Option</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var project in Projects)
+        {
+            <tr>
+                <td>@project.Title</td>
+                <td>@project.Requirement</td>
+                <td>
+                    <button @onclick="() => EditProject(project.id, service)">Edit</button>
+                    <button @onclick="() => DeleteProject(project.id, service)">Edit</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button @onclick="ShowAddComponent">Edit</button>
+
+

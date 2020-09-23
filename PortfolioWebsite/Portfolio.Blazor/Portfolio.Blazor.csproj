@@ -21,4 +21,8 @@
     <None Include="wwwroot\images\resume.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Portfolio.Shared\Portfolio.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
