@@ -4,7 +4,7 @@
 @using Portfolio.Blazor.DataProvider
 @inherits ProjectsBase
 @inject APIService service
-
+@inject HttpClient client
 <h3>@PageTitle</h3>
 <br />
 
@@ -33,4 +33,6 @@
 
 <button @onclick="ShowAddComponent">Edit</button>
 
-
+@code{
+    service
+}

@@ -14,7 +14,10 @@ namespace Portfolio.Blazor.DataProvider
 
         public APIService(HttpClient client)
         {
+            Console.WriteLine("\t" + client.BaseAddress);
             this.client = client ?? throw new ArgumentNullException(nameof(client));
+            Console.WriteLine("\t" + this.client.BaseAddress);
+
         }
 
         public async Task<IEnumerable<Project>> GetProjectsAsync()
