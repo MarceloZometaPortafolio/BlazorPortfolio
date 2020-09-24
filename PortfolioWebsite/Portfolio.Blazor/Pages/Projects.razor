@@ -40,8 +40,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        ProjectList = await service.GetProjectsAsync();        
         //return base.OnInitializedAsync();
+        await GetAllProjectsFromDB();
     }
 
     public string PageTitle { get; set; }
@@ -55,6 +55,8 @@
     public async Task DeleteProject(int id, APIService service)
     {
         await service.DeleteProjectAsync(id);
+        StateHasChanged();
+        await GetAllProjectsFromDB();
     }
 
     public void ShowAddComponent()
@@ -67,5 +69,10 @@
         {
             isAddComponentDisplayed = false;
         }
+    }
+
+    private async Task GetAllProjectsFromDB()
+    {
+        ProjectList = await service.GetProjectsAsync();
     }
 }
