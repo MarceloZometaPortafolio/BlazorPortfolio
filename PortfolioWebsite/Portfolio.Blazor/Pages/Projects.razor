@@ -6,7 +6,8 @@
 
 @inject APIService service
 @inject HttpClient client
-@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper UriHelper
+@inject NavigationManager NavManager
+@*@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper UriHelper*@
 
 <h3>@PageTitle</h3>
 <br />
@@ -58,7 +59,7 @@
 
     public void EditProject(int id)
     {
-        UriHelper.NavigateTo($"/projects/{id}");
+        NavManager.NavigateTo($"/projects/" + id);
     }
 
     public async Task DeleteProject(int id)

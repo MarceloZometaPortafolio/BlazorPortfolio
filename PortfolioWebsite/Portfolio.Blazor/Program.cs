@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Portfolio.Blazor.DataProvider;
+using Microsoft.AspNetCore.Components;
 
 namespace Portfolio.Blazor
 {
@@ -20,7 +21,7 @@ namespace Portfolio.Blazor
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("http://localhost:5001") });
             
-            builder.Services.AddScoped<APIService>();
+            builder.Services.AddScoped<APIService>();            
 
             await builder.Build().RunAsync();
         }
