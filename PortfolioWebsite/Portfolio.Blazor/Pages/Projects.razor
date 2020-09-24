@@ -31,18 +31,20 @@
     </tbody>
 </table>
 
-<button @onclick="ShowAddComponent">Add</button>
+<button @onclick="ShowAddComponent">Add New Project</button>
+<br/>
 
 @if(isAddComponentDisplayed is true)
 {
-    <label>Hi from adding component</label>
+    <AddProject GreatestId="@GreatestId"/>
 }
 
 
 @code{
     public bool isAddComponentDisplayed = false;
-
-
+    public string PageTitle { get; set; }
+    public IEnumerable<Project> ProjectList { get; set; }
+    public int GreatestId { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -50,9 +52,6 @@
         await GetAllProjectsFromDB();
     }
 
-    public string PageTitle { get; set; }
-
-    public IEnumerable<Project> ProjectList { get; set; }
 
     public void EditProject(int id, APIService service)
     {
@@ -82,5 +81,6 @@
     private async Task GetAllProjectsFromDB()
     {
         ProjectList = await service.GetProjectsAsync();
+        GreatestId = ProjectList.Max(p => p.id);
     }
 }

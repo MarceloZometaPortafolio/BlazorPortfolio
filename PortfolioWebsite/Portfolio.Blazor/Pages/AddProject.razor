@@ -1,0 +1,50 @@
+﻿@using Portfolio.Blazor.DataProvider
+@using Portfolio.Shared
+@inject APIService service
+
+<h3>Add New Project</h3>
+
+<form>
+    <label>Project Title:</label>
+    <input type="text" @bind="NewProject.Title" />
+    <br />
+
+    <label>Project Requirements:</label>
+    <br />
+    <textarea @bind="NewProject.Requirement" />
+    <br />
+
+    <label>Project Design:</label>
+    <br />
+    <textarea @bind="NewProject.Design" />
+    <br />
+
+    <label>Project Completion Date:</label>
+    <br />
+    <input type="datetime" @bind="NewProject.CompletionDate" />
+    <br />
+
+    <button @onclick="AddNewProject">Add</button>
+</form>
+
+@code {
+
+    [Parameter]
+    public int GreatestId { get; set; }
+
+    Project NewProject;
+
+    protected override void OnInitialized()
+    {
+        //base.OnInitialized();
+        NewProject = new Project();
+    }
+
+    public async Task AddNewProject()
+    {
+        NewProject.id = GreatestId + 1;
+
+        await service.AddProjectAsync(NewProject);
+    }
+
+}

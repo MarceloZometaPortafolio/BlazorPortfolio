@@ -42,6 +42,7 @@ namespace Portfolio.Blazor.DataProvider
 
         public async Task DeleteProjectAsync(int id)
         {
+            Console.WriteLine("\tCurrently deleting project " + id);
             await client.DeleteAsync($"api/project/{id}");
         }
     }

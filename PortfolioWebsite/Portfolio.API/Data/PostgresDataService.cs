@@ -20,7 +20,7 @@ namespace Portfolio.API.Data
         {
             context.Projects.Add(project);
 
-            Console.WriteLine("Added project " + project.Title);
+            Console.WriteLine("Added project " + project.Title + "with id " + project.id);
             await context.SaveChangesAsync();
         }
 
