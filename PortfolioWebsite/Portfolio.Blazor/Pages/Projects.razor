@@ -33,6 +33,12 @@
 
 <button @onclick="ShowAddComponent">Add</button>
 
+@if(isAddComponentDisplayed is true)
+{
+    <label>Hi from adding component</label>
+}
+
+
 @code{
     public bool isAddComponentDisplayed = false;
 
@@ -69,6 +75,8 @@
         {
             isAddComponentDisplayed = false;
         }
+
+        this.StateHasChanged();
     }
 
     private async Task GetAllProjectsFromDB()
