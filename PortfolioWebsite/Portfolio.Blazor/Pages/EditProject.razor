@@ -1,9 +1,38 @@
 ﻿@page "/projects/{ProjectId:int}"
-<h3>EditProject</h3>
+@using Portfolio.Shared
 
-<label>Hi from edit project. This is id @ProjectId</label>
+@inject Portfolio.Blazor.DataProvider.APIService service
+
+<h3>@Title</h3>
+
+<h5>Requirements</h5>
+<p>@Requirements</p>
+
+<h5>Design:</h5>
+<p>@Design</p>
+
+<h5>Completion date</h5>
+<p>@CompletionDate</p>
 
 @code {
     [Parameter]
     public int ProjectId { get; set; }
+
+    public string Title { get; set; }
+    public string Requirements { get; set; }
+    public string Design { get; set; }
+    public DateTime CompletionDate { get; set; }
+
+    public Project Project { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //return base.OnInitializedAsync();
+        Project = await service.GetProjectByIDAsync(ProjectId);
+
+        Title = Project.Title;
+        Requirements = Project.Requirement;
+        Design = Project.Design;
+        CompletionDate = Project.CompletionDate;
+    }
 }

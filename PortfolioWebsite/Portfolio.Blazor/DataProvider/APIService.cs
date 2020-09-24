@@ -35,8 +35,10 @@ namespace Portfolio.Blazor.DataProvider
 
         public async Task<Project> GetProjectByIDAsync(int id)
         {
-            var project = await client.GetFromJsonAsync<Project>($"api/project/{id}");
+            var projects = await client.GetFromJsonAsync<IEnumerable<Project>>("api/project");
 
+            var project = projects.Where(proj => proj.id == id).First();
+            Console.WriteLine("Project found waas " + project.Title);
             return project;
         }
 
@@ -44,6 +46,11 @@ namespace Portfolio.Blazor.DataProvider
         {
             Console.WriteLine("\tCurrently deleting project " + id);
             await client.DeleteAsync($"api/project/{id}");
+        }
+
+        public async Task UpdateProjectAsync(int id)
+        {
+            Console.WriteLine("\tCurrently updating project " + id);            
         }
     }
 }
