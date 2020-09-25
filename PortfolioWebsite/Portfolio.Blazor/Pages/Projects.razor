@@ -59,7 +59,7 @@
 
     public void EditProject(int id)
     {
-        NavManager.NavigateTo($"/projects/edit/" + id);
+        NavManager.NavigateTo($"projects/edit/" + id);
     }
 
     public async Task DeleteProject(int id)
@@ -91,6 +91,6 @@
 
     public void NavigateToDetailsPage(int id)
     {
-        NavManager.NavigateTo("/projects/" + id);
+        NavManager.NavigateTo("projects/" + id);
     }
 }
