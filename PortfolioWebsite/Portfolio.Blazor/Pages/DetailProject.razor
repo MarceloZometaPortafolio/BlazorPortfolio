@@ -1,33 +1,21 @@
-﻿@page "/projects/edit/{ProjectId:int}"
+﻿@page "/projects/{ProjectId:int}"
 @using Portfolio.Shared
-
 @inject Portfolio.Blazor.DataProvider.APIService service
 
 <h3>@Title</h3>
+<br />
 
-<form>
-    <label>Project Title:</label>
-    <br/>
-    <input type="text" @bind="Title" />
-    <br />
+<h5>Requirements:</h5>
+<p>@Requirements</p>
+<br />
 
-    <label>Project Requirements:</label>
-    <br />
-    <textarea @bind="Requirements" />
-    <br />
+<h5>Design:</h5>
+<p>@Design</p>
+<br />
 
-    <label>Project Design:</label>
-    <br />
-    <textarea @bind="Design" />
-    <br />
-
-    <label>Project Completion Date:</label>
-    <br />
-    <input type="datetime" @bind="CompletionDate" />
-    <br />
-
-    <button @onclick="SaveChanges">Save changes</button>
-</form>
+<h5>Completion date:</h5>
+<p>@CompletionDate</p>
+<br />
 
 @code {
     [Parameter]
@@ -41,7 +29,7 @@
     public Project Project { get; set; }
 
     /// <summary>
-    /// it was needed to have separate properties for displaying 
+    /// it was needed to have separate properties for displaying
     /// because the page loaded before oninitializedasync finished
     /// giving place to a null exception
     /// </summary>
@@ -56,17 +44,4 @@
         Design = Project.Design;
         CompletionDate = Project.CompletionDate;
     }
-
-    public async Task SaveChanges()
-    {
-        Project.Title = Title;
-        Project.Requirement = Requirements;
-        Project.Design = Design;
-        Project.CompletionDate = CompletionDate;
-
-        await service.UpdateProjectAsync(Project);
-
-        //await OnInitializedAsync();
-    }
-
 }

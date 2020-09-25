@@ -24,7 +24,7 @@
         @foreach (var project in ProjectList ?? new Project[] { })
         {
             <tr>
-                <td>@project.Title</td>
+                <td><a class="text-primary" @onclick="() => NavigateToDetailsPage(project.id)">@project.Title</a></td>
                 <td>@project.Requirement</td>
                 <td>
                     <button @onclick="() => EditProject(project.id)">Edit</button>
@@ -59,7 +59,7 @@
 
     public void EditProject(int id)
     {
-        NavManager.NavigateTo($"/projects/" + id);
+        NavManager.NavigateTo($"/projects/edit/" + id);
     }
 
     public async Task DeleteProject(int id)
@@ -87,5 +87,10 @@
     {
         ProjectList = await service.GetProjectsAsync();
         GreatestId = ProjectList.Max(p => p.id);
+    }
+
+    public void NavigateToDetailsPage(int id)
+    {
+        NavManager.NavigateTo("/projects/" + id);
     }
 }
