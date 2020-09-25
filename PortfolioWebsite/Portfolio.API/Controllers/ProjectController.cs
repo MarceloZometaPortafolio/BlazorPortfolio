@@ -30,13 +30,13 @@ namespace Portfolio.API.Controllers
         }
 
         // GET api/<ProjectController>/5
-        [HttpGet("{id}")]
-        public async Task<IEnumerable<Project>> Get(int id)
-        {
-            IEnumerable<Project> projects = data.Projects.Where(project => project.id == id);
+        //[HttpGet("{id}")]
+        //public async Task<IEnumerable<Project>> Get(int id)
+        //{
+        //    IEnumerable<Project> projects = data.Projects.Where(project => project.id == id);
 
-            return projects;
-        }
+        //    return projects;
+        //}
 
         // POST api/<ProjectController>
         [HttpPost]
@@ -46,9 +46,18 @@ namespace Portfolio.API.Controllers
         }
 
         // PUT api/<ProjectController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        //[HttpPut("{id}")]
+        //public async Task Put(int id, [FromBody] string value)
+        //{
+        //    //var project = value
+        //    //data.UpdateProjectAsync(project);
+        //    Console.WriteLine("Updating project " + id + " " + value);
+        //}
+
+        [HttpPost("[action]")]
+        public async Task Update(Project project)
         {
+            await data.UpdateProjectAsync(project);
         }
 
         // DELETE api/<ProjectController>/5

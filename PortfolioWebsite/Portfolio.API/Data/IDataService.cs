@@ -15,5 +15,6 @@ namespace Portfolio.API.Data
         Task DeleteProjectAsync(Project project);
 
         Task UpdateProjectAsync(Project project);
+
     }
 }

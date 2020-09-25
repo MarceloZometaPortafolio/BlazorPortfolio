@@ -34,6 +34,8 @@ namespace Portfolio.API.Data
 
         public async Task UpdateProjectAsync(Project project)
         {
+            Console.WriteLine("About to update project");
+
             context.Projects.Update(project);
 
             Console.WriteLine("Updated project " + project.Title);
