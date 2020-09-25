@@ -19,8 +19,8 @@ namespace Portfolio.Blazor
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("http://localhost:5001") });
-            
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://portfolio-api-marcelo.herokuapp.com") });
+
             builder.Services.AddScoped<APIService>();            
 
             await builder.Build().RunAsync();
