@@ -10,7 +10,7 @@ using Portfolio.API.Data;
 namespace Portfolio.API.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20200930061724_AddedManyToManyTags")]
+    [Migration("20200930182841_AddedManyToManyTags")]
     partial class AddedManyToManyTags
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
