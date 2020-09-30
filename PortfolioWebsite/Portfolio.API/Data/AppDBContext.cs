@@ -19,6 +19,7 @@ namespace Portfolio.API.Data
         }
 
         public DbSet<Project> Projects { get; set; }
-
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<ProjectCategory> ProjectCategories { get; set; }
     }
 }

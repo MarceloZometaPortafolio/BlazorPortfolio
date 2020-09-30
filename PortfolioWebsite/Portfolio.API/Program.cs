@@ -19,8 +19,7 @@ namespace Portfolio.API
             var host = CreateHostBuilder(args).Build();
             using (var scope = host.Services.CreateScope())
             {
-                var db = scope.ServiceProvider.GetRequiredService<AppDBContext>();
-                db.Database.EnsureCreated();
+                var db = scope.ServiceProvider.GetRequiredService<AppDBContext>();                
                 db.Database.Migrate();
             }
             host.Run();
