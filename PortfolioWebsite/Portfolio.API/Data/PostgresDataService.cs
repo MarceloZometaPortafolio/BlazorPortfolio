@@ -11,11 +11,16 @@ namespace Portfolio.API.Data
         private readonly AppDBContext context;
 
         public IQueryable<Project> Projects => context.Projects;
+        public IQueryable<Language> Languages => context.Languages;
+        public IQueryable<Platform> Platforms => context.Platforms;
+        public IQueryable<Technology> Technologies => context.Technologies;
 
         public PostgresDataService(AppDBContext context)
         {
             this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
+
+        //Project table interactions
         public async Task AddProjectAsync(Project project)
         {
             context.Projects.Add(project);
@@ -41,5 +46,8 @@ namespace Portfolio.API.Data
             Console.WriteLine("Updated project " + project.Title);
             await context.SaveChangesAsync();
         }
+
+        //Language table interactions
+
     }
 }
