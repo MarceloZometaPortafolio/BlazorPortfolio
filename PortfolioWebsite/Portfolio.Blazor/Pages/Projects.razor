@@ -4,7 +4,6 @@
 @using Portfolio.Shared
 
 @inject APIService service
-@inject HttpClient client
 @inject NavigationManager NavManager
 @*@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper UriHelper*@
 
@@ -51,7 +50,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        //return base.OnInitializedAsync();
         await GetAllProjectsFromDB();
     }
 
