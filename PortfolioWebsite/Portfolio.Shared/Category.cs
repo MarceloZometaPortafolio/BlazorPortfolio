@@ -9,6 +9,6 @@ namespace Portfolio.Shared
         public int id { get; set; }
         public string Name { get; set; }
 
-        public List<ProjectCategory> ProjectCategories { get; set; }
+        public List<ProjectLanguage> ProjectCategories { get; set; }
     }
 }
