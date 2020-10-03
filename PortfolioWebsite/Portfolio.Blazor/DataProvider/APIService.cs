@@ -62,7 +62,12 @@ namespace Portfolio.Blazor.DataProvider
                 Name = newName,
                 ProjectId = projectId
             };
-            await client.PostAsJsonAsync($"api/project/assign/", assignBody);
+            await client.PostAsJsonAsync($"api/project/assign", assignBody);
+        }
+
+        public async Task<IEnumerable<Language>> GetLanguagesByProjectId(int projectId)
+        {
+            return await client.GetFromJsonAsync<IEnumerable<Language>>("api/project/getlanguages/" + projectId);
         }
     }
 }

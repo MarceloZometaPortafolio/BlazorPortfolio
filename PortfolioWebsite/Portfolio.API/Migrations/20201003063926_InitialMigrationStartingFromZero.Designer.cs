@@ -10,8 +10,8 @@ using Portfolio.API.Data;
 namespace Portfolio.API.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20201003055149_AddedLanguages")]
-    partial class AddedLanguages
+    [Migration("20201003063926_InitialMigrationStartingFromZero")]
+    partial class InitialMigrationStartingFromZero
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
