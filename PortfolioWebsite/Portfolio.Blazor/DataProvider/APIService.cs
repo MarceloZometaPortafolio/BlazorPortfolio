@@ -53,5 +53,16 @@ namespace Portfolio.Blazor.DataProvider
             Console.WriteLine("\tCurrently updating project " + project.id);
             await client.PostAsJsonAsync("api/project/update", project);
         }
+
+        public async Task AssignTag(string categoryType, int projectId, string newName)
+        {
+            var assignBody = new AssignRequest
+            {
+                CategoryType = categoryType,
+                Name = newName,
+                ProjectId = projectId
+            };
+            await client.PostAsJsonAsync($"api/project/assign/", assignBody);
+        }
     }
 }

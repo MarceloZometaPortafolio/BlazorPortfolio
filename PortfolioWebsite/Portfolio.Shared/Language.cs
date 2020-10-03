@@ -12,7 +12,5 @@ namespace Portfolio.Shared
 
         [JsonPropertyName("name")]
         public string Name { get; set; }
-
-        public IList<ProjectLanguage> ProjectLanguages { get; set; }
     }
 }

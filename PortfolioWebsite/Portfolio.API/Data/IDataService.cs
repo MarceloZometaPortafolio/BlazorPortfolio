@@ -8,7 +8,8 @@ namespace Portfolio.API.Data
 {
     public interface IDataService
     {
-        IQueryable<Project> Projects { get; }
+        IQueryable<Project> Projects { get; }        
+        IQueryable<ProjectLanguage> ProjectLanguages { get; }
 
         Task AddProjectAsync(Project project);
 
@@ -16,5 +17,6 @@ namespace Portfolio.API.Data
 
         Task UpdateProjectAsync(Project project);
 
+        Task AssignCategoryAsync(AssignRequest assignRequest);
     }
 }

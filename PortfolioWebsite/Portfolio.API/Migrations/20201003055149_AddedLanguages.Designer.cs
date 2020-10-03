@@ -10,8 +10,8 @@ using Portfolio.API.Data;
 namespace Portfolio.API.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20201003032321_AddedLanguagePlatformTechnology")]
-    partial class AddedLanguagePlatformTechnology
+    [Migration("20201003055149_AddedLanguages")]
+    partial class AddedLanguages
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,21 +34,6 @@ namespace Portfolio.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Languages");
-                });
-
-            modelBuilder.Entity("Portfolio.Shared.Platform", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Platforms");
                 });
 
             modelBuilder.Entity("Portfolio.Shared.Project", b =>
@@ -77,102 +62,36 @@ namespace Portfolio.API.Migrations
 
             modelBuilder.Entity("Portfolio.Shared.ProjectLanguage", b =>
                 {
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("LanguageId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("ProjectId", "LanguageId");
-
-                    b.HasIndex("LanguageId");
-
-                    b.ToTable("ProjectLanguages");
-                });
-
-            modelBuilder.Entity("Portfolio.Shared.ProjectPlatform", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("LanguageId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("ProjectPlatforms");
-                });
-
-            modelBuilder.Entity("Portfolio.Shared.ProjectTechnology", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("LanguageId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("ProjectTechnologies");
-                });
-
-            modelBuilder.Entity("Portfolio.Shared.Technology", b =>
-                {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
+                    b.Property<int>("LanguageId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Technologies");
+                    b.HasIndex("LanguageId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("ProjectLanguages");
                 });
 
             modelBuilder.Entity("Portfolio.Shared.ProjectLanguage", b =>
                 {
                     b.HasOne("Portfolio.Shared.Language", "Language")
-                        .WithMany("ProjectLanguages")
+                        .WithMany()
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Portfolio.Shared.Project", "Project")
+                    b.HasOne("Portfolio.Shared.Project", null)
                         .WithMany("ProjectLanguages")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Portfolio.Shared.ProjectPlatform", b =>
-                {
-                    b.HasOne("Portfolio.Shared.Project", "Project")
-                        .WithMany()
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Portfolio.Shared.ProjectTechnology", b =>
-                {
-                    b.HasOne("Portfolio.Shared.Project", "Project")
-                        .WithMany()
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

@@ -1,4 +1,5 @@
-﻿using Portfolio.Shared;
+﻿using Microsoft.EntityFrameworkCore;
+using Portfolio.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,7 @@ namespace Portfolio.API.Data
 
         public IQueryable<Project> Projects => context.Projects;
         public IQueryable<Language> Languages => context.Languages;
-
         public IQueryable<ProjectLanguage> ProjectLanguages => context.ProjectLanguages;
-
-        public IQueryable<Platform> Platforms => context.Platforms;
-        public IQueryable<Technology> Technologies => context.Technologies;
 
         public PostgresDataService(AppDBContext context)
         {
@@ -73,6 +70,31 @@ namespace Portfolio.API.Data
 
             Console.WriteLine("Updated language " + language.Name);
             await context.SaveChangesAsync();
+        }
+
+        public async Task AssignCategoryAsync(AssignRequest assignRequest)
+        {
+            switch (assignRequest.CategoryType)
+            {
+                case Project.LanguageCategory:
+                    var language = await context.Languages.FirstOrDefaultAsync(l => l.Name == assignRequest.Name);
+                    if (language == null)
+                    {
+                        language = new Language { Name = assignRequest.Name };
+                        context.Languages.Add(language);
+                        await context.SaveChangesAsync();
+                    }
+                    var lc = new ProjectLanguage
+                    {
+                        ProjectId = assignRequest.ProjectId,
+                        LanguageId = language.Id
+                    };
+                    context.ProjectLanguages.Add(lc);
+                    await context.SaveChangesAsync();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

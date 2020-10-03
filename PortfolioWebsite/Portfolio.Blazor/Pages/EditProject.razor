@@ -1,6 +1,7 @@
 ﻿@page "/projects/edit/{ProjectId:int}"
 @using Portfolio.Shared
 
+
 @inject Portfolio.Blazor.DataProvider.APIService service
 
 <h3>@Title</h3>
@@ -27,6 +28,15 @@
 
 <button @onclick="SaveChanges">Save changes</button>
 
+<h4>Add a language to your project!</h4>
+<br/>
+
+<label>Language:</label>
+<input type="text" @bind="NewLanguage"/>
+<br/>
+
+<button @onclick="AddLanguage">Add Language</button>
+
 @code {
     [Parameter]
     public int ProjectId { get; set; }
@@ -37,6 +47,8 @@
     public DateTime CompletionDate { get; set; }
 
     public Project Project { get; set; }
+
+    public string NewLanguage { get; set; }
 
     /// <summary>
     /// it was needed to have separate properties for displaying 
@@ -62,6 +74,11 @@
         Project.CompletionDate = CompletionDate;
 
         await service.UpdateProjectAsync(Project);
+    }
+
+    public async Task AddLanguage()
+    {
+        await service.AssignTag(Project.LanguageCategory, Project.id, NewLanguage);
     }
 
 }
