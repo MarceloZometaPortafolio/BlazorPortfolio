@@ -12,6 +12,9 @@ namespace Portfolio.API.Data
 
         public IQueryable<Project> Projects => context.Projects;
         public IQueryable<Language> Languages => context.Languages;
+
+        public IQueryable<ProjectLanguage> ProjectLanguages => context.ProjectLanguages;
+
         public IQueryable<Platform> Platforms => context.Platforms;
         public IQueryable<Technology> Technologies => context.Technologies;
 
@@ -48,6 +51,28 @@ namespace Portfolio.API.Data
         }
 
         //Language table interactions
+        public async Task AddLanguageAsync(Language language)
+        {
+            context.Languages.Add(language);
 
+            Console.WriteLine("Added language " + language.Name + "with id " + language.Id);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task DeleteLanguageAsync(Language language)
+        {
+            context.Languages.Remove(language);
+
+            Console.WriteLine("Deleted language " + language.Name);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task UpdateLanguageAsync(Language language)
+        {           
+            context.Languages.Update(language);
+
+            Console.WriteLine("Updated language " + language.Name);
+            await context.SaveChangesAsync();
+        }
     }
 }

@@ -11,6 +11,6 @@ namespace Portfolio.Shared
         public int ProjectId { get; set; }
         public int LanguageId { get; set; }
         public Project Project { get; set; }
-        public Technology Technology { get; set; }
+        //public Technology Technology { get; set; }
     }
 }
