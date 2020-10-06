@@ -37,6 +37,16 @@
     </ul>
 }
 
+
+
+<h5>Technologies:</h5>
+@foreach (var t in technologies)
+{
+    <ul>
+        <li>@t.Name</li>
+    </ul>
+}
+
 @code {
     [Parameter]
     public int ProjectId { get; set; }
@@ -49,7 +59,8 @@
     public Project Project { get; set; }
 
     private IEnumerable<Language> languages = new List<Language>();
-    private IEnumerable<Platform> platforms= new List<Platform>();
+    private IEnumerable<Platform> platforms = new List<Platform>();
+    private IEnumerable<Technology> technologies = new List<Technology>();
 
     /// <summary>
     /// it was needed to have separate properties for displaying
@@ -69,5 +80,6 @@
 
         languages = await service.GetLanguagesByProjectId(ProjectId);
         platforms = await service.GetPlatformsByProjectId(ProjectId);
+        technologies = await service.GetTechnologiesByProjectId(ProjectId);
     }
 }

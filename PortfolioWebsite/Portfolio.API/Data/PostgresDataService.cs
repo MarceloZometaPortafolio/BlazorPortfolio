@@ -2,6 +2,7 @@
 using Portfolio.Shared;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,10 +16,9 @@ namespace Portfolio.API.Data
         public IQueryable<Language> Languages => context.Languages;
         public IQueryable<Platform> Platforms => context.Platforms;
         
-
         public IQueryable<ProjectLanguage> ProjectLanguages => context.ProjectLanguages;
         public IQueryable<ProjectPlatform> ProjectPlatforms=> context.ProjectPlatforms;
-
+        public IQueryable<ProjectTechnology> ProjectTechnologies => context.ProjectTechnologies;
 
         public PostgresDataService(AppDBContext context)
         {
@@ -97,6 +97,7 @@ namespace Portfolio.API.Data
                     context.ProjectLanguages.Add(lc);
                     await context.SaveChangesAsync();
                     break;
+
                 case Project.PlatformCategory:
                     var platform = await context.Platforms.FirstOrDefaultAsync(p => p.Name == assignRequest.Name);
                     if (platform == null)
@@ -113,6 +114,24 @@ namespace Portfolio.API.Data
                     context.ProjectPlatforms.Add(projectPlatform);
                     await context.SaveChangesAsync();
                     break;
+
+                case Project.TechnologyCategory:
+                    var technology = await context.Technologies.FirstOrDefaultAsync(t => t.Name == assignRequest.Name);
+                    if (technology == null)
+                    {
+                        technology = new Technology { Name = assignRequest.Name };
+                        context.Technologies.Add(technology);
+                        await context.SaveChangesAsync();
+                    }
+                    var projectTechnology = new ProjectTechnology
+                    {
+                        ProjectId = assignRequest.ProjectId,
+                        TechnologyId = technology.Id
+                    };
+                    context.ProjectTechnologies.Add(projectTechnology);
+                    await context.SaveChangesAsync();
+                    break;
+
                 default:
                     break;
             }

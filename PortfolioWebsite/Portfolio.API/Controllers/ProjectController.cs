@@ -93,6 +93,12 @@ namespace Portfolio.API.Controllers
             return await data.ProjectPlatforms.Where(pp => pp.ProjectId == id).Select(p => p.Platform).ToListAsync();
         }
 
+        [HttpGet("gettechnologies/{id}")]
+        public async Task<IEnumerable<Technology>> GetTechnologiesByProjectId(int id)
+        {
+            return await data.ProjectTechnologies.Where(pt => pt.ProjectId == id).Select(t => t.Technology).ToListAsync();
+        }
+
         [HttpGet("[action]")]
         public async Task DefaultData()
         {

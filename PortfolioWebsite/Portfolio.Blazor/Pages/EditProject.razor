@@ -48,6 +48,17 @@
 
 <button @onclick="AddPlatform">Add Platform</button>
 
+
+
+<h4>Add technologies to your project!</h4>
+<br />
+
+<label>Technology:</label>
+<input type="text" @bind="NewTechnology" />
+<br />
+
+<button @onclick="AddTechnology">Add Technology</button>
+
 @code {
     [Parameter]
     public int ProjectId { get; set; }
@@ -61,6 +72,7 @@
 
     public string NewLanguage { get; set; }
     public string NewPlatform { get; set; }
+    public string NewTechnology { get; set; }
 
     /// <summary>
     /// it was needed to have separate properties for displaying
@@ -96,6 +108,11 @@
     public async Task AddPlatform()
     {
         await service.AssignTag(Project.PlatformCategory, Project.id, NewPlatform);
+    }
+
+    public async Task AddTechnology()
+    {
+        await service.AssignTag(Project.TechnologyCategory, Project.id, NewTechnology);
     }
 
 }
