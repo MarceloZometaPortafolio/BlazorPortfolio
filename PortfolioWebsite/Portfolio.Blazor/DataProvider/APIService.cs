@@ -99,7 +99,11 @@ namespace Portfolio.Blazor.DataProvider
             var language = languages.Where(l => l.Id == id).First();
             Console.WriteLine("Language found was " + language.Name);
             return language;
+        }
 
+        public async Task<IEnumerable<Project>> GetProjectsByLanguageId(int id)
+        {
+            return await client.GetFromJsonAsync<IEnumerable<Project>>("api/language/getprojects/" + id);
         }
     }
 }

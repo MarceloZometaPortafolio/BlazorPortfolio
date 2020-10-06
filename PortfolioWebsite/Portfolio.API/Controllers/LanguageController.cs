@@ -22,14 +22,7 @@ namespace Portfolio.API.Controllers
         {
             this.data = data ?? throw new ArgumentNullException(nameof(data));
         }
-        // GET: api/<LanguageController>
-        //[HttpGet("{id}")]
-        //public async Task<IEnumerable<Language>> Get(int id)
-        //{
-           
-        //}
-
-        // GET api/<LanguageController>/5
+        
         [HttpGet]
         public async Task<IList<Language>> Get()
         {
@@ -40,22 +33,10 @@ namespace Portfolio.API.Controllers
             return languages;
         }
 
-        // POST api/<LanguageController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpGet("getprojects/{id}")]
+        public async Task<IEnumerable<Project>> GetLanguagesByProjectId(int id)
         {
+            return await data.ProjectLanguages.Where(pl => pl.LanguageId == id).Select(p => p.Project).ToListAsync();
         }
-
-        // PUT api/<LanguageController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<LanguageController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }               
     }
 }
