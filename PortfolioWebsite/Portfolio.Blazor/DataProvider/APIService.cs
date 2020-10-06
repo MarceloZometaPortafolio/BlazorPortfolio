@@ -86,12 +86,11 @@ namespace Portfolio.Blazor.DataProvider
 
         public async Task<IEnumerable<Language>> GetLanguagesAsync()
         {
-            Console.WriteLine("\tCurrently getting languages async");
+            Console.WriteLine("\tCurrently getting all languages");
             var languages = await client.GetFromJsonAsync<IEnumerable<Language>>("api/language");
 
             return languages;
         }
-
         public async Task<Language> GetLanguageByIDAsync(int id)
         {
             var languages = await client.GetFromJsonAsync<IEnumerable<Language>>("api/language");
@@ -100,10 +99,30 @@ namespace Portfolio.Blazor.DataProvider
             Console.WriteLine("Language found was " + language.Name);
             return language;
         }
-
         public async Task<IEnumerable<Project>> GetProjectsByLanguageId(int id)
         {
             return await client.GetFromJsonAsync<IEnumerable<Project>>("api/language/getprojects/" + id);
+        }
+
+
+        public async Task<IEnumerable<Platform>> GetPlatformsAsync()
+        {
+            Console.WriteLine("\tCurrently getting all platforms");
+            var platforms = await client.GetFromJsonAsync<IEnumerable<Platform>>("api/platform");
+
+            return platforms;
+        }
+        public async Task<Platform> GetPlatformsByIdAsync(int id)
+        {
+            var platforms = await client.GetFromJsonAsync<IEnumerable<Platform>>("api/platform");
+
+            var platform = platforms.Where(p => p.Id == id).First();
+            Console.WriteLine("Platform found was " + platform.Name);
+            return platform;
+        }
+        public async Task<IEnumerable<Project>> GetProjectsByPlatformId(int id)
+        {
+            return await client.GetFromJsonAsync<IEnumerable<Project>>("api/platform/getprojects/" + id);
         }
     }
 }
