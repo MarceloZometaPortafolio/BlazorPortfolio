@@ -83,12 +83,15 @@ namespace Portfolio.API.Controllers
 
         [HttpGet("getlanguages/{id}")]
         public async Task<IEnumerable<Language>> GetLanguagesByProjectId(int id)
-        {
-            Console.WriteLine("Hello from project controller. Assigning to project " + id);
+        {            
             return await data.ProjectLanguages.Where(pl => pl.ProjectId == id).Select(l => l.Language).ToListAsync();            
         }
 
-
+        [HttpGet("getplatforms/{id}")]
+        public async Task<IEnumerable<Platform>> GetPlatformsByProjectId(int id)
+        {            
+            return await data.ProjectPlatforms.Where(pp => pp.ProjectId == id).Select(p => p.Platform).ToListAsync();
+        }
 
         [HttpGet("[action]")]
         public async Task DefaultData()

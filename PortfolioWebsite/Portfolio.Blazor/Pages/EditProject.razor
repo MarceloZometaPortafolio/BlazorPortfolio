@@ -1,13 +1,11 @@
 ﻿@page "/projects/edit/{ProjectId:int}"
 @using Portfolio.Shared
-
-
 @inject Portfolio.Blazor.DataProvider.APIService service
 
 <h3>@Title</h3>
 
 <label>Project Title:</label>
-<br/>
+<br />
 <input type="text" @bind="Title" />
 <br />
 
@@ -28,14 +26,27 @@
 
 <button @onclick="SaveChanges">Save changes</button>
 
-<h4>Add a language to your project!</h4>
-<br/>
+
+
+<h4>Add languages to your project!</h4>
+<br />
 
 <label>Language:</label>
-<input type="text" @bind="NewLanguage"/>
-<br/>
+<input type="text" @bind="NewLanguage" />
+<br />
 
 <button @onclick="AddLanguage">Add Language</button>
+
+
+
+<h4>Add platforms to your project!</h4>
+<br />
+
+<label>Platform:</label>
+<input type="text" @bind="NewPlatform" />
+<br />
+
+<button @onclick="AddPlatform">Add Platform</button>
 
 @code {
     [Parameter]
@@ -49,9 +60,10 @@
     public Project Project { get; set; }
 
     public string NewLanguage { get; set; }
+    public string NewPlatform { get; set; }
 
     /// <summary>
-    /// it was needed to have separate properties for displaying 
+    /// it was needed to have separate properties for displaying
     /// because the page loaded before oninitializedasync finished
     /// giving place to a null exception
     /// </summary>
@@ -79,6 +91,11 @@
     public async Task AddLanguage()
     {
         await service.AssignTag(Project.LanguageCategory, Project.id, NewLanguage);
+    }
+
+    public async Task AddPlatform()
+    {
+        await service.AssignTag(Project.PlatformCategory, Project.id, NewPlatform);
     }
 
 }

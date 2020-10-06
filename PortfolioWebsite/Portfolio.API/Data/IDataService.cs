@@ -10,6 +10,8 @@ namespace Portfolio.API.Data
     {
         IQueryable<Project> Projects { get; }        
         IQueryable<ProjectLanguage> ProjectLanguages { get; }
+        IQueryable<ProjectPlatform> ProjectPlatforms { get; }
+
 
         Task AddProjectAsync(Project project);
 

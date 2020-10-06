@@ -6,5 +6,6 @@
         public int ProjectId { get; set; }        
         public int LanguageId { get; set; }
         public Language Language{ get; set; }
+        public Project Project { get; set; }
     }
 }

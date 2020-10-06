@@ -17,11 +17,23 @@
 <p>@CompletionDate</p>
 <br />
 
+
+
 <h5>Languages:</h5>
-@foreach(var l in languages)
+@foreach (var l in languages)
 {
     <ul>
         <li>@l.Name</li>
+    </ul>
+}
+
+
+
+<h5>Platforms:</h5>
+@foreach (var p in platforms)
+{
+    <ul>
+        <li>@p.Name</li>
     </ul>
 }
 
@@ -37,6 +49,7 @@
     public Project Project { get; set; }
 
     private IEnumerable<Language> languages = new List<Language>();
+    private IEnumerable<Platform> platforms= new List<Platform>();
 
     /// <summary>
     /// it was needed to have separate properties for displaying
@@ -55,5 +68,6 @@
         CompletionDate = Project.CompletionDate;
 
         languages = await service.GetLanguagesByProjectId(ProjectId);
+        platforms = await service.GetPlatformsByProjectId(ProjectId);
     }
 }

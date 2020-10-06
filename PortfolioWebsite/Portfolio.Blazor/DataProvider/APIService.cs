@@ -71,5 +71,10 @@ namespace Portfolio.Blazor.DataProvider
         {
             return await client.GetFromJsonAsync<IEnumerable<Language>>("api/project/getlanguages/" + projectId);
         }
+
+        public async Task<IEnumerable<Platform>> GetPlatformsByProjectId(int projectId)
+        {
+            return await client.GetFromJsonAsync<IEnumerable<Platform>>("api/project/getplatforms/" + projectId);
+        }
     }
 }

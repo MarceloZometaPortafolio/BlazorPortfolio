@@ -13,7 +13,12 @@ namespace Portfolio.API.Data
 
         public IQueryable<Project> Projects => context.Projects;
         public IQueryable<Language> Languages => context.Languages;
+        public IQueryable<Platform> Platforms => context.Platforms;
+        
+
         public IQueryable<ProjectLanguage> ProjectLanguages => context.ProjectLanguages;
+        public IQueryable<ProjectPlatform> ProjectPlatforms=> context.ProjectPlatforms;
+
 
         public PostgresDataService(AppDBContext context)
         {
@@ -90,6 +95,22 @@ namespace Portfolio.API.Data
                         LanguageId = language.Id
                     };
                     context.ProjectLanguages.Add(lc);
+                    await context.SaveChangesAsync();
+                    break;
+                case Project.PlatformCategory:
+                    var platform = await context.Platforms.FirstOrDefaultAsync(p => p.Name == assignRequest.Name);
+                    if (platform == null)
+                    {
+                        platform = new Platform { Name = assignRequest.Name };
+                        context.Platforms.Add(platform);
+                        await context.SaveChangesAsync();
+                    }
+                    var projectPlatform = new ProjectPlatform
+                    {
+                        ProjectId = assignRequest.ProjectId,
+                        PlatformId = platform.Id
+                    };
+                    context.ProjectPlatforms.Add(projectPlatform);
                     await context.SaveChangesAsync();
                     break;
                 default:
