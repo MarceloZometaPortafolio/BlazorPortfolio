@@ -12,29 +12,29 @@ namespace Portfolio.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PlatformController : ControllerBase
+    public class TechnologyController : ControllerBase
     {
         private readonly IDataService data;
 
-        public PlatformController(IDataService data)
+        public TechnologyController(IDataService data)
         {
             this.data = data ?? throw new ArgumentNullException(nameof(data));
         }
 
         [HttpGet]
-        public async Task<IList<Platform>> Get()
+        public async Task<IList<Technology>> Get()
         {
-            var platforms = await data.Platforms
+            var technologies = await data.Technologies
                 .ToListAsync();
 
-            Console.WriteLine(platforms);
-            return platforms;
+            Console.WriteLine(technologies);
+            return technologies;
         }
 
         [HttpGet("getprojects/{id}")]
-        public async Task<IEnumerable<Project>> GetProjectsByPlatformId(int id)
+        public async Task<IEnumerable<Project>> GetProjectsByTechnologyId(int id)
         {
-            return await data.ProjectPlatforms.Where(pp => pp.PlatformId == id)
+            return await data.ProjectTechnologies.Where(pt => pt.TechnologyId == id)
                 .Select(p => p.Project)
                 .ToListAsync();
         }

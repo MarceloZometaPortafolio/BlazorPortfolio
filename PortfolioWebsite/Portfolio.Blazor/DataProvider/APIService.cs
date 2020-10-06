@@ -124,5 +124,26 @@ namespace Portfolio.Blazor.DataProvider
         {
             return await client.GetFromJsonAsync<IEnumerable<Project>>("api/platform/getprojects/" + id);
         }
+
+
+        public async Task<IEnumerable<Technology>> GetTechnologiesAsync()
+        {
+            Console.WriteLine("\tCurrently getting all technologies");
+            var technologies = await client.GetFromJsonAsync<IEnumerable<Technology>>("api/technology");
+
+            return technologies;
+        }
+        public async Task<Technology> GetTechnologiesById(int id)
+        {
+            var technologies = await GetTechnologiesAsync();
+
+            var technology = technologies.Where(p => p.Id == id).First();
+            Console.WriteLine("Technology found was " + technology.Name);
+            return technology;
+        }
+        public async Task<IEnumerable<Project>> GetProjectsByTechnologyId(int id)
+        {
+            return await client.GetFromJsonAsync<IEnumerable<Project>>("api/technology/getprojects/" + id);
+        }
     }
 }
