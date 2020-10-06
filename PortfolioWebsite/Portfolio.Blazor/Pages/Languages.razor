@@ -1,0 +1,27 @@
+﻿@page "/languages"
+@inject Portfolio.Blazor.DataProvider.APIService service
+@inject NavigationManager NavManager
+@using Portfolio.Shared
+<h3>Languages:</h3>
+
+<ul>
+    @foreach (Language l in languages)
+    {
+        <li><a class="text-primary" @onclick="() => NavigateToDetailsPage(l.Id)">@l.Name</a></li>
+    }
+</ul>
+
+
+@code {
+    public IEnumerable<Language> languages = new List<Language>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        languages =await service.GetLanguagesAsync();
+    }
+
+    public void NavigateToDetailsPage(int id)
+    {
+        NavManager.NavigateTo("languages/" + id);
+    }
+}

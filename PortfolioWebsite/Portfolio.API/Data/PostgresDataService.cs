@@ -15,10 +15,12 @@ namespace Portfolio.API.Data
         public IQueryable<Project> Projects => context.Projects;
         public IQueryable<Language> Languages => context.Languages;
         public IQueryable<Platform> Platforms => context.Platforms;
+        public IQueryable<Technology> Technologies => context.Technologies;
         
         public IQueryable<ProjectLanguage> ProjectLanguages => context.ProjectLanguages;
         public IQueryable<ProjectPlatform> ProjectPlatforms=> context.ProjectPlatforms;
         public IQueryable<ProjectTechnology> ProjectTechnologies => context.ProjectTechnologies;
+
 
         public PostgresDataService(AppDBContext context)
         {

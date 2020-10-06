@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Portfolio.Blazor.DataProvider
@@ -80,6 +81,25 @@ namespace Portfolio.Blazor.DataProvider
         public async Task<IEnumerable<Technology>> GetTechnologiesByProjectId(int projectId)
         {
             return await client.GetFromJsonAsync<IEnumerable<Technology>>("api/project/gettechnologies/" + projectId);
+        }
+
+
+        public async Task<IEnumerable<Language>> GetLanguagesAsync()
+        {
+            Console.WriteLine("\tCurrently getting languages async");
+            var languages = await client.GetFromJsonAsync<IEnumerable<Language>>("api/language");
+
+            return languages;
+        }
+
+        public async Task<Language> GetLanguageByIDAsync(int id)
+        {
+            var languages = await client.GetFromJsonAsync<IEnumerable<Language>>("api/language");
+
+            var language = languages.Where(l => l.Id == id).First();
+            Console.WriteLine("Language found was " + language.Name);
+            return language;
+
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Portfolio.API.Data;
 using Portfolio.Shared;
 
@@ -29,10 +30,14 @@ namespace Portfolio.API.Controllers
         //}
 
         // GET api/<LanguageController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        public async Task<IList<Language>> Get()
         {
-            return "value";
+            var languages = await data.Languages
+                .ToListAsync();
+
+            Console.WriteLine(languages);
+            return languages;
         }
 
         // POST api/<LanguageController>
