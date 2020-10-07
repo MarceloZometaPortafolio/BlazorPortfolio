@@ -1,6 +1,7 @@
 ﻿@page "/projects/{ProjectId:int}"
 @using Portfolio.Shared
 @inject Portfolio.Blazor.DataProvider.APIService service
+@inject NavigationManager NavManager
 
 <h3>@Title</h3>
 <br />
@@ -23,7 +24,7 @@
 @foreach (var l in languages)
 {
     <ul>
-        <li>@l.Name</li>
+        <li><a class="text-primary" @onclick="() => NavigateToCategory(nameof(languages), l.Id)">@l.Name</a></li>
     </ul>
 }
 
@@ -33,7 +34,7 @@
 @foreach (var p in platforms)
 {
     <ul>
-        <li>@p.Name</li>
+        <li><a class="text-primary" @onclick="() => NavigateToCategory(nameof(platforms), p.Id)">@p.Name</a></li>
     </ul>
 }
 
@@ -43,7 +44,7 @@
 @foreach (var t in technologies)
 {
     <ul>
-        <li>@t.Name</li>
+        <li><a class="text-primary" @onclick="() => NavigateToCategory(nameof(technologies), t.Id)">@t.Name</a></li>
     </ul>
 }
 
@@ -81,5 +82,10 @@
         languages = await service.GetLanguagesByProjectId(ProjectId);
         platforms = await service.GetPlatformsByProjectId(ProjectId);
         technologies = await service.GetTechnologiesByProjectId(ProjectId);
+    }
+
+    public void NavigateToCategory(string url, int id)
+    {
+        NavManager.NavigateTo($"{url}/{id}");
     }
 }
