@@ -1,0 +1,27 @@
+﻿@page "/platforms"
+@inject Portfolio.Blazor.DataProvider.APIService service
+@inject NavigationManager NavManager
+@using Portfolio.Shared
+<h3>Platforms:</h3>
+
+<ul>
+    @foreach (Platform p in platforms)
+    {
+        <li><a class="text-primary" @onclick="() => NavigateToDetailsPage(p.Id)">@p.Name</a></li>
+    }
+</ul>
+
+
+@code {
+    public IEnumerable<Platform> platforms = new List<Platform>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        platforms = await service.GetPlatformsAsync();
+    }
+
+    public void NavigateToDetailsPage(int id)
+    {
+        NavManager.NavigateTo("platforms/" + id);
+    }
+}

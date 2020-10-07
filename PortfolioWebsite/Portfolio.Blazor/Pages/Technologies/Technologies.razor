@@ -1,0 +1,27 @@
+﻿@page "/technologies"
+@inject Portfolio.Blazor.DataProvider.APIService service
+@inject NavigationManager NavManager
+@using Portfolio.Shared
+<h3>Technologies:</h3>
+
+<ul>
+    @foreach (Technology t in technologies)
+    {
+        <li><a class="text-primary" @onclick="() => NavigateToDetailsPage(t.Id)">@t.Name</a></li>
+    }
+</ul>
+
+
+@code {
+    private IEnumerable<Technology> technologies= new List<Technology>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        technologies = await service.GetTechnologiesAsync();
+    }
+
+    public void NavigateToDetailsPage(int id)
+    {
+        NavManager.NavigateTo("technologies/" + id);
+    }
+}

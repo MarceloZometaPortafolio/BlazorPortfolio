@@ -1,0 +1,118 @@
+﻿@page "/projects/edit/{ProjectId:int}"
+@using Portfolio.Shared
+@inject Portfolio.Blazor.DataProvider.APIService service
+
+<h3>@Title</h3>
+
+<label>Project Title:</label>
+<br />
+<input type="text" @bind="Title" />
+<br />
+
+<label>Project Requirements:</label>
+<br />
+<textarea @bind="Requirements" />
+<br />
+
+<label>Project Design:</label>
+<br />
+<textarea @bind="Design" />
+<br />
+
+<label>Project Completion Date:</label>
+<br />
+<input type="datetime" @bind="CompletionDate" />
+<br />
+
+<button @onclick="SaveChanges">Save changes</button>
+
+
+
+<h4>Add languages to your project!</h4>
+<br />
+
+<label>Language:</label>
+<input type="text" @bind="NewLanguage" />
+<br />
+
+<button @onclick="AddLanguage">Add Language</button>
+
+
+
+<h4>Add platforms to your project!</h4>
+<br />
+
+<label>Platform:</label>
+<input type="text" @bind="NewPlatform" />
+<br />
+
+<button @onclick="AddPlatform">Add Platform</button>
+
+
+
+<h4>Add technologies to your project!</h4>
+<br />
+
+<label>Technology:</label>
+<input type="text" @bind="NewTechnology" />
+<br />
+
+<button @onclick="AddTechnology">Add Technology</button>
+
+@code {
+    [Parameter]
+    public int ProjectId { get; set; }
+
+    public string Title { get; set; }
+    public string Requirements { get; set; }
+    public string Design { get; set; }
+    public DateTime CompletionDate { get; set; }
+
+    public Project Project { get; set; }
+
+    public string NewLanguage { get; set; }
+    public string NewPlatform { get; set; }
+    public string NewTechnology { get; set; }
+
+    /// <summary>
+    /// it was needed to have separate properties for displaying
+    /// because the page loaded before oninitializedasync finished
+    /// giving place to a null exception
+    /// </summary>
+    /// <returns>void Task</returns>
+    protected override async Task OnInitializedAsync()
+    {
+        Project = await service.GetProjectByIDAsync(ProjectId);
+
+        Title = Project.Title;
+        Requirements = Project.Requirement;
+        Design = Project.Design;
+        CompletionDate = Project.CompletionDate;
+    }
+
+    public async Task SaveChanges()
+    {
+        Project.Title = Title;
+        Project.Requirement = Requirements;
+        Project.Design = Design;
+        Project.CompletionDate = CompletionDate;
+
+        await service.UpdateProjectAsync(Project);
+    }
+
+    public async Task AddLanguage()
+    {
+        await service.AssignTag(Project.LanguageCategory, Project.id, NewLanguage);
+    }
+
+    public async Task AddPlatform()
+    {
+        await service.AssignTag(Project.PlatformCategory, Project.id, NewPlatform);
+    }
+
+    public async Task AddTechnology()
+    {
+        await service.AssignTag(Project.TechnologyCategory, Project.id, NewTechnology);
+    }
+
+}

@@ -26,7 +26,11 @@ namespace Portfolio.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<Project>> Get()
         {
-            return await data.Projects.ToListAsync();
+            var projects =  await data.Projects                
+                .ToListAsync();
+
+            Console.WriteLine(projects);
+            return projects;
         }
 
         // GET api/<ProjectController>/5
@@ -69,6 +73,30 @@ namespace Portfolio.API.Controllers
             Console.WriteLine("Project to delete is " + projectToDelete.Title);
 
             await data.DeleteProjectAsync(projectToDelete);
+        }
+
+        [HttpPost("[action]")]
+        public async Task Assign(AssignRequest assignRequest)
+        {
+            await data.AssignCategoryAsync(assignRequest);
+        }
+
+        [HttpGet("getlanguages/{id}")]
+        public async Task<IEnumerable<Language>> GetLanguagesByProjectId(int id)
+        {            
+            return await data.ProjectLanguages.Where(pl => pl.ProjectId == id).Select(l => l.Language).ToListAsync();            
+        }
+
+        [HttpGet("getplatforms/{id}")]
+        public async Task<IEnumerable<Platform>> GetPlatformsByProjectId(int id)
+        {            
+            return await data.ProjectPlatforms.Where(pp => pp.ProjectId == id).Select(p => p.Platform).ToListAsync();
+        }
+
+        [HttpGet("gettechnologies/{id}")]
+        public async Task<IEnumerable<Technology>> GetTechnologiesByProjectId(int id)
+        {
+            return await data.ProjectTechnologies.Where(pt => pt.ProjectId == id).Select(t => t.Technology).ToListAsync();
         }
 
         [HttpGet("[action]")]
