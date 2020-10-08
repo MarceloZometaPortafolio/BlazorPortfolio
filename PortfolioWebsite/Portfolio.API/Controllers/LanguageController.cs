@@ -34,7 +34,7 @@ namespace Portfolio.API.Controllers
         }
 
         [HttpGet("getprojects/{id}")]
-        public async Task<IEnumerable<Project>> GetLanguagesByProjectId(int id)
+        public async Task<IEnumerable<Project>> GetProjectsByLanguageId(int id)
         {
             return await data.ProjectLanguages.Where(pl => pl.LanguageId == id).Select(p => p.Project).ToListAsync();
         }
