@@ -1,4 +1,5 @@
 ﻿@using Portfolio.Blazor.DataProvider
+@using Portfolio.Shared.Slug
 @using Portfolio.Shared
 @inject APIService service
 
@@ -33,12 +34,13 @@
     Project NewProject;
 
     protected override void OnInitialized()
-    {        
+    {
         NewProject = new Project();
     }
 
     public async Task AddNewProject()
     {
+        NewProject.Slug = NewProject.Title.ToSlug();
         await service.AddProjectAsync(NewProject);
     }
 

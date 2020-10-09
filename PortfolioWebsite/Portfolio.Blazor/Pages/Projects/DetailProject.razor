@@ -1,4 +1,4 @@
-﻿@page "/projects/{ProjectId:int}"
+﻿@page "/projects/{Slug}"
 @using Portfolio.Shared
 @inject Portfolio.Blazor.DataProvider.APIService service
 @inject NavigationManager NavManager
@@ -50,7 +50,7 @@
 
 @code {
     [Parameter]
-    public int ProjectId { get; set; }
+    public string Slug { get; set; }
 
     public string Title { get; set; }
     public string Requirements { get; set; }
@@ -72,16 +72,16 @@
     protected override async Task OnInitializedAsync()
     {
         //return base.OnInitializedAsync();
-        Project = await service.GetProjectByIDAsync(ProjectId);
+        Project = await service.GetProjectBySlugAsync(Slug);
 
         Title = Project.Title;
         Requirements = Project.Requirement;
         Design = Project.Design;
         CompletionDate = Project.CompletionDate;
 
-        languages = await service.GetLanguagesByProjectId(ProjectId);
-        platforms = await service.GetPlatformsByProjectId(ProjectId);
-        technologies = await service.GetTechnologiesByProjectId(ProjectId);
+        languages = await service.GetLanguagesByProjectId(Project.id);
+        platforms = await service.GetPlatformsByProjectId(Project.id);
+        technologies = await service.GetTechnologiesByProjectId(Project.id);
     }
 
     public void NavigateToCategory(string url, int id)

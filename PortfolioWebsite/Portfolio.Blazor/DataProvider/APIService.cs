@@ -43,6 +43,15 @@ namespace Portfolio.Blazor.DataProvider
             return project;
         }
 
+        public async Task<Project> GetProjectBySlugAsync(string slug)
+        {
+            var projects = await client.GetFromJsonAsync<IEnumerable<Project>>("api/project");
+
+            var project = projects.Where(proj => proj.Slug == slug).First();
+            Console.WriteLine("Project found was " + project.Title + " with slug of " + project.Slug);
+            return project;
+        }
+
         public async Task DeleteProjectAsync(int id)
         {
             Console.WriteLine("\tCurrently deleting project " + id);

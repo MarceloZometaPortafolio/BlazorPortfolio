@@ -22,7 +22,7 @@
         @foreach (var project in ProjectList ?? new Project[] { })
         {
             <tr>
-                <td><a class="text-primary" @onclick="() => NavigateToDetailsPage(project.id)">@project.Title</a></td>
+                <td><a class="text-primary" @onclick="() => NavigateToDetailsPage(project.Slug)">@project.Title</a></td>
                 <td>@project.Requirement</td>
                 <td>
                     <button @onclick="() => EditProject(project.id)">Edit</button>
@@ -86,8 +86,8 @@
         GreatestId = ProjectList.Max(p => p.id);
     }
 
-    public void NavigateToDetailsPage(int id)
+    public void NavigateToDetailsPage(string slug)
     {
-        NavManager.NavigateTo("projects/" + id);
+        NavManager.NavigateTo("projects/" + slug);
     }
 }
