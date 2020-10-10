@@ -1,4 +1,4 @@
-﻿@page "/projects/edit/{ProjectId:int}"
+﻿@page "/projects/edit/{Slug}"
 @using Portfolio.Shared
 @inject Portfolio.Blazor.DataProvider.APIService service
 
@@ -61,7 +61,7 @@
 
 @code {
     [Parameter]
-    public int ProjectId { get; set; }
+    public string Slug { get; set; }
 
     public string Title { get; set; }
     public string Requirements { get; set; }
@@ -82,7 +82,7 @@
     /// <returns>void Task</returns>
     protected override async Task OnInitializedAsync()
     {
-        Project = await service.GetProjectByIDAsync(ProjectId);
+        Project = await service.GetProjectBySlugAsync(Slug);
 
         Title = Project.Title;
         Requirements = Project.Requirement;
@@ -103,16 +103,19 @@
     public async Task AddLanguage()
     {
         await service.AssignTag(Project.LanguageCategory, Project.id, NewLanguage);
+        NewLanguage = "";
     }
 
     public async Task AddPlatform()
     {
         await service.AssignTag(Project.PlatformCategory, Project.id, NewPlatform);
+        NewPlatform = "";
     }
 
     public async Task AddTechnology()
     {
         await service.AssignTag(Project.TechnologyCategory, Project.id, NewTechnology);
+        NewTechnology = "";
     }
 
 }

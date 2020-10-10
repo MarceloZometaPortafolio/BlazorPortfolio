@@ -28,7 +28,7 @@ namespace Portfolio.API
         {
             services.AddControllers();
             var connectionString = Configuration["DATABASE_URL"];
-            services.AddDbContext<AppDBContext>(options => options.UseNpgsql(convertUrlConnectionString(Configuration["DATABASE_URL"])));
+            services.AddDbContext<AppDBContext>(options => options.UseNpgsql(ConvertUrlConnectionString(Configuration["DATABASE_URL"])));
             services.AddTransient<IDataService, PostgresDataService>();
 
             services.AddCors(options =>
@@ -43,7 +43,7 @@ namespace Portfolio.API
             });
         }
 
-        private string convertUrlConnectionString(string dbUrl)
+        private string ConvertUrlConnectionString(string dbUrl)
         {
             if(dbUrl is null)
             {

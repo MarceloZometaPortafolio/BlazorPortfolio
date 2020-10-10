@@ -25,7 +25,7 @@
                 <td><a class="text-primary" @onclick="() => NavigateToDetailsPage(project.Slug)">@project.Title</a></td>
                 <td>@project.Requirement</td>
                 <td>
-                    <button @onclick="() => EditProject(project.id)">Edit</button>
+                    <button @onclick="() => EditProject(project.Slug)">Edit</button>
                     <button @onclick="() => DeleteProject(project.id)">Delete</button>
                 </td>
             </tr>
@@ -54,9 +54,9 @@
     }
 
 
-    public void EditProject(int id)
+    public void EditProject(string slug)
     {
-        NavManager.NavigateTo($"projects/edit/" + id);
+        NavManager.NavigateTo($"projects/edit/" + slug);
     }
 
     public async Task DeleteProject(int id)
