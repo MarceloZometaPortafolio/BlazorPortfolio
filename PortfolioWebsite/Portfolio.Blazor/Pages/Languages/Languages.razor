@@ -7,7 +7,7 @@
 <ul>
     @foreach (Language l in languages)
     {
-        <li><a class="text-primary" @onclick="() => NavigateToDetailsPage(l.Id)">@l.Name</a></li>
+        <li><a class="text-primary" @onclick="() => NavigateToDetailsPage(l.Slug)">@l.Name</a></li>
     }
 </ul>
 
@@ -20,8 +20,8 @@
         languages =await service.GetLanguagesAsync();
     }
 
-    public void NavigateToDetailsPage(int id)
+    public void NavigateToDetailsPage(string slug)
     {
-        NavManager.NavigateTo("languages/" + id);
+        NavManager.NavigateTo("languages/" + slug);
     }
 }

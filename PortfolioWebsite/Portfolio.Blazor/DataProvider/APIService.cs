@@ -36,7 +36,7 @@ namespace Portfolio.Blazor.DataProvider
 
         public async Task<Project> GetProjectByIDAsync(int id)
         {
-            var projects = await client.GetFromJsonAsync<IEnumerable<Project>>("api/project");
+            var projects = await GetProjectsAsync();
 
             var project = projects.Where(proj => proj.id == id).First();
             Console.WriteLine("Project found was " + project.Title + " with id of " + project.id);
@@ -45,7 +45,7 @@ namespace Portfolio.Blazor.DataProvider
 
         public async Task<Project> GetProjectBySlugAsync(string slug)
         {
-            var projects = await client.GetFromJsonAsync<IEnumerable<Project>>("api/project");
+            var projects = await GetProjectsAsync();
 
             var project = projects.Where(proj => proj.Slug == slug).First();
             Console.WriteLine("Project found was " + project.Title + " with slug of " + project.Slug);
@@ -102,12 +102,23 @@ namespace Portfolio.Blazor.DataProvider
         }
         public async Task<Language> GetLanguageByIDAsync(int id)
         {
-            var languages = await client.GetFromJsonAsync<IEnumerable<Language>>("api/language");
+            var languages = await GetLanguagesAsync();
 
             var language = languages.Where(l => l.Id == id).First();
             Console.WriteLine("Language found was " + language.Name);
             return language;
         }
+
+        public async Task<Language> GetLanguageBySlugAsync(string slug)
+        {
+            var languages = await GetLanguagesAsync();
+
+            var language = languages.Where(l => l.Slug == slug).First();
+            
+            Console.WriteLine("Language found was " + language.Name);
+            return language;
+        }
+
         public async Task<IEnumerable<Project>> GetProjectsByLanguageId(int id)
         {
             return await client.GetFromJsonAsync<IEnumerable<Project>>("api/language/getprojects/" + id);
@@ -123,12 +134,22 @@ namespace Portfolio.Blazor.DataProvider
         }
         public async Task<Platform> GetPlatformsByIdAsync(int id)
         {
-            var platforms = await client.GetFromJsonAsync<IEnumerable<Platform>>("api/platform");
+            var platforms = await GetPlatformsAsync();
 
             var platform = platforms.Where(p => p.Id == id).First();
             Console.WriteLine("Platform found was " + platform.Name);
             return platform;
         }
+        public async Task<Platform> GetPlatformsBySlugAsync(string slug)
+        {
+            var platforms = await GetPlatformsAsync();
+
+            var platform = platforms.Where(p => p.Slug == slug).First();
+
+            Console.WriteLine("Platform found was " + platform.Name);
+            return platform;
+        }
+
         public async Task<IEnumerable<Project>> GetProjectsByPlatformId(int id)
         {
             return await client.GetFromJsonAsync<IEnumerable<Project>>("api/platform/getprojects/" + id);
@@ -142,7 +163,7 @@ namespace Portfolio.Blazor.DataProvider
 
             return technologies;
         }
-        public async Task<Technology> GetTechnologiesById(int id)
+        public async Task<Technology> GetTechnologiesByIdAsync(int id)
         {
             var technologies = await GetTechnologiesAsync();
 
@@ -150,6 +171,15 @@ namespace Portfolio.Blazor.DataProvider
             Console.WriteLine("Technology found was " + technology.Name);
             return technology;
         }
+        public async Task<Technology> GetTechnologiesBySlugAsync(string slug)
+        {
+            var technologies = await GetTechnologiesAsync();
+
+            var technology = technologies.Where(p => p.Slug == slug).First();
+            Console.WriteLine("Technology found was " + technology.Name);
+            return technology;
+        }
+
         public async Task<IEnumerable<Project>> GetProjectsByTechnologyId(int id)
         {
             return await client.GetFromJsonAsync<IEnumerable<Project>>("api/technology/getprojects/" + id);

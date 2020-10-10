@@ -7,7 +7,7 @@
 <ul>
     @foreach (Platform p in platforms)
     {
-        <li><a class="text-primary" @onclick="() => NavigateToDetailsPage(p.Id)">@p.Name</a></li>
+        <li><a class="text-primary" @onclick="() => NavigateToDetailsPage(p.Slug)">@p.Name</a></li>
     }
 </ul>
 
@@ -20,8 +20,8 @@
         platforms = await service.GetPlatformsAsync();
     }
 
-    public void NavigateToDetailsPage(int id)
+    public void NavigateToDetailsPage(string slug)
     {
-        NavManager.NavigateTo("platforms/" + id);
+        NavManager.NavigateTo("platforms/" + slug);
     }
 }

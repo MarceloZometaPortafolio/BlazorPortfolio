@@ -7,7 +7,7 @@
 <ul>
     @foreach (Technology t in technologies)
     {
-        <li><a class="text-primary" @onclick="() => NavigateToDetailsPage(t.Id)">@t.Name</a></li>
+        <li><a class="text-primary" @onclick="() => NavigateToDetailsPage(t.Slug)">@t.Name</a></li>
     }
 </ul>
 
@@ -20,8 +20,8 @@
         technologies = await service.GetTechnologiesAsync();
     }
 
-    public void NavigateToDetailsPage(int id)
+    public void NavigateToDetailsPage(string slug)
     {
-        NavManager.NavigateTo("technologies/" + id);
+        NavManager.NavigateTo("technologies/" + slug);
     }
 }

@@ -1,4 +1,4 @@
-﻿@page "/languages/{LanguageId:int}"
+﻿@page "/languages/{Slug}"
 @inject Portfolio.Blazor.DataProvider.APIService service
 @inject NavigationManager NavManager
 @using Portfolio.Shared
@@ -18,7 +18,7 @@ List of projects using this language:
         @foreach (Project project in ProjectList)
         {
             <tr>
-                <td><a class="text-primary" @onclick="() => NavigateToDetailsPage(project.id)">@project.Title</a></td>
+                <td><a class="text-primary" @onclick="() => NavigateToDetailsPage(project.Slug)">@project.Title</a></td>
                 <td>@project.Requirement</td>                
             </tr>
         }
@@ -27,20 +27,20 @@ List of projects using this language:
 
 @code {
     [Parameter]
-    public int LanguageId { get; set; }
+    public string Slug { get; set; }
 
     public Language Language = new Language();
     public IEnumerable<Project> ProjectList = new List<Project>();
 
     protected override async Task OnInitializedAsync()
     {
-        Language = await service.GetLanguageByIDAsync(LanguageId);
+        Language = await service.GetLanguageBySlugAsync(Slug);
 
-        ProjectList = await service.GetProjectsByLanguageId(LanguageId);
+        ProjectList = await service.GetProjectsByLanguageId(Language.Id);
     }
 
-    public void NavigateToDetailsPage(int id)
+    public void NavigateToDetailsPage(string slug)
     {
-        NavManager.NavigateTo("projects/" + id);
+        NavManager.NavigateTo("projects/" + slug);
     }
 }

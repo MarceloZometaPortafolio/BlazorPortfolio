@@ -1,11 +1,11 @@
-﻿@page "/technologies/{TechnologyId:int}"
+﻿@page "/technologies/{Slug}"
 @inject Portfolio.Blazor.DataProvider.APIService service
 @inject NavigationManager NavManager
 @using Portfolio.Shared
 
 <h3>@technology.Name</h3>
 
-List of projects using this platform:
+List of projects using this technology:
 
 <table class="table">
     <thead>
@@ -18,7 +18,7 @@ List of projects using this platform:
         @foreach (Project project in ProjectList)
         {
             <tr>
-                <td><a class="text-primary" @onclick="() => NavigateToDetailsPage(project.id)">@project.Title</a></td>
+                <td><a class="text-primary" @onclick="() => NavigateToDetailsPage(project.Slug)">@project.Title</a></td>
                 <td>@project.Requirement</td>
             </tr>
         }
@@ -27,20 +27,20 @@ List of projects using this platform:
 
 @code {
     [Parameter]
-    public int TechnologyId { get; set; }
+    public string Slug { get; set; }
 
     private Technology technology = new Technology();
     public IEnumerable<Project> ProjectList = new List<Project>();
 
     protected override async Task OnInitializedAsync()
     {
-        technology = await service.GetTechnologiesById(TechnologyId);
+        technology = await service.GetTechnologiesBySlugAsync(Slug);
 
-        ProjectList = await service.GetProjectsByTechnologyId(TechnologyId);
+        ProjectList = await service.GetProjectsByTechnologyId(technology.Id);
     }
 
-    public void NavigateToDetailsPage(int id)
+    public void NavigateToDetailsPage(string slug)
     {
-        NavManager.NavigateTo("projects/" + id);
+        NavManager.NavigateTo("projects/" + slug);
     }
 }

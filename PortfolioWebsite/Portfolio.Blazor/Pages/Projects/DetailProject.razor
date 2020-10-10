@@ -24,7 +24,7 @@
 @foreach (var l in languages)
 {
     <ul>
-        <li><a class="text-primary" @onclick="() => NavigateToCategory(nameof(languages), l.Id)">@l.Name</a></li>
+        <li><a class="text-primary" @onclick="() => NavigateToCategory(nameof(languages), l.Slug)">@l.Name</a></li>
     </ul>
 }
 
@@ -34,7 +34,7 @@
 @foreach (var p in platforms)
 {
     <ul>
-        <li><a class="text-primary" @onclick="() => NavigateToCategory(nameof(platforms), p.Id)">@p.Name</a></li>
+        <li><a class="text-primary" @onclick="() => NavigateToCategory(nameof(platforms), p.Slug)">@p.Name</a></li>
     </ul>
 }
 
@@ -44,7 +44,7 @@
 @foreach (var t in technologies)
 {
     <ul>
-        <li><a class="text-primary" @onclick="() => NavigateToCategory(nameof(technologies), t.Id)">@t.Name</a></li>
+        <li><a class="text-primary" @onclick="() => NavigateToCategory(nameof(technologies), t.Slug)">@t.Name</a></li>
     </ul>
 }
 
@@ -84,8 +84,8 @@
         technologies = await service.GetTechnologiesByProjectId(Project.id);
     }
 
-    public void NavigateToCategory(string url, int id)
+    public void NavigateToCategory(string url, string slug)
     {
-        NavManager.NavigateTo($"{url}/{id}");
+        NavManager.NavigateTo($"{url}/{slug}");
     }
 }
