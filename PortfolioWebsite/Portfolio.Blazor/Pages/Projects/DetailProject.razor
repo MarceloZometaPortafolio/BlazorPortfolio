@@ -1,21 +1,22 @@
 ﻿@page "/projects/{Slug}"
-@using Portfolio.Shared
+
 @inject Portfolio.Blazor.DataProvider.APIService service
 @inject NavigationManager NavManager
+@using Portfolio.Shared
 
-<h3>@Title</h3>
+<h3>@Project.Title</h3>
 <br />
 
 <h5>Requirements:</h5>
-<p>@Requirements</p>
+<MarkdownView Content="@Project.Requirement"/>
 <br />
 
 <h5>Design:</h5>
-<p>@Design</p>
+<MarkdownView Content="@Project.Design" />
 <br />
 
 <h5>Completion date:</h5>
-<p>@CompletionDate</p>
+<MarkdownView Content="@Project.CompletionDate.ToString()"/>
 <br />
 
 
@@ -52,32 +53,16 @@
     [Parameter]
     public string Slug { get; set; }
 
-    public string Title { get; set; }
-    public string Requirements { get; set; }
-    public string Design { get; set; }
-    public DateTime CompletionDate { get; set; }
-
-    public Project Project { get; set; }
+    public Project Project = new Project();
 
     private IEnumerable<Language> languages = new List<Language>();
     private IEnumerable<Platform> platforms = new List<Platform>();
     private IEnumerable<Technology> technologies = new List<Technology>();
 
-    /// <summary>
-    /// it was needed to have separate properties for displaying
-    /// because the page loaded before oninitializedasync finished
-    /// giving place to a null exception
-    /// </summary>
-    /// <returns>void Task</returns>
     protected override async Task OnInitializedAsync()
     {
         //return base.OnInitializedAsync();
         Project = await service.GetProjectBySlugAsync(Slug);
-
-        Title = Project.Title;
-        Requirements = Project.Requirement;
-        Design = Project.Design;
-        CompletionDate = Project.CompletionDate;
 
         languages = await service.GetLanguagesByProjectId(Project.id);
         platforms = await service.GetPlatformsByProjectId(Project.id);

@@ -14,7 +14,7 @@
     <thead>
         <tr>
             <th>Title</th>
-            <th>Requirement</th>
+            <th>Completion Date:</th>
             <th>Option</th>
         </tr>
     </thead>
@@ -23,7 +23,7 @@
         {
             <tr>
                 <td><a class="text-primary" @onclick="() => NavigateToDetailsPage(project.Slug)">@project.Title</a></td>
-                <td>@project.Requirement</td>
+                <td>@project.CompletionDate</td>
                 <td>
                     <button @onclick="() => EditProject(project.Slug)">Edit</button>
                     <button @onclick="() => DeleteProject(project.id)">Delete</button>

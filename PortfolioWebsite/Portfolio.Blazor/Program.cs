@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Portfolio.Blazor.DataProvider;
 using Microsoft.AspNetCore.Components;
+using Ganss.XSS;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Portfolio.Blazor
 {
@@ -21,7 +23,14 @@ namespace Portfolio.Blazor
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration["APIBaseAddress"]) });
 
-            builder.Services.AddScoped<APIService>();            
+            builder.Services.AddScoped<APIService>();
+
+            builder.Services.AddScoped<IHtmlSanitizer, HtmlSanitizer>(x =>
+            {
+                var sanitizer = new Ganss.XSS.HtmlSanitizer();
+                sanitizer.AllowedAttributes.Add("class");
+                return sanitizer;
+            });
 
             await builder.Build().RunAsync();
         }

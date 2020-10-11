@@ -1,0 +1,36 @@
+﻿@inject IHtmlSanitizer sanitizer
+@using Markdig;
+@using Ganss.XSS; 
+
+@htmlContent
+
+@code {
+
+    private string _content;
+    private MarkupString htmlContent = new MarkupString();
+
+    [Parameter]
+    public string Content
+    {
+        get => _content;
+        set
+        {
+            _content = value;
+            htmlContent = ConvertStringToMarkupString(_content);
+        }
+    }
+
+    private MarkupString ConvertStringToMarkupString(string content)
+    {
+        if (!string.IsNullOrWhiteSpace(content))
+        {
+            var contentAsHtml = Markdown.ToHtml(content, new Markdig.MarkdownPipelineBuilder().UseAdvancedExtensions().Build());
+
+            var sanitizedHtml = sanitizer.Sanitize(contentAsHtml);
+
+            return new MarkupString(sanitizedHtml);
+        }
+
+        return new MarkupString();
+    }
+}
