@@ -11,7 +11,7 @@ List of projects using this technology:
     <thead>
         <tr>
             <th>Title</th>
-            <th>Requirement</th>
+            <th>Completion Date</th>
         </tr>
     </thead>
     <tbody>
@@ -19,7 +19,7 @@ List of projects using this technology:
         {
             <tr>
                 <td><a class="text-primary" @onclick="() => NavigateToDetailsPage(project.Slug)">@project.Title</a></td>
-                <td>@project.Requirement</td>
+                <td>@project.CompletionDate.ToString()</td>
             </tr>
         }
     </tbody>
