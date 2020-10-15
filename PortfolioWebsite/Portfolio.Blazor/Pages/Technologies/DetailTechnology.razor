@@ -7,40 +7,17 @@
 
 List of projects using this technology:
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Completion Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Project project in ProjectList)
-        {
-            <tr>
-                <td><a class="text-primary" @onclick="() => NavigateToDetailsPage(project.Slug)">@project.Title</a></td>
-                <td>@project.CompletionDate.ToString()</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<DetailCategory Slug="@Slug" TypeOfCategory="technologies" />
+
 
 @code {
     [Parameter]
     public string Slug { get; set; }
 
     private Technology technology = new Technology();
-    public IEnumerable<Project> ProjectList = new List<Project>();
 
     protected override async Task OnInitializedAsync()
     {
         technology = await service.GetTechnologiesBySlugAsync(Slug);
-
-        ProjectList = await service.GetProjectsByTechnologyId(technology.Id);
-    }
-
-    public void NavigateToDetailsPage(string slug)
-    {
-        NavManager.NavigateTo("projects/" + slug);
     }
 }

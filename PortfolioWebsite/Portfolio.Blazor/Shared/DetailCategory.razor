@@ -1,0 +1,84 @@
+﻿@using Portfolio.Shared
+@inject Portfolio.Blazor.DataProvider.APIService service
+@inject NavigationManager NavManager
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Completion Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Project project in ProjectList)
+        {
+            <tr>
+                <td><a class="text-primary" @onclick="() => NavigateToDetailsPage(project.Slug)">@project.Title</a></td>
+                <td>@project.CompletionDate.ToString()</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter]
+    public string Slug { get; set; }
+
+    [Parameter]
+    public string TypeOfCategory { get; set; }
+    
+    public ICategory Category;
+    public IEnumerable<Project> ProjectList = new List<Project>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await PopulateCategoryAndProjectList();
+    }
+
+    private async Task PopulateCategoryAndProjectList()
+    {
+        switch (TypeOfCategory)
+        {
+            case ("languages"):
+                Category = new Language();
+                await GetLanguageAndSpecificProjects();
+                break;
+
+            case ("platforms"):
+                Category = new Platform();
+                await GetPlatformAndSpecificProjects();
+                break;
+
+            case ("technologies"):
+                Category = new Technology();
+                await GetTechnologyAndSpecificProjects();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private async Task GetLanguageAndSpecificProjects()
+    {
+        Category = await service.GetLanguageBySlugAsync(Slug);
+        ProjectList = await service.GetProjectsByLanguageId(Category.Id);
+    }
+
+    private async Task GetPlatformAndSpecificProjects()
+    {
+        Category = await service.GetPlatformsBySlugAsync(Slug);
+        ProjectList = await service.GetProjectsByPlatformId(Category.Id);
+    }
+
+    private async Task GetTechnologyAndSpecificProjects()
+    {
+        Category = await service.GetTechnologiesBySlugAsync(Slug);
+        ProjectList = await service.GetProjectsByTechnologyId(Category.Id);
+    }
+
+    public void NavigateToDetailsPage(string slug)
+    {
+        NavManager.NavigateTo("projects/" + slug);
+    }
+}
