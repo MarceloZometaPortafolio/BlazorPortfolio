@@ -31,6 +31,9 @@
     [Parameter]
     public int GreatestId { get; set; }
 
+    [Parameter]
+    public EventCallback<Project> ProjectAdded { get; set; }
+
     Project NewProject;
 
     protected override void OnInitialized()
@@ -42,6 +45,8 @@
     {
         NewProject.Slug = NewProject.Title.ToSlug();
         await service.AddProjectAsync(NewProject);
+
+        await ProjectAdded.InvokeAsync(NewProject);
     }
 
 }

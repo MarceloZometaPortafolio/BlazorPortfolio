@@ -38,14 +38,14 @@
 
 @if (isAddComponentDisplayed is true)
 {
-    <Portfolio.Blazor.Pages.Projects.AddProject GreatestId="@GreatestId" />
+    <AddProject GreatestId="@GreatestId" ProjectAdded="ProjectAdded"/>
 }
 
 
 @code{
     public bool isAddComponentDisplayed = false;
     public string PageTitle { get; set; }
-    public IEnumerable<Project> ProjectList = new List<Project>();
+    public IList<Project> ProjectList = new List<Project>();
     public int GreatestId { get; set; }
 
     protected override async Task OnInitializedAsync()
@@ -82,12 +82,17 @@
 
     private async Task GetAllProjectsFromDB()
     {
-        ProjectList = await service.GetProjectsAsync();
+        ProjectList = (await service.GetProjectsAsync()).ToList();
         GreatestId = ProjectList.Max(p => p.id);
     }
 
     public void NavigateToDetailsPage(string slug)
     {
         NavManager.NavigateTo("projects/" + slug);
+    }
+
+    private async Task ProjectAdded(Project project)
+    {
+        await GetAllProjectsFromDB();
     }
 }
