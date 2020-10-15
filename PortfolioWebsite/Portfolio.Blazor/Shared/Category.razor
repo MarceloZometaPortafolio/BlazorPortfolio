@@ -1,0 +1,80 @@
+﻿@inject Portfolio.Blazor.DataProvider.APIService service
+@inject NavigationManager NavManager
+@using Portfolio.Shared
+@using System.Collections.Generic
+
+<ul>
+    @foreach (var t in categories)
+    {
+        <li><a class="text-primary" @onclick="() => NavigateToDetailsPage(t.Slug)">@t.Name</a></li>
+    }
+</ul>
+
+@code {
+    [Parameter]
+    public string TypeOfCategory { get; set; }
+
+    private IList<Portfolio.Shared.ICategory> categories = new List<Portfolio.Shared.ICategory>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await InitializeList();
+    }
+
+    private async Task InitializeList()
+    {
+        switch (TypeOfCategory)
+        {
+            case ("languages"):
+                await AddLanguagesToList();
+                break;
+
+            case ("platforms"):
+                await AddPlatformsToList();
+                break;
+
+            case ("technologies"):
+                await AddTechnologiesToList();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private async Task AddLanguagesToList()
+    {
+        List<Language> languages = (await service.GetLanguagesAsync()).ToList();
+
+        foreach (var c in languages)
+        {
+            categories.Add(c);
+        }
+    }
+    private async Task AddPlatformsToList()
+    {
+        List<Platform> platforms = (await service.GetPlatformsAsync()).ToList();
+
+        foreach (var c in platforms)
+        {
+            categories.Add(c);
+        }
+    }
+
+
+    private async Task AddTechnologiesToList()
+    {
+        List<Technology> technologies = (await service.GetTechnologiesAsync()).ToList();
+
+        foreach (var c in technologies)
+        {
+            categories.Add(c);
+        }
+    }
+
+
+    public void NavigateToDetailsPage(string slug)
+    {
+        NavManager.NavigateTo($"{TypeOfCategory}/" + slug);
+    }
+}

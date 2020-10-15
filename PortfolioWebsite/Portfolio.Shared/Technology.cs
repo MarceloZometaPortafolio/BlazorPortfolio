@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Portfolio.Shared
 {
-    public class Technology
+    public class Technology : ICategory
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }

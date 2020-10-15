@@ -2,26 +2,10 @@
 @inject Portfolio.Blazor.DataProvider.APIService service
 @inject NavigationManager NavManager
 @using Portfolio.Shared
+
 <h3>Platforms:</h3>
 
-<ul>
-    @foreach (Platform p in platforms)
-    {
-        <li><a class="text-primary" @onclick="() => NavigateToDetailsPage(p.Slug)">@p.Name</a></li>
-    }
-</ul>
-
+<Portfolio.Blazor.Shared.Category TypeOfCategory="technologies" />
 
 @code {
-    public IEnumerable<Platform> platforms = new List<Platform>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        platforms = await service.GetPlatformsAsync();
-    }
-
-    public void NavigateToDetailsPage(string slug)
-    {
-        NavManager.NavigateTo("platforms/" + slug);
-    }
 }
