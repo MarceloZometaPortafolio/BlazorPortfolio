@@ -11,6 +11,8 @@ using Portfolio.Blazor.DataProvider;
 using Microsoft.AspNetCore.Components;
 using Ganss.XSS;
 using System.Security.Cryptography.X509Certificates;
+using Polly;
+using Polly.Extensions.Http;
 
 namespace Portfolio.Blazor
 {
@@ -21,9 +23,9 @@ namespace Portfolio.Blazor
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration["APIBaseAddress"]) });
-
-            builder.Services.AddScoped<APIService>();
+            builder.Services.AddHttpClient<APIService>(hc => hc.BaseAddress = new Uri(builder.Configuration["APIBaseAddress"]))
+                .SetHandlerLifetime(TimeSpan.FromMinutes(5))
+                .AddPolicyHandler(GetPolicy());
 
             builder.Services.AddScoped<IHtmlSanitizer, HtmlSanitizer>(x =>
             {
@@ -33,6 +35,18 @@ namespace Portfolio.Blazor
             });
 
             await builder.Build().RunAsync();
+        }
+
+        private static IAsyncPolicy<HttpResponseMessage> GetPolicy()
+        {
+            Random jitterer = new Random();
+
+            return HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .OrResult(msg => msg.StatusCode == System.Net.HttpStatusCode.NotFound)
+                .WaitAndRetryAsync(6,
+                    retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt))
+                                        + TimeSpan.FromMilliseconds(jitterer.Next(0, 100)));
         }
     }
 }
