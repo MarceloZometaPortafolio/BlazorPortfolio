@@ -41,13 +41,15 @@ app {
             margin-left: 1.5rem;
         }
 
-.main .top-row a:first-child {
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+        .main .top-row a:first-child {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, black 70%);
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    position: sticky;
+    top: 0;
 }
 
     .sidebar .top-row {
@@ -79,7 +81,7 @@ app {
         }
 
         .sidebar .nav-item a {
-            color: black;
+            color: #d7d7d7;
             border-radius: 4px;
             height: 3rem;
             display: flex;
@@ -129,12 +131,12 @@ app {
     z-index: 1000;
 }
 
-#blazor-error-ui .dismiss {
-    cursor: pointer;
-    position: absolute;
-    right: 0.75rem;
-    top: 0.5rem;
-}
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
 
 @media (max-width: 767.98px) {
     .main .top-row:not(.auth) {
@@ -181,7 +183,66 @@ app {
         display: block;
     }
 
-    h1 {
+    
 
+    /* Links inside the navbar */
+    .navbar a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    /* Change background on mouse-over */
+    .navbar a:hover {
+        background: #ddd;
+        color: black;
+    }
+
+    .topNavBar {
+        overflow: hidden;
+        background-color: #333;
+        position: fixed; /* Set the navbar to fixed position */
+        top: 0; /* Position the navbar at the top of the page */
+        width: 100%; /* Full width */
+    }
+
+    .topNavBar header {
+        width: auto;
+        height: 70px;
+        background-color: black;
+    }
+
+    .topNavBar h1 {
+        position: absolute;
+        padding: 3px;
+        float: left;
+        margin-left: 2%;
+        color: aquamarine;
+        vertical-align:central;
+    }
+
+    .topNavBar ul {
+        width: auto;
+        float: right;
+        margin-top: 8px;
+    }
+
+    .topNavBar a{
+        display: inline-block;
+        margin: 0 5px;
+        padding: 7px 13px;
+        border-radius: 3px;
+    }
+
+    .topNavBar a:hover {
+        color: red;
+        transition: 0.5s;
+    }
+
+    .mainContent{
+        margin-top:70px;
     }
 }
