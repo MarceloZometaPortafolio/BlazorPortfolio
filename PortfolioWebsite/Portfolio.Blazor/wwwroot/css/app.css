@@ -1,5 +1,9 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
+:root{
+    --title-color:  
+}
+
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
@@ -203,7 +207,7 @@ app {
 
     .topNavBar {
         overflow: hidden;
-        background-color: #333;
+        background-color: #0B0C10;
         position: fixed; /* Set the navbar to fixed position */
         top: 0; /* Position the navbar at the top of the page */
         width: 100%; /* Full width */
@@ -220,7 +224,7 @@ app {
         padding: 3px;
         float: left;
         margin-left: 2%;
-        color: aquamarine;
+        color: #66FCF1;
         vertical-align:central;
     }
 
@@ -235,10 +239,11 @@ app {
         margin: 0 5px;
         padding: 7px 13px;
         border-radius: 3px;
+        color: #66FCF1;
     }
 
     .topNavBar a:hover, .dropdownNavBar:hover .dropbtn {
-        color: red;
+        background-color: #1F2833;
         transition: 0.5s;
     }
 
@@ -275,5 +280,10 @@ app {
 
     .dropdownNavBar:hover .dropdownNavBar-content{
         display: block;
+    }
+
+    .my-button{
+        background-color: #1F2833;
+        color: #C5C6C7;
     }
 }

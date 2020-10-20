@@ -25,15 +25,15 @@
                 <td><a class="text-primary" @onclick="() => NavigateToDetailsPage(project.Slug)">@project.Title</a></td>
                 <td>@project.CompletionDate</td>
                 <td>
-                    <button @onclick="() => EditProject(project.Slug)" class="btn-dark">Edit</button>
-                    <button @onclick="() => DeleteProject(project.id)" class="btn-light">Delete</button>
+                    <button @onclick="() => EditProject(project.Slug)" class="my-button">Edit</button>
+                    <button @onclick="() => DeleteProject(project.id)" class="my-button">Delete</button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<button @onclick="ShowAddComponent" class="btn-secondary">Add New Project</button>
+<button @onclick="ShowAddComponent" class="my-button">Add New Project</button>
 <br />
 
 @if (isAddComponentDisplayed is true)
