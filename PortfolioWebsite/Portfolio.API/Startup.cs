@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using Portfolio.API.Data;
 
 namespace Portfolio.API
@@ -30,6 +31,15 @@ namespace Portfolio.API
             var connectionString = Configuration["DATABASE_URL"];
             services.AddDbContext<AppDBContext>(options => options.UseNpgsql(ConvertUrlConnectionString(Configuration["DATABASE_URL"])));
             services.AddTransient<IDataService, PostgresDataService>();
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Marcelo Zometa Portfolio",
+                    Version = "v1"
+                });
+            });
 
             services.AddCors(options =>
             {
@@ -79,6 +89,12 @@ namespace Portfolio.API
             app.UseCors();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+            });
 
             app.UseEndpoints(endpoints =>
             {
