@@ -224,7 +224,7 @@ app {
         vertical-align:central;
     }
 
-    .topNavBar ul {
+    .topNavBar nav {
         width: auto;
         float: right;
         margin-top: 8px;
@@ -237,12 +237,43 @@ app {
         border-radius: 3px;
     }
 
-    .topNavBar a:hover {
+    .topNavBar a:hover, .dropdownNavBar:hover .dropbtn {
         color: red;
         transition: 0.5s;
     }
 
     .mainContent{
         margin-top:70px;
+    }
+
+    .dropdownNavBar{
+        overflow: hidden;
+        color: inherit;
+
+    }
+
+    .dropdownNavBar .dropbtn{
+        background-color: inherit;
+        font-family: inherit;
+        margin: 0;
+    }
+
+    .dropdownNavBar-content {
+        display: none;
+        position: absolute;
+        min-width: inherit;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdownNavBar-content a{
+        float: none;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+    .dropdownNavBar:hover .dropdownNavBar-content{
+        display: block;
     }
 }

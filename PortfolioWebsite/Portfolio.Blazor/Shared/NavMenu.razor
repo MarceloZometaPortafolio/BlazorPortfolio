@@ -1,56 +1,17 @@
-﻿@*<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">Marcelo Zometa</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>*@
-
-<header class="topNavBar">
+﻿<header class="topNavBar">
     <h1>Marcelo Zometa</h1>
 
     <nav id="topNavBar">
-        <ul>
-            <a href="/">Home</a>
-            <a href="/resume">Resume</a>
-            <a href="/skills">Skills</a>
-        </ul>        
+        <a href="">Home</a>
+        <a href="resume">Resume</a>
+        <a href="skills">Skills</a>
+        <a href="posts">Posts</a>
+        <a href="projects">Projects</a>
+        <a href="languages">Languages</a>
+        <a href="Platforms">Platforms</a>
+        <a href="Technologies">Technologies</a>
     </nav>
 </header>
-
-@*<div id="topNavBar" @onclick="ToggleNavMenu">  
-        
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        
-            <NavLink class="nav-link" href="resume" Match="NavLinkMatch.All">
-                <span class="oi oi-book" aria-hidden="true"></span> Resume
-            </NavLink>
-        
-            <NavLink class="nav-link" href="skills" Match="NavLinkMatch.All">
-                <span class="oi oi-bar-chart" aria-hidden="true"></span> Skills
-            </NavLink>
-        
-            <NavLink class="nav-link" href="posts" Match="NavLinkMatch.All">
-                <span class="oi oi-beaker" aria-hidden="true"></span> Posts
-            </NavLink>
-        
-            <NavLink class="nav-link" href="projects" Match="NavLinkMatch.All">
-                <span class="oi oi-book" aria-hidden="true"></span> Projects
-            </NavLink>
-        
-            <NavLink class="nav-link" href="languages" Match="NavLinkMatch.All">
-                <span class="oi oi-bar-chart" aria-hidden="true"></span> Languages
-            </NavLink>
-        
-            <NavLink class="nav-link" href="platforms" Match="NavLinkMatch.All">
-                <span class="oi oi-bar-chart" aria-hidden="true"></span> Platforms
-            </NavLink>
-        
-            <NavLink class="nav-link" href="technologies" Match="NavLinkMatch.All">
-                <span class="oi oi-bar-chart" aria-hidden="true"></span> Technologies
-            </NavLink>
-</div>*@
 
 @code {
     private bool collapseNavMenu = true;
