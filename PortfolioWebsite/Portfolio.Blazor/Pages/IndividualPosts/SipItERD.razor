@@ -1,0 +1,103 @@
+﻿@page "/erd"
+<h3>Xamarin.Forms</h3>
+
+Xamarin.Forms is an open source cross-platform framework from Microsoft for building iOS,
+Android, & Windows apps with .NET from a single shared codebase. More information at <a href="https://dotnet.microsoft.com/apps/xamarin/xamarin-forms">Xamarin.Forms</a>
+
+<br />
+<br />
+<h5>Description of project:</h5>
+This application was designed for a small business in Ephraim called <a href="https://www.facebook.com/sipitsodashack/">Sip It! Soda Shack</a>.
+
+<br />
+For making this project, I used the following technologies:
+
+<br />
+<ol>
+    <li>
+        <strong>Xamarin.Forms:</strong>This framework is for developing responsive mobile applications for iOS, Android, and Windows Apps.
+        This was used in this project as the basis where the entire application is built.
+    </li>
+    <li>
+        <strong>Prism:</strong>This .NetFramework library is responsible for dependency injection, page navigation and other powerful techniques.
+        In this project, this was particularly useful for dependency injection, which made creation and use of services easy and costless.
+    </li>
+    <li>
+        <strong>Shell Application:</strong>This type of Xamarin.Forms application provides great features like common navigation, URI-based navigation
+        scheme and an integrated search handler.
+
+        For this application, Shell was great for creating a modern and responsive layout using tabs, and creating the wires to navigate between pages more
+        freely.
+    </li>
+</ol>
+
+<br />
+<br />
+<h5>Remarkable code:</h5>
+<p>
+    In this project, these are some of the most remarkable pieces of code. For accessing the entire repository, <a href="https://github.com/MarceloZometaPortafolio/SipItApp">click here</a>
+</p>
+
+<strong>Use of MVVM</strong>
+<br />
+        By using the ModelViewViewModel pattern (MVVM) we successfully create a separation between the Views (Interface) with the Model (data structures)
+        allowing us to create a "middle man" which will transform model information into values that can be displayed on a view.
+<br />
+
+        Allowing the use of ViewModels in the app:
+<div style=" margin:25px">
+    <img src="images/SipIt/viewmodel.jpg" alt="Registering viewmodels" />
+</div>
+
+        Connecting the View to the ViewModel:
+<div style=" margin:25px">
+    <img src="images/SipIt/usingviewmodels.jpg" alt="Connecting viewmodels" />
+</div>
+
+        Definition of a ViewModel:
+<div style=" margin:25px">
+    <img src="images/SipIt/definitionviewmodel.jpg" alt="defining viewmodels" />
+</div>
+
+<strong>Use of Shell navigation</strong>
+<br />
+        By using the Shell navigation on this app, we acquire a URI type of navigation, where in theory you can navigate to any page anywhere, which gives 
+the app more flexibility with the flow of the pages. In addition, Shell allows for great modern looks to the app by using hamburger menus, shells or tabs. 
+This application uses tabs on the bottom of the page. 
+<br />
+
+        Definition of routes:
+<div style=" margin:25px">
+    <img src="images/SipIt/shellnavigation.jpg" alt="App landing page" />
+</div>
+
+
+<br />
+<br />
+<h5>Gallery:</h5>
+<div>
+    <div style="float:left; margin:25px">
+        <img src="images/SipIt/homeSipIt.jpg" alt="App landing page" height="600" />
+    </div>
+    <div style="        float: left;
+        margin: 25px
+">
+        <img src="images/SipIt/loginSipIt.jpg" alt="Log in page" height="600" />
+
+    </div>
+    <div style="        float: left;
+        margin: 25px
+">
+        <img src="images/SipIt/registerSipIt.jpg" alt="Register page" height="600" />
+
+    </div>
+    <div style="        float: left;
+        margin: 25px
+">
+        <img src="images/SipIt/menuSipIt.jpg" alt="Menu page" height="600" />
+    </div>
+</div>
+
+@code {
+
+}
