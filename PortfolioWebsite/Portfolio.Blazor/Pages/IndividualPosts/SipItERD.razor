@@ -1,102 +1,76 @@
 ﻿@page "/erd"
-<h3>Xamarin.Forms</h3>
+<h3>Entity-relationship Diagram (ERD) for the Sip It App Project</h3>
+<br />
 
-Xamarin.Forms is an open source cross-platform framework from Microsoft for building iOS,
-Android, & Windows apps with .NET from a single shared codebase. More information at <a href="https://dotnet.microsoft.com/apps/xamarin/xamarin-forms">Xamarin.Forms</a>
+An Entity Relationship Diagram (ERD) is a snapshot of data structures.
+An Entity Relationship Diagram shows entities (tables) in a database and relationships
+between tables within that database. For a good database design it is essential to
+have an Entity Relationship Diagram.
+More information at
+<a href="https://www.datanamic.com/dezign/erdiagramtool.html#:~:text=An%20Entity%20Relationship%20Diagram%20(ERD,have%20an%20Entity%20Relationship%20Diagram.">this site</a>
 
 <br />
 <br />
-<h5>Description of project:</h5>
-This application was designed for a small business in Ephraim called <a href="https://www.facebook.com/sipitsodashack/">Sip It! Soda Shack</a>.
-
+<h5>Importance:</h5>
 <br />
-For making this project, I used the following technologies:
 
-<br />
-<ol>
-    <li>
-        <strong>Xamarin.Forms:</strong>This framework is for developing responsive mobile applications for iOS, Android, and Windows Apps.
-        This was used in this project as the basis where the entire application is built.
-    </li>
-    <li>
-        <strong>Prism:</strong>This .NetFramework library is responsible for dependency injection, page navigation and other powerful techniques.
-        In this project, this was particularly useful for dependency injection, which made creation and use of services easy and costless.
-    </li>
-    <li>
-        <strong>Shell Application:</strong>This type of Xamarin.Forms application provides great features like common navigation, URI-based navigation
-        scheme and an integrated search handler.
-
-        For this application, Shell was great for creating a modern and responsive layout using tabs, and creating the wires to navigate between pages more
-        freely.
-    </li>
-</ol>
+It is of key importance to have a well thought out ERD for it not only works as the documentation of the database, but also shows the various entities
+existant and their relations, as well as their attributes. When documented properly, an ERD will help the team working with it to use, add or remove
+functionality without jeopardizing the prior information.
 
 <br />
 <br />
-<h5>Remarkable code:</h5>
-<p>
-    In this project, these are some of the most remarkable pieces of code. For accessing the entire repository, <a href="https://github.com/MarceloZometaPortafolio/SipItApp">click here</a>
-</p>
 
-<strong>Use of MVVM</strong>
-<br />
-        By using the ModelViewViewModel pattern (MVVM) we successfully create a separation between the Views (Interface) with the Model (data structures)
-        allowing us to create a "middle man" which will transform model information into values that can be displayed on a view.
+<h5>Design:</h5>
 <br />
 
-        Allowing the use of ViewModels in the app:
-<div style=" margin:25px">
-    <img src="images/SipIt/viewmodel.jpg" alt="Registering viewmodels" />
-</div>
-
-        Connecting the View to the ViewModel:
-<div style=" margin:25px">
-    <img src="images/SipIt/usingviewmodels.jpg" alt="Connecting viewmodels" />
-</div>
-
-        Definition of a ViewModel:
-<div style=" margin:25px">
-    <img src="images/SipIt/definitionviewmodel.jpg" alt="defining viewmodels" />
-</div>
-
-<strong>Use of Shell navigation</strong>
-<br />
-        By using the Shell navigation on this app, we acquire a URI type of navigation, where in theory you can navigate to any page anywhere, which gives 
-the app more flexibility with the flow of the pages. In addition, Shell allows for great modern looks to the app by using hamburger menus, shells or tabs. 
-This application uses tabs on the bottom of the page. 
+For this ERD, I used a free tool offered on Google Drive called "diagrams.net" which offered the proper tools I needed. With it I created this first
+ERD which implemented a Menu for the Sip It App on Xamarin:
 <br />
 
-        Definition of routes:
-<div style=" margin:25px">
-    <img src="images/SipIt/shellnavigation.jpg" alt="App landing page" />
-</div>
+<img src="images/ERD/ERD.jpg" alt="Menu ERD" style="margin:1em;" />
+<br />
 
+In it, you can appreciate 5 different entities and their proper attributes. When planning it, I came up with the difficulty that each drink was composed
+of a base (Coke, Pepsi, Dr. Pepper, etc.) and multiple types of add-ons (syrups, purees, sugar free additives, etc.). Not only the drinks would relate
+to the bases, but they would have a many-to-many relation with the add-ons. Add-ons are called Flavors and the drinks are called Sanpete
+Favorites on the ERD to maintain client's nomenclature.
+
+That is how I came up with this design, where each base can be in many entries of the drinks, but each drink will only have one base. In addition,
+each drink would have many flavors, and each flavor could show up in many drinks, so I created a bridge table to represent that many-to-many relation.
+The Size table did not relate with any of the affored mentioned tables so it stands alone.
 
 <br />
 <br />
-<h5>Gallery:</h5>
-<div>
-    <div style="float:left; margin:25px">
-        <img src="images/SipIt/homeSipIt.jpg" alt="App landing page" height="600" />
-    </div>
-    <div style="        float: left;
-        margin: 25px
-">
-        <img src="images/SipIt/loginSipIt.jpg" alt="Log in page" height="600" />
 
-    </div>
-    <div style="        float: left;
-        margin: 25px
-">
-        <img src="images/SipIt/registerSipIt.jpg" alt="Register page" height="600" />
+<h5>Implementation:</h5>
+<br />
 
-    </div>
-    <div style="        float: left;
-        margin: 25px
-">
-        <img src="images/SipIt/menuSipIt.jpg" alt="Menu page" height="600" />
-    </div>
-</div>
+After finishing the design, I continued the process by implementing it on PostgreSQL. Personally, I have more experience managing Microsoft's
+SQL Server databases, but this time I wanted to explore other technologies, so I opted for PostgreSQL. To do that, first, I created a PSQL container
+on my local machine using this command:
+<br />
+
+<img src="images/ERD/docker.jpg" alt="Docker command to create PostgreSQL database" style="margin:2em; justify-self:center" />
+<br />
+
+Where I configured my system to talk to the container through port 5430, to be named sipit_db and to always restart; as well as setting some
+environment variables to connect (blurred out for security reasons).
+
+Once this container was up and running, I proceeded to the task of creating the entities (tables) of the ERD. Below you can find an example of some code
+to create the SanpeteFavorites_Flavor bridge table:
+<br />
+
+<img src="images/ERD/bridge.jpg" alt="SanpeteFavorites_Flavor table creation" style="margin:2em; justify-self:center" />
+<br />
+
+Here you can appreciate I have set SanpeteFavorites_Id and Flavor_Id as foreign keys that will delete on cascade if their parent entry dies. Also,
+to avoid having to deal with a composite key, I decided to add a personal Id to each entry, making each entry easier to reference if so desired.
+
+Finally, I proceeded to the painstaking process of inputting real data into the entities. Below you can find part of the scripts used to do so:
+<br />
+
+<img src="images/ERD/insert.jpg" alt="Inserting data to the SanpeteFavorites_Flavor table" style="margin:2em; justify-self:center" />
 
 @code {
 
