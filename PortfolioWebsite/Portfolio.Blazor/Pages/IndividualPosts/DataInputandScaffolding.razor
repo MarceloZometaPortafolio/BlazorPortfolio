@@ -1,102 +1,91 @@
 ﻿@page "/data-input"
-<h3>Xamarin.Forms</h3>
-
-Xamarin.Forms is an open source cross-platform framework from Microsoft for building iOS,
-Android, & Windows apps with .NET from a single shared codebase. More information at <a href="https://dotnet.microsoft.com/apps/xamarin/xamarin-forms">Xamarin.Forms</a>
-
+<h3>Scaffolding on Entity Framework</h3>
 <br />
-<br />
-<h5>Description of project:</h5>
-This application was designed for a small business in Ephraim called <a href="https://www.facebook.com/sipitsodashack/">Sip It! Soda Shack</a>.
 
-<br />
-For making this project, I used the following technologies:
+The Entity Framework is a set of technologies in ADO.NET that support the development 
+of data-oriented software applications. It allows architects and developers to model 
+entities, relationships, and logic of the business problems they 
+are solving, and it allows them to work with the data engines used to store and retrieve
+ the data. More information at
+<a href="https://www.datanamic.com/dezign/erdiagramtool.html#:~:text=An%20Entity%20Relationship%20Diagram%20(ERD,have%20an%20Entity%20Relationship%20Diagram.">this site</a>
 
 <br />
+<br />
+<h5>Importance:</h5>
+<br />
+
+Entity Framework is a great tool for working with databases on the Dotnet Framework. While 
+C# on its own offers a way to connect and talk to a database, doing so opens the chance for 
+data corruption for you would publish the connection credentials to every app published. 
+In addition, if a user has insert and update permissions for their entry on their app, they 
+can easily access other entries too. Using Entity Framework helps us avoid that. 
+<br />
+<br />
+
+<h5>Design:</h5>
+<br />
+
+To work with a database on Dotnet, there are mainly 2 paths:
+
 <ol>
     <li>
-        <strong>Xamarin.Forms:</strong>This framework is for developing responsive mobile applications for iOS, Android, and Windows Apps.
-        This was used in this project as the basis where the entire application is built.
+        To start from scratch. You personally type each model, controller and APIs. 
+        After that, you have to add migrations to the database and update the database manually
+        This is fenomenal for new empty databases. It helps you adapt the database based on how you
+        are planning to use it.
     </li>
-    <li>
-        <strong>Prism:</strong>This .NetFramework library is responsible for dependency injection, page navigation and other powerful techniques.
-        In this project, this was particularly useful for dependency injection, which made creation and use of services easy and costless.
-    </li>
-    <li>
-        <strong>Shell Application:</strong>This type of Xamarin.Forms application provides great features like common navigation, URI-based navigation
-        scheme and an integrated search handler.
 
-        For this application, Shell was great for creating a modern and responsive layout using tabs, and creating the wires to navigate between pages more
-        freely.
+    <li>
+        To scaffold the models and dbcontext from an existing database. This is great when you
+        have an existing and already populated database for it saves a lot of time. 
     </li>
 </ol>
 
-<br />
-<br />
-<h5>Remarkable code:</h5>
-<p>
-    In this project, these are some of the most remarkable pieces of code. For accessing the entire repository, <a href="https://github.com/MarceloZometaPortafolio/SipItApp">click here</a>
-</p>
-
-<strong>Use of MVVM</strong>
-<br />
-        By using the ModelViewViewModel pattern (MVVM) we successfully create a separation between the Views (Interface) with the Model (data structures)
-        allowing us to create a "middle man" which will transform model information into values that can be displayed on a view.
-<br />
-
-        Allowing the use of ViewModels in the app:
-<div style=" margin:25px">
-    <img src="images/SipIt/viewmodel.jpg" alt="Registering viewmodels" />
-</div>
-
-        Connecting the View to the ViewModel:
-<div style=" margin:25px">
-    <img src="images/SipIt/usingviewmodels.jpg" alt="Connecting viewmodels" />
-</div>
-
-        Definition of a ViewModel:
-<div style=" margin:25px">
-    <img src="images/SipIt/definitionviewmodel.jpg" alt="defining viewmodels" />
-</div>
-
-<strong>Use of Shell navigation</strong>
-<br />
-        By using the Shell navigation on this app, we acquire a URI type of navigation, where in theory you can navigate to any page anywhere, which gives 
-the app more flexibility with the flow of the pages. In addition, Shell allows for great modern looks to the app by using hamburger menus, shells or tabs. 
-This application uses tabs on the bottom of the page. 
-<br />
-
-        Definition of routes:
-<div style=" margin:25px">
-    <img src="images/SipIt/shellnavigation.jpg" alt="App landing page" />
-</div>
-
+In either case, you still have to manually connect to the database. In this case, since I have
+ plenty of experience with the first option, I decided to proceed with the Scaffolding.   
 
 <br />
 <br />
-<h5>Gallery:</h5>
-<div>
-    <div style="float:left; margin:25px">
-        <img src="images/SipIt/homeSipIt.jpg" alt="App landing page" height="600" />
-    </div>
-    <div style="        float: left;
-        margin: 25px
-">
-        <img src="images/SipIt/loginSipIt.jpg" alt="Log in page" height="600" />
 
-    </div>
-    <div style="        float: left;
-        margin: 25px
-">
-        <img src="images/SipIt/registerSipIt.jpg" alt="Register page" height="600" />
+<h5>Implementation:</h5>
+<br />
 
-    </div>
-    <div style="        float: left;
-        margin: 25px
-">
-        <img src="images/SipIt/menuSipIt.jpg" alt="Menu page" height="600" />
-    </div>
-</div>
+Entity Framework makes it really simple for us to scaffold from an existing database. All we have to
+do is to download a special Nuget package called "Microsoft.EntityFramework.Tools" which is 
+going to allow us to access specialized Entity Framework tools on the console. Make sure
+to install this package to the specific project that is going to talk to the database. In
+my case, this meant installing it in the API project.
+
+Now that is done, you have to run the following command in the console. Again, make sure 
+to be in the proper directory.  
+<br />
+
+<img src="images/scaffold/scaffold.jpg" alt="Docker command to scaffold models and dbcontext from PostgreSQL database" style="margin:2em; justify-self:center" />
+<br />
+
+From the code above, the text inside the quotation marks is the credentials for the database. 
+To connect to a PostgreSQL database you need to specify the host, the port, which database, 
+a username and the password. 
+
+Next, the "Npgsql.EntityFrameworkCore.PostgreSQL" specifies the database engine to use. This
+is specific to the engine. And finally, the -o Models specifies the output folder where all
+the models and controllers will be created. 
+
+Once this process is finished, you can proceed to edit the controller to implement all the
+functionality you desire. In my case, I decided to have just options for getting information.
+This API will not let the client add, update or remove from the database menu items. 
+<br />
+
+<img src="images/scaffold/controller.jpg" alt="Controller example" style="margin:2em; justify-self:center" />
+<br />
+
+Finally, to connect your application to the database, you need to specify a dbcontext, a 
+service to connect to the dbcontext. The dbConnection is a user secret with the database
+credentials.
+
+<br />
+
+<img src="images/scaffold/connection.jpg" alt="Connecting to the database" style="margin:2em; justify-self:center" />
 
 @code {
 
