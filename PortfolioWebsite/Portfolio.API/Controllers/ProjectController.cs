@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Portfolio.API.Data;
@@ -13,6 +14,7 @@ namespace Portfolio.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class ProjectController : ControllerBase
     {
         private readonly IDataService data;
@@ -81,6 +83,7 @@ namespace Portfolio.API.Controllers
             await data.AssignCategoryAsync(assignRequest);
         }
 
+        [Authorize]
         [HttpGet("getlanguages/{id}")]
         public async Task<IEnumerable<Language>> GetLanguagesByProjectId(int id)
         {            

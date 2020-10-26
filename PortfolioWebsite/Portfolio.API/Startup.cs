@@ -12,6 +12,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Portfolio.API.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 
 namespace Portfolio.API
 {
@@ -51,6 +53,16 @@ namespace Portfolio.API
                                .AllowAnyHeader();
                     });
             });
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = $"{Configuration["Auth0:Authority"]}";
+                options.Audience = Configuration["Auth0:ApiIdentifier"];
+            });
         }
 
         private string ConvertUrlConnectionString(string dbUrl)
@@ -88,6 +100,7 @@ namespace Portfolio.API
 
             app.UseCors();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseSwagger();

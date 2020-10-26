@@ -1,10 +1,18 @@
 ﻿@page "/projects"
+@attribute [Authorize]
 
 @using Portfolio.Blazor.DataProvider
 @using Portfolio.Shared
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using System.Net.Http.Headers
+@using Portfolio.Blazor.Pages.Projects
 
 @inject APIService service
 @inject NavigationManager NavManager
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+@inject IAccessTokenProvider TokenProvider
 @*@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper UriHelper*@
 
 <h3>Projects</h3>
@@ -38,7 +46,7 @@
 
 @if (isAddComponentDisplayed is true)
 {
-    <AddProject GreatestId="@GreatestId" ProjectAdded="ProjectAdded"/>
+    <AddProject GreatestId="@GreatestId" ProjectAdded="ProjectAdded" />
 }
 
 

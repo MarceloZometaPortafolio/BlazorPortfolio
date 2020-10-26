@@ -27,6 +27,14 @@ namespace Portfolio.Blazor
                 .SetHandlerLifetime(TimeSpan.FromMinutes(5))
                 .AddPolicyHandler(GetPolicy());
 
+            builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+            builder.Services.AddOidcAuthentication(options =>
+            {
+                builder.Configuration.Bind("Auth0", options.ProviderOptions);
+                options.ProviderOptions.ResponseType = "code";
+            });
+
             builder.Services.AddScoped<IHtmlSanitizer, HtmlSanitizer>(x =>
             {
                 var sanitizer = new Ganss.XSS.HtmlSanitizer();
