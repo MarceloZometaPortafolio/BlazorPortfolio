@@ -1,4 +1,5 @@
-﻿using Portfolio.Shared;
+﻿using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Portfolio.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,13 @@ namespace Portfolio.Blazor.DataProvider
     public class APIService
     {
         private readonly HttpClient client;
+        private readonly IAccessTokenProvider accessToken;
 
-        public APIService(HttpClient client)
+        public APIService(HttpClient client, IAccessTokenProvider accessToken)
         {
             Console.WriteLine("\t" + client.BaseAddress);
             this.client = client ?? throw new ArgumentNullException(nameof(client));
+            this.accessToken = accessToken ?? throw new ArgumentNullException(nameof(accessToken));
             Console.WriteLine("\t" + this.client.BaseAddress);
 
         }

@@ -23,6 +23,13 @@ namespace Portfolio.Blazor
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
+            builder.Services.AddOidcAuthentication(options =>
+            {
+                builder.Configuration.Bind("Auth0", options.ProviderOptions);
+                options.ProviderOptions.ResponseType = "code";
+                options.ProviderOptions.DefaultScopes.Add("https://schemas.dev-h2j88rmi.com/roles");
+            });
+
             builder.Services.AddScoped<Auth0AuthorizationMessageHandler>();
 
             builder.Services.AddHttpClient<APIService>(hc => hc.BaseAddress = new Uri(builder.Configuration["APIBaseAddress"]))
@@ -32,12 +39,7 @@ namespace Portfolio.Blazor
 
             //builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-            builder.Services.AddOidcAuthentication(options =>
-            {
-                builder.Configuration.Bind("Auth0", options.ProviderOptions);
-                options.ProviderOptions.ResponseType = "code";
-                options.ProviderOptions.DefaultScopes.Add("https://schemas.dev-h2j88rmi.com/roles");
-            });
+            
 
             builder.Services.AddScoped<IHtmlSanitizer, HtmlSanitizer>(x =>
             {

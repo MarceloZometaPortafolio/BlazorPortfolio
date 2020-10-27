@@ -13,7 +13,7 @@ namespace Portfolio.Blazor
         public Auth0AuthorizationMessageHandler(IAccessTokenProvider provider, NavigationManager navigationManager, IConfiguration config) : base(provider, navigationManager)
         {
             this.ConfigureHandler(
-                authorizedUrls: new[] { "http://localhost:5005", "https://portfolio-api-marcelo.herokuapp.com/" }
+                authorizedUrls: new[] { "http://localhost:5001", "http://localhost:5005", "https://portfolio-api-marcelo.herokuapp.com/", "https://marcelozometaportafolio.github.io/BlazorPortfolio/" }
             );
         }
     }

@@ -29,7 +29,6 @@
             @if (isAdmin)
             {
                 <th>Option</th>
-
             }
         </tr>
     </thead>
@@ -55,7 +54,7 @@
 <button @onclick="ShowAddComponent" class="my-button">Add New Project</button>
 <br />
 
-@if (isAddComponentDisplayed is true)
+@if (isAddComponentDisplayed is true && isAdmin)
 {
     <AddProject GreatestId="@GreatestId" ProjectAdded="ProjectAdded" />
 }

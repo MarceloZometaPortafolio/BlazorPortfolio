@@ -44,22 +44,14 @@ namespace Portfolio.API.Controllers
         //}
 
         // POST api/<ProjectController>
-        [Authorize]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task Post([FromBody] Project project)
         {
             await data.AddProjectAsync(project);
         }
 
-        // PUT api/<ProjectController>/5
-        //[HttpPut("{id}")]
-        //public async Task Put(int id, [FromBody] string value)
-        //{
-        //    //var project = value
-        //    //data.UpdateProjectAsync(project);
-        //    Console.WriteLine("Updating project " + id + " " + value);
-        //}
-        [Authorize]
+        [Authorize(Roles = "admin")]
         [HttpPost("[action]")]
         public async Task Update(Project project)
         {
@@ -67,7 +59,7 @@ namespace Portfolio.API.Controllers
         }
 
         // DELETE api/<ProjectController>/5
-        [Authorize]
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
