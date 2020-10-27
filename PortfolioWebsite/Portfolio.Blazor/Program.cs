@@ -23,7 +23,10 @@ namespace Portfolio.Blazor
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
+            builder.Services.AddScoped<Auth0AuthorizationMessageHandler>();
+
             builder.Services.AddHttpClient<APIService>(hc => hc.BaseAddress = new Uri(builder.Configuration["APIBaseAddress"]))
+                .AddHttpMessageHandler<Auth0AuthorizationMessageHandler>()
                 .SetHandlerLifetime(TimeSpan.FromMinutes(5))
                 .AddPolicyHandler(GetPolicy());
 
@@ -33,6 +36,7 @@ namespace Portfolio.Blazor
             {
                 builder.Configuration.Bind("Auth0", options.ProviderOptions);
                 options.ProviderOptions.ResponseType = "code";
+                options.ProviderOptions.DefaultScopes.Add("https://schemas.dev-h2j88rmi.com/roles");
             });
 
             builder.Services.AddScoped<IHtmlSanitizer, HtmlSanitizer>(x =>

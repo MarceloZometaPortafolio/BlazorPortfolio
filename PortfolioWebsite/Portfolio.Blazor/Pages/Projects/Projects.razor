@@ -1,5 +1,5 @@
 ﻿@page "/projects"
-@attribute [Authorize]
+@*@attribute [Authorize]*@
 
 @using Portfolio.Blazor.DataProvider
 @using Portfolio.Shared
@@ -7,48 +7,78 @@
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using System.Net.Http.Headers
 @using Portfolio.Blazor.Pages.Projects
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
 @inject APIService service
 @inject NavigationManager NavManager
 @inject NavigationManager Navigation
 @inject SignOutSessionStateManager SignOutManager
 @inject IAccessTokenProvider TokenProvider
+
 @*@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper UriHelper*@
 
 <h3>Projects</h3>
 <br />
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Completion Date:</th>
-            <th>Option</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var project in ProjectList)
+<AuthorizeView Roles="admin">
+    <Authorized>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Completion Date:</th>
+                    <th>Option</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var project in ProjectList)
+                {
+                    <tr>
+                        <td><a class="text-primary" @onclick="() => NavigateToDetailsPage(project.Slug)">@project.Title</a></td>
+                        <td>@project.CompletionDate</td>
+                        <td>
+                            <button @onclick="() => EditProject(project.Slug)" class="my-button">Edit</button>
+                            <button @onclick="() => DeleteProject(project.id)" class="my-button">Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <button @onclick="ShowAddComponent" class="my-button">Add New Project</button>
+        <br />
+
+        @if (isAddComponentDisplayed is true)
         {
-            <tr>
-                <td><a class="text-primary" @onclick="() => NavigateToDetailsPage(project.Slug)">@project.Title</a></td>
-                <td>@project.CompletionDate</td>
-                <td>
-                    <button @onclick="() => EditProject(project.Slug)" class="my-button">Edit</button>
-                    <button @onclick="() => DeleteProject(project.id)" class="my-button">Delete</button>
-                </td>
-            </tr>
+            <AddProject GreatestId="@GreatestId" ProjectAdded="ProjectAdded" />
         }
-    </tbody>
-</table>
+    </Authorized>
+    <NotAuthorized>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Completion Date:</th>
+                    <th>Option</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var project in ProjectList)
+                {
+                    <tr>
+                        <td><a class="text-primary" @onclick="() => NavigateToDetailsPage(project.Slug)">@project.Title</a></td>
+                        <td>@project.CompletionDate</td>
+                        <td>                            
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-<button @onclick="ShowAddComponent" class="my-button">Add New Project</button>
-<br />
-
-@if (isAddComponentDisplayed is true)
-{
-    <AddProject GreatestId="@GreatestId" ProjectAdded="ProjectAdded" />
-}
-
+        <button @onclick="ShowAddComponent" class="my-button">Add New Project</button>
+        <br />
+    </NotAuthorized>
+</AuthorizeView>
 
 @code{
     public bool isAddComponentDisplayed = false;

@@ -13,8 +13,7 @@ using Portfolio.Shared;
 namespace Portfolio.API.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    
+    [ApiController]    
     public class ProjectController : ControllerBase
     {
         private readonly IDataService data;
@@ -45,6 +44,7 @@ namespace Portfolio.API.Controllers
         //}
 
         // POST api/<ProjectController>
+        [Authorize]
         [HttpPost]
         public async Task Post([FromBody] Project project)
         {
@@ -59,7 +59,7 @@ namespace Portfolio.API.Controllers
         //    //data.UpdateProjectAsync(project);
         //    Console.WriteLine("Updating project " + id + " " + value);
         //}
-
+        [Authorize]
         [HttpPost("[action]")]
         public async Task Update(Project project)
         {
@@ -67,6 +67,7 @@ namespace Portfolio.API.Controllers
         }
 
         // DELETE api/<ProjectController>/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
@@ -83,7 +84,7 @@ namespace Portfolio.API.Controllers
             await data.AssignCategoryAsync(assignRequest);
         }
 
-        [Authorize]
+        
         [HttpGet("getlanguages/{id}")]
         public async Task<IEnumerable<Language>> GetLanguagesByProjectId(int id)
         {            
