@@ -14,81 +14,69 @@
 @inject NavigationManager Navigation
 @inject SignOutSessionStateManager SignOutManager
 @inject IAccessTokenProvider TokenProvider
+@inject AuthenticationStateProvider authStateProvider
 
-@*@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper UriHelper*@
 
 <h3>Projects</h3>
 <br />
 
-<AuthorizeView Roles="admin">
-    <Authorized>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Completion Date:</th>
-                    <th>Option</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var project in ProjectList)
-                {
-                    <tr>
-                        <td><a class="text-primary" @onclick="() => NavigateToDetailsPage(project.Slug)">@project.Title</a></td>
-                        <td>@project.CompletionDate</td>
-                        <td>
-                            <button @onclick="() => EditProject(project.Slug)" class="my-button">Edit</button>
-                            <button @onclick="() => DeleteProject(project.id)" class="my-button">Delete</button>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
 
-        <button @onclick="ShowAddComponent" class="my-button">Add New Project</button>
-        <br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Completion Date:</th>
+            @if (isAdmin)
+            {
+                <th>Option</th>
 
-        @if (isAddComponentDisplayed is true)
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var project in ProjectList)
         {
-            <AddProject GreatestId="@GreatestId" ProjectAdded="ProjectAdded" />
-        }
-    </Authorized>
-    <NotAuthorized>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Completion Date:</th>
-                    <th>Option</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var project in ProjectList)
+            <tr>
+                <td><a class="text-primary" @onclick="() => NavigateToDetailsPage(project.Slug)">@project.Title</a></td>
+                <td>@project.CompletionDate</td>
+                @if (isAdmin)
                 {
-                    <tr>
-                        <td><a class="text-primary" @onclick="() => NavigateToDetailsPage(project.Slug)">@project.Title</a></td>
-                        <td>@project.CompletionDate</td>
-                        <td>                            
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+                    <td>
+                        <button @onclick="() => EditProject(project.Slug)" class="my-button">Edit</button>
+                        <button @onclick="() => DeleteProject(project.id)" class="my-button">Delete</button>
+                    </td>
 
-        <button @onclick="ShowAddComponent" class="my-button">Add New Project</button>
-        <br />
-    </NotAuthorized>
-</AuthorizeView>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button @onclick="ShowAddComponent" class="my-button">Add New Project</button>
+<br />
+
+@if (isAddComponentDisplayed is true)
+{
+    <AddProject GreatestId="@GreatestId" ProjectAdded="ProjectAdded" />
+}
+
 
 @code{
     public bool isAddComponentDisplayed = false;
     public string PageTitle { get; set; }
     public IList<Project> ProjectList = new List<Project>();
     public int GreatestId { get; set; }
+    public bool isAdmin;
 
     protected override async Task OnInitializedAsync()
     {
         await GetAllProjectsFromDB();
+
+        var authState = await authStateProvider.GetAuthenticationStateAsync();
+        var roles = from c in authState.User.Claims
+                    where c.Type == "https://schemas.dev-h2j88rmi.com/roles"
+                    select c.Value;
+        isAdmin = roles.Any(r => r.Contains("admin"));
     }
 
 
