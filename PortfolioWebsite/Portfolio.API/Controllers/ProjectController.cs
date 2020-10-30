@@ -70,6 +70,7 @@ namespace Portfolio.API.Controllers
             await data.DeleteProjectAsync(projectToDelete);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost("[action]")]
         public async Task Assign(AssignRequest assignRequest)
         {

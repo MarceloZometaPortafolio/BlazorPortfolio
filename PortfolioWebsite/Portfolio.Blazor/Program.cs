@@ -21,14 +21,7 @@ namespace Portfolio.Blazor
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
-            builder.RootComponents.Add<App>("app");
-
-            builder.Services.AddOidcAuthentication(options =>
-            {
-                builder.Configuration.Bind("Auth0", options.ProviderOptions);
-                options.ProviderOptions.ResponseType = "code";
-                options.ProviderOptions.DefaultScopes.Add("https://schemas.dev-h2j88rmi.com/roles");
-            });
+            builder.RootComponents.Add<App>("app");           
 
             builder.Services.AddScoped<Auth0AuthorizationMessageHandler>();
 
@@ -37,9 +30,16 @@ namespace Portfolio.Blazor
                 .SetHandlerLifetime(TimeSpan.FromMinutes(5))
                 .AddPolicyHandler(GetPolicy());
 
+            builder.Services.AddOidcAuthentication(options =>
+            {
+                builder.Configuration.Bind("Auth0", options.ProviderOptions);
+                options.ProviderOptions.ResponseType = "code";
+                options.ProviderOptions.DefaultScopes.Add("https://schemas.dev-h2j88rmi.com/roles");
+            });
+
             //builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-            
+
 
             builder.Services.AddScoped<IHtmlSanitizer, HtmlSanitizer>(x =>
             {
