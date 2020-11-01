@@ -1,6 +1,7 @@
 ﻿@page "/projects/edit/{Slug}"
 @using Portfolio.Shared
 @inject Portfolio.Blazor.DataProvider.APIService service
+@inject Portfolio.Blazor.DataProvider.PublicAPIService publicService
 
 <h3>@Title</h3>
 
@@ -82,7 +83,7 @@
     /// <returns>void Task</returns>
     protected override async Task OnInitializedAsync()
     {
-        Project = await service.GetProjectBySlugAsync(Slug);
+        Project = await publicService.GetProjectBySlugAsync(Slug);
 
         Title = Project.Title;
         Requirements = Project.Requirement;

@@ -65,7 +65,7 @@ namespace Portfolio.API
                 options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                 {
                     NameClaimType = "Roles",
-                    RoleClaimType = "https://schemas.dev-h2j88rmi.com/roles"
+                    RoleClaimType = "https://schemas.marceloZometa.com/roles"
                 };
             });
         }

@@ -4,10 +4,8 @@
 @using Portfolio.Shared
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-@using System.Net.Http.Headers
-@using Portfolio.Blazor.Pages.Projects
-@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
+@inject PublicAPIService publicService
 @inject APIService service
 @inject NavigationManager NavManager
 @inject NavigationManager Navigation
@@ -72,7 +70,7 @@
 
         var authState = await authStateProvider.GetAuthenticationStateAsync();
         var roles = from c in authState.User.Claims
-                    where c.Type == "https://schemas.dev-h2j88rmi.com/roles"
+                    where c.Type == "https://schemas.marceloZometa.com/roles"
                     select c.Value;
         isAdmin = roles.Any(r => r.Contains("admin"));
     }
@@ -106,7 +104,7 @@
 
     private async Task GetAllProjectsFromDB()
     {
-        ProjectList = (await service.GetProjectsAsync()).ToList();
+        ProjectList = (await publicService.GetProjectsAsync()).ToList();
         GreatestId = ProjectList.Max(p => p.id);
     }
 
