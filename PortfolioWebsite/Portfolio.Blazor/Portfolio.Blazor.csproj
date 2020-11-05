@@ -35,6 +35,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\ERD\" />
+    <Folder Include="wwwroot\images\injection\" />
   </ItemGroup>
 
 </Project>

@@ -2,6 +2,38 @@
 <h3>The problem with Xamarin Shells and Dependency Injection</h3>
 <br />
 
+   For the my Xamarin Project "Sip It App" found on this <a href="https://github.com/MarceloZometaPortafolio/SipItApp">repository</a> I ran into major problems for
+    having dependency injection when using Shell Navigation on Xamarin. My case is exposed below:
+
+<br />
+<br />
+
+<h5>Challenge:</h5>
+<br />
+
+    Shells is a new way for Xamarin to provide URL-based navigation and a search handler for the mobile. The problem? Its navigation somehow messes up with the
+    wiring for having dependency injection. Below find a picture of the files on the spot: My "MenuPageViewModel" and "MenuPage.xaml.cs"
+
+<br />
+<img src="images/injection/codeBehind.jpg" alt="MenuPage.xaml.cs" style="margin:2em; justify-self:center" />
+<img src="images/injection/viewmodel.jpg" alt="MenuPageViewModel.cs" style="margin:2em; justify-self:center" />
+
+<br />
+
+Whenever I tried injecting the RestService from Refit, I would get a break on my program claiming that the page could not invoked properly. To my surprise, after painstaking
+debugging I found that the object that the viewmodel was receiving was indeed null, but instead of going through it made the whole project crash.
+
+<h5>Solution:</h5>
+<br />
+
+    To solve this challenge, I came up with the following workaround: instead of injecting the service, since this was a class on itself I would create a new instance of it
+    per page. This is not the right way to do it, but it is the only possible solution I found to this lack of functionality from Xamarin. This will centainly become
+    technical debt, but it is something I will have to address later. According to Microsoft, there is a new update coming up where this problem will be fixed.
+
+    With the code shown above on the MenuPageViewModel I was able to call the API and get the menu to display on the page:
+
+<img src="images/injection/display.jpg" alt="Menu displaying on screen" style="margin:2em; justify-self:center" />
+<br />
 @code {
 
 }

@@ -2,6 +2,51 @@
 <h3>The Gas Station Project</h3>
 <br />
 
+<h4>Description:</h4>
+<br />
+This project consists on a simulation of what happends on a gas station, the process how a car arrives to the station, selects the fuel specific to its engine, starts pumping
+gas, stops pumping gas and a receipt is given. This program was implemented on Java using TDD.
+
+<br />
+
+<h4>Design:</h4>
+<br />
+The project is organized for having a singleton GasStation object which will hold 12 GasPumps. Each Pump will be an individual object which will hold state and depending on the State
+object status, it will run different funtions. The Car class is the main actor in this model for it is the one that runs the threads, and trigger different actions on the GasStation.
+
+
+<h4>Tests:</h4>
+First, we have unit tests specific to the classes. These belong to the GasPump and count as unit tests
+<br />
+
+<img src="images/gas/unittest.jpg" alt="Propmt" style="margin:2em; justify-self:center" />
+<br />
+
+Then, these tests were labeled as scenarios for they were assigned as user stories. They need to comply with a series of steps of the whole project so they can count as
+integration tests
+<br />
+
+<img src="images/gas/testscenario.jpg" alt="Propmt" style="margin:2em; justify-self:center" />
+<br />
+
+<h4>Code</h4>
+Here are some examples of the code implementation. If you want to take a closer look on how Car manages threads go <a href="java-threading">here</a>
+<br />
+
+GasStation Singleton:
+<br />
+<img src="images/gas/gasstation.jpg" alt="Propmt" style="margin:2em; justify-self:center" />
+<br />
+
+GasPump:
+<br />
+<img src="images/gas/pump.jpg" alt="Propmt" style="margin:2em; justify-self:center" />
+<br />
+
+Car:
+<br />
+<img src="images/gas/car.jpg" alt="Propmt" style="margin:2em; justify-self:center" />
+<br />
 
 @code {
 
