@@ -9,7 +9,7 @@ import Blog from './components/Blog';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Blog />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

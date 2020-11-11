@@ -43,12 +43,12 @@ function Header(props) {
         >
           {title}
         </Typography>
-        <IconButton>
+        {/* <IconButton>
           <SearchIcon />
         </IconButton>
         <Button variant="outlined" size="small">
           Sign up
-        </Button>
+        </Button> */}
       </Toolbar>
       <Toolbar
         component="nav"

@@ -1,24 +1,24 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header';
 
 function App() {
+  const sections = [
+    { title: 'Resume', url: 'resume' },
+    { title: 'Skills', url: 'skills' },
+    { title: 'Posts', url: 'posts' },
+    { title: 'Skills', url: 'skills' },
+    { title: 'Projects', url: 'projects' },
+    { title: 'Languages', url: 'languages' },
+    { title: 'Platforms', url: 'platforms' },
+    { title: 'Technologies', url: 'technologies' }
+  ];
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header sections={sections} title={"My blog"}/>
     </div>
   );
 }

@@ -20,16 +20,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const sections = [
-  { title: 'Technology', url: '#' },
-  { title: 'Design', url: '#' },
-  { title: 'Culture', url: '#' },
-  { title: 'Business', url: '#' },
-  { title: 'Politics', url: '#' },
-  { title: 'Opinion', url: '#' },
-  { title: 'Science', url: '#' },
-  { title: 'Health', url: '#' },
-  { title: 'Style', url: '#' },
-  { title: 'Travel', url: '#' },
+  { title: 'Resume', url: 'resume' },
+  { title: 'Skills', url: 'skills' },
+  { title: 'Posts', url: 'posts' },
+  { title: 'Skills', url: 'skills' },
+  { title: 'Projects', url: 'projects' },
+  { title: 'Languages', url: 'languages' },
+  { title: 'Platforms', url: 'platforms' },
+  { title: 'Technologies', url: 'technologies' }
 ];
 
 const mainFeaturedPost = {
@@ -51,7 +49,7 @@ const featuredPosts = [
     imageText: 'Image Text',
   },
   {
-    title: 'Post title',
+    title: 'Can I change this title?',
     date: 'Nov 11',
     description:
       'This is a wider card with supporting text below as a natural lead-in to additional content.',
@@ -112,10 +110,10 @@ export default function Blog() {
           </Grid>
         </main>
       </Container>
-      <Footer
+      {/* <Footer
         title="Footer"
         description="Something here to give the footer a purpose!"
-      />
+      /> */}
     </React.Fragment>
   );
 }

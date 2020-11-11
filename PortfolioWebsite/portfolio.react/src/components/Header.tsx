@@ -37,9 +37,10 @@ export default function Header(props: HeaderProps) {
   const { sections, title } = props;
 
   return (
-    <React.Fragment>
+    // <React.Fragment>
+    <div>
       <Toolbar className={classes.toolbar}>
-        <Button size="small">Subscribe</Button>
+        <Button size="small">Testing</Button>
         <Typography
           component="h2"
           variant="h5"
@@ -50,12 +51,12 @@ export default function Header(props: HeaderProps) {
         >
           {title}
         </Typography>
-        <IconButton>
+        {/* <IconButton>
           <SearchIcon />
-        </IconButton>
-        <Button variant="outlined" size="small">
+        </IconButton> */}
+        {/* <Button variant="outlined" size="small">
           Sign up
-        </Button>
+        </Button> */}
       </Toolbar>
       <Toolbar
         component="nav"
@@ -75,6 +76,6 @@ export default function Header(props: HeaderProps) {
           </Link>
         ))}
       </Toolbar>
-    </React.Fragment>
+      </div>
   );
 }
