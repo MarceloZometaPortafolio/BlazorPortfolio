@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button, Card, CardContent, CardHeader, Paper } from '@material-ui/core';
-import { Add, AddCircle, InsertChart } from '@material-ui/icons';
+import { Button, Card, CardContent, CardHeader, Container, Paper } from '@material-ui/core';
+import { AddCircle } from '@material-ui/icons';
+import AddNewProject from './AddProject';
 
 interface Project {
     id: number,
@@ -13,6 +14,7 @@ interface Project {
 
 const Projects = () => {
     const [projects, setProjects] = useState([]);
+    const [addButtonWasClicked, setAddButtonWasClicked] = useState(false);
 
     let mainFeaturedPost = {
         title: "",
@@ -37,25 +39,29 @@ const Projects = () => {
     }, []);
 
     return (
-        <div id="Projects">  
-            {/* <form>
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    onChange={handleSearchInputChange}
-                    value={search}  
-                />
-            </form>       */}
-            <Card>                
-                <CardContent>
-                    <CardHeader title="Projects"/>                        
-                    {projects.map((item : Project) => 
-                        <div key={item.id}>{item.title}</div>)}            
-                </CardContent>                
-            </Card>
-            <Button variant="contained" color="primary" startIcon={<AddCircle/>}>
-                Add New Project
-            </Button>
+        <div id="Projects">
+            {addButtonWasClicked ? 
+                //True
+                <AddNewProject />
+                :
+                //False
+                <div>
+                    <Card>                
+                        <CardContent>
+                            <CardHeader title="Projects"/>     
+                            <Container maxWidth="sm">
+                                {projects.map((item : Project) => 
+                                    <div key={item.id}>{item.title}</div>)}            
+                            </Container>                                       
+                        </CardContent>                
+                    </Card>         
+                    <Button variant="contained" color="primary" startIcon={<AddCircle/>}
+                            onClick={()=> setAddButtonWasClicked(!addButtonWasClicked)}
+                    >
+                        Add New Project
+                    </Button>    
+                </div>
+            }
         </div>
     );
 }

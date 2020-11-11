@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import Main from './components/Main';
 import Blog from './components/Blog';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 const sections = [
   { title: 'Resume', url: 'resume' },
@@ -21,6 +22,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Header sections={sections} title={"Marcelo Zometa's Portfolio"}/>
     <App />
+    <Footer description={"Marcelo Zometa ©2020"} title={"Marcelo Zometa's Portfolio"}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

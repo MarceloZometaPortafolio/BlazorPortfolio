@@ -1,8 +1,17 @@
-import React from 'react';
+import React, {createContext} from 'react';
 import { BrowserRouter, Route, Redirect, Switch} from 'react-router-dom';
 import './App.css';
 import Main from './components/Main';
 import Projects from './components/Projects/Projects';
+
+interface FormContextProps {
+  values: {},
+  setValue?: (fieldName: string, value: any) => void;
+}
+
+export const FormContext = createContext<FormContextProps>({
+  values: {},
+})
 
 function App() {
   const posts = ["First post\n", "Second post\n", "Third post\n"]
