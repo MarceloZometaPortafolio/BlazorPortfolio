@@ -11,6 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
+    backgroundColor: '#ffffff'
   },
   toolbarTitle: {
     flex: 1,
@@ -53,14 +54,13 @@ export default function Header(props: HeaderProps) {
           noWrap
           className={classes.toolbarTitle}
         >
-          {title}
+          <Link color="inherit" href="/">
+            {title}
+          </Link>
         </Typography>
-        {/* <IconButton>
-          <SearchIcon />
-        </IconButton> */}
-        {/* <Button variant="outlined" size="small">
+        <Button variant="outlined" size="small" color="primary">
           Sign up
-        </Button> */}
+        </Button>
       </Toolbar>
       <Toolbar
         component="nav"
@@ -74,7 +74,7 @@ export default function Header(props: HeaderProps) {
             key={section.title}
             variant="body2"
             href={section.url}
-            className={classes.toolbarLink}
+            className={classes.toolbarLink}            
           >
             {section.title}
           </Link>

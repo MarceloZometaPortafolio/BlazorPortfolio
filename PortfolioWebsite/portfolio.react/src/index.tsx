@@ -5,10 +5,21 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Main from './components/Main';
 import Blog from './components/Blog';
+import Header from './components/Header';
 
+const sections = [
+  { title: 'Resume', url: 'resume' },
+  { title: 'Skills', url: 'skills' },
+  { title: 'Posts', url: 'posts' },
+  { title: 'Projects', url: 'projects' },
+  { title: 'Languages', url: 'languages' },
+  { title: 'Platforms', url: 'platforms' },
+  { title: 'Technologies', url: 'technologies' }
+];
 
 ReactDOM.render(
   <React.StrictMode>
+    <Header sections={sections} title={"Marcelo Zometa's Portfolio"}/>
     <App />
   </React.StrictMode>,
   document.getElementById('root')
