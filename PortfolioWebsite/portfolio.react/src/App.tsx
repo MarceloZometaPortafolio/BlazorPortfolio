@@ -8,17 +8,15 @@ function App() {
     { title: 'Resume', url: 'resume' },
     { title: 'Skills', url: 'skills' },
     { title: 'Posts', url: 'posts' },
-    { title: 'Skills', url: 'skills' },
     { title: 'Projects', url: 'projects' },
     { title: 'Languages', url: 'languages' },
     { title: 'Platforms', url: 'platforms' },
     { title: 'Technologies', url: 'technologies' }
   ];
 
-
   return (
     <div className="App">
-      <Header sections={sections} title={"My blog"}/>
+      <Header sections={sections} title={"Marcelo Zometa's Portfolio"}/>
     </div>
   );
 }

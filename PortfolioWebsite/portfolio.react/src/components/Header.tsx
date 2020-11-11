@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -35,12 +36,15 @@ interface HeaderProps {
 export default function Header(props: HeaderProps) {
   const classes = useStyles();
   const { sections, title } = props;
+  const [isVisible, setVisibleMenu] = React.useState(false);
 
   return (
     // <React.Fragment>
     <div>
       <Toolbar className={classes.toolbar}>
-        <Button size="small">Testing</Button>
+        <div onClick={() => setVisibleMenu(!isVisible)}>
+          <MenuIcon/>
+        </div>
         <Typography
           component="h2"
           variant="h5"
@@ -62,8 +66,8 @@ export default function Header(props: HeaderProps) {
         component="nav"
         variant="dense"
         className={classes.toolbarSecondary}
-      >
-        {sections.map((section) => (
+      >        
+        {isVisible && sections.map((section) => (
           <Link
             color="inherit"
             noWrap
