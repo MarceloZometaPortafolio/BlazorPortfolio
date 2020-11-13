@@ -1,13 +1,12 @@
 import React, { FormEvent, useState } from 'react';
-import { Button, TextField } from '@material-ui/core';
+import { Button, FormGroup, TextField } from '@material-ui/core';
+
 
 const AddNewProject = () => {
     const [title, setTitle] = useState("");
     const [requirement, setRequirement] = useState("");
     const [design, setDesign] = useState("");
-    const [completionDate, setCompletionDate] = useState(() => {new Date().getDate()});
-
-
+    const [completionDate, setCompletionDate] = useState("");
 
     function EditingTitle(e: React.ChangeEvent<HTMLInputElement>){
         setTitle(e.target.value);
@@ -16,9 +15,20 @@ const AddNewProject = () => {
 
     function HandleSubmit(e: FormEvent<HTMLFormElement>){
         e.preventDefault();
-        console.log("Title=" + title);
-        console.log("Requirement=" + requirement);
-        console.log("Design=" + design);
+        console.log("Title=" + title + "\n" +
+                    "Requirement=" + requirement + "\n" +
+                    "Design=" + design + "\n" +
+                    "Date=" + completionDate);
+
+        PostToAPI();
+    }
+
+    function PostToAPI(){
+        console.log("You're about to post")
+    }
+
+    function GoBack(){
+        console.log("You're in go back!")
     }
 
     return (
@@ -48,17 +58,25 @@ const AddNewProject = () => {
                             fullWidth
                             margin={"normal"}
                             multiline/> 
-                {/* <TextField  value={completionDate}
-                            onChange={(e) => setCompletionDate(new Date(e.target.value))}
-                            label={"CompletionDate:"}
-                            placeholder={"Please enter the completion date of the project"}                                                    
+                {/* <TextField  
+                            onChange={(e) => setCompletionDate(e.target.value)}
+                            label={"Completion Date:"}                                                                                
                             variant="outlined"
-                            type={"date"}
+                            type="date"
                             margin={"normal"}
-                            multiline/>       */}
-                <Button     variant="contained" color="primary" type="submit">
+                            
+                            /> */}
+                <br/>
+                <FormGroup row>
+                    <Button variant="contained" color="primary" type="submit" >
                         Add New Project
-                    </Button> 
+                    </Button>
+                    <p>                     </p>
+                    <Button variant="contained" color="inherit" type="button" onClick={GoBack}>
+                        Cancel
+                    </Button>     
+                </FormGroup>
+                
             </form>
         </div>
     );
