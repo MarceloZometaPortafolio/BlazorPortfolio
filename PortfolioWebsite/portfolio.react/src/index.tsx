@@ -22,7 +22,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Header sections={sections} title={"Marcelo Zometa's Portfolio"}/>
     <App />
-    <Footer description={"Marcelo Zometa ©2020"} title={"Marcelo Zometa's Portfolio"}/>
+    <Footer />
   </React.StrictMode>,
   document.getElementById('root')
 );

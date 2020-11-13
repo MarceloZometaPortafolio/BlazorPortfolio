@@ -25,33 +25,17 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     left: 0,
     bottom: 0,
-    right: 0
+    right: 0    
   },
 }));
 
-interface FooterProps {
-  description: string;
-  title: string;
-}
-
-export default function Footer(props: FooterProps) {
+export default function Footer() {
   const classes = useStyles();
-  const { description, title } = props;
+  
 
   return (
     <footer className={classes.footer}>
-      <Container maxWidth="lg">
-        <Typography variant="h6" align="center" gutterBottom>
-          {title}
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="textSecondary"
-          component="p"
-        >
-          {description}
-        </Typography>
+      <Container maxWidth="lg">        
         <Copyright />
       </Container>
     </footer>
