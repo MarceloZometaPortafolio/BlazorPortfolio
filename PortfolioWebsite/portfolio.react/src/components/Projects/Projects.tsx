@@ -3,14 +3,9 @@ import axios from 'axios';
 import { Button, Card, CardContent, CardHeader, Container, Paper } from '@material-ui/core';
 import { AddCircle } from '@material-ui/icons';
 import AddNewProject from './AddProject';
+import {getProjects} from '../../Models/Project';
+import Project from '../../Models/Project';
 
-interface Project {
-    id: number,
-    title: string,
-    requirement: string,
-    design: string,
-    completionDate: string
-}
 
 const Projects = () => {
     const [projects, setProjects] = useState([]);
@@ -25,17 +20,22 @@ const Projects = () => {
         linkText: 'Continue reading…',
       };
 
-    function getProjects(){
-        return axios.get("https://portfolio-api-marcelo.herokuapp.com/api/project/")
-            .then(response => {
-                const projectsFound =  response.data;
-                console.log(projectsFound);
-                setProjects(projectsFound);
-            })
-    } 
+    // function getProjects(){
+    //     return axios.get("https://portfolio-api-marcelo.herokuapp.com/api/project/")
+    //         .then(response => {
+    //             const projectsFound =  response.data;
+    //             console.log(projectsFound);
+    //             setProjects(projectsFound);
+    //         })
+    // }     
 
     useEffect(() => {
-        getProjects();
+        async function fetchData () {
+            const projectsFound = await getProjects();
+            setProjects(projectsFound);
+        }
+
+        fetchData();
     }, []);
 
     return (
