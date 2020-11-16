@@ -1,5 +1,7 @@
 import Project from './Project';
+import {getProjects} from './Project';
 import {Action, ActionCreator, Dispatch} from 'redux';
+import { ThunkAction } from 'redux-thunk';
 
 export interface AppState {
     readonly projectsList: Project[] | null;
@@ -29,13 +31,28 @@ type AppStateActions =
     | UpdatedProjectAction
     | DeletedProjectAction
 
-export const getProjectsActionCreator = () => {
+export const getProjectsActionCreator : ActionCreator<
+    ThunkAction<
+        Promise<void>,
+        Project[],
+        [],
+        GotProjectsAction>
+    > = () => {
     return async (dispatch: Dispatch) => {
         const gettingProjectsAction : GettingProjectsAction = {
             type: 'GettingProject'
         }
 
         dispatch(gettingProjectsAction);
+
+        const projectsList = await getProjects();
+
+        const gotProjectsAction : GotProjectsAction = {
+            projects,
+            type: 'GotProjects'
+        }
+
+        dispatch(gotProjectsAction);
 
         // TODO - dispatch the GettingUnansweredQuestions action 
         // TODO - get the questions from server
