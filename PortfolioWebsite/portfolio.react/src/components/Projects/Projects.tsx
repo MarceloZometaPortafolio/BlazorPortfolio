@@ -11,28 +11,28 @@ const Projects = () => {
     const [projects, setProjects] = useState([]);
     const [addButtonWasClicked, setAddButtonWasClicked] = useState(false);
 
-    let mainFeaturedPost = {
-        title: "",
-        description:
-          "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-        image: 'https://source.unsplash.com/random',
-        imageText: 'main image description',
-        linkText: 'Continue reading…',
-      };
+    // let mainFeaturedPost = {
+    //     title: "",
+    //     description:
+    //       "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
+    //     image: 'https://source.unsplash.com/random',
+    //     imageText: 'main image description',
+    //     linkText: 'Continue reading…',
+    //   };
 
-    // function getProjects(){
-    //     return axios.get("https://portfolio-api-marcelo.herokuapp.com/api/project/")
-    //         .then(response => {
-    //             const projectsFound =  response.data;
-    //             console.log(projectsFound);
-    //             setProjects(projectsFound);
-    //         })
-    // }     
+    function getProjects(){
+        return axios.get("https://portfolio-api-marcelo.herokuapp.com/api/project/")
+            .then(response => {
+                const projectsFound =  response.data;
+                console.log(projectsFound);
+                setProjects(projectsFound);
+            })
+    }     
 
     useEffect(() => {
         async function fetchData () {
-            const projectsFound = await getProjects();
-            setProjects(projectsFound);
+            await getProjects();
+            //setProjects(projectsFound);
         }
 
         fetchData();
