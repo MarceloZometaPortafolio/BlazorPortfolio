@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import { Height } from '@material-ui/icons';
 
 function Copyright() {
   return (
@@ -25,14 +26,14 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     left: 0,
     bottom: 0,
-    right: 0    
+    right: 0,
+    height: "1em"
   },
 }));
 
 export default function Footer() {
   const classes = useStyles();
   
-
   return (
     <footer className={classes.footer}>
       <Container maxWidth="lg">        

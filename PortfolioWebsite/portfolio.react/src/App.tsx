@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Redirect, Switch} from 'react-router-dom';
 import './App.css';
 import Main from './components/Main';
 import Projects from './components/Projects/Projects';
+import Resume from './components/Resume';
 
 interface FormContextProps {
   values: {},
@@ -22,6 +23,8 @@ function App() {
         <Route exact path="/" 
                render={(props) => (<Main title="From the firehose" posts={posts}/>)}
         />
+        <Route exact path="/resume" 
+               component={Resume}/>
         <Route exact path="/projects" component={Projects}/>
       </BrowserRouter>
     </div>

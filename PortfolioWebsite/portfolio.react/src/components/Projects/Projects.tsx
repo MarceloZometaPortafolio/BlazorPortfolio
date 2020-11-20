@@ -3,14 +3,21 @@ import axios from 'axios';
 import { Button, Card, CardContent, CardHeader, Container, Paper } from '@material-ui/core';
 import { AddCircle } from '@material-ui/icons';
 import AddNewProject from './AddProject';
-import {getProjects} from '../../Models/Project';
+import {getProjects} from '../../Data/APIService';
 import Project from '../../Models/Project';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    body: {
+      textAlign : "left"
+    },
+  }));
 
 
 const Projects = () => {
     const [projects, setProjects] = useState([]);
     const [addButtonWasClicked, setAddButtonWasClicked] = useState(false);
-
+    const classes = useStyles();
     // let mainFeaturedPost = {
     //     title: "",
     //     description:
@@ -20,19 +27,20 @@ const Projects = () => {
     //     linkText: 'Continue reading…',
     //   };
 
-    function getProjects(){
-        return axios.get("https://portfolio-api-marcelo.herokuapp.com/api/project/")
-            .then(response => {
-                const projectsFound =  response.data;
-                console.log(projectsFound);
-                setProjects(projectsFound);
-            })
-    }     
+    // async function getProjects(){
+    //     return axios.get("https://portfolio-api-marcelo.herokuapp.com/api/project/")
+    //         .then(response => {
+    //             const projectsFound =  response.data;
+    //             console.log(projectsFound);
+    //             return projectsFound;
+    //         })
+    // }     
 
     useEffect(() => {
         async function fetchData () {
-            await getProjects();
-            //setProjects(projectsFound);
+            const projectsReturned = await getProjects();
+            
+            setProjects(projectsReturned);
         }
 
         fetchData();
@@ -46,7 +54,7 @@ const Projects = () => {
                 :
                 //False
                 <div>
-                    <Card>                
+                    <Card className={classes.body}>                
                         <CardContent>
                             <CardHeader title="Projects"/>     
                             <Container maxWidth="sm">

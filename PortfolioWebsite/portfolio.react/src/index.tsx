@@ -7,6 +7,19 @@ import Main from './components/Main';
 import Blog from './components/Blog';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { makeStyles } from '@material-ui/core/styles';
+
+
+const useStyles = makeStyles((theme) => ({
+  body: {
+    minHeight: "100vh"
+  },
+  footer: {
+    bottom: "0",
+    position: "absolute",
+    width: "100%"
+  }
+}));
 
 const sections = [
   { title: 'Resume', url: 'resume' },
@@ -19,9 +32,10 @@ const sections = [
 ];
 
 ReactDOM.render(
+
   <React.StrictMode>
     <Header sections={sections} title={"Marcelo Zometa's Portfolio"}/>
-    <App />
+    <App/>
     <Footer />
   </React.StrictMode>,
   document.getElementById('root')
