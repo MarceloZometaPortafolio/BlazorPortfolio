@@ -7,6 +7,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
+import { AuthConsumer } from "../authContext";
+import Login from './Login';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -40,46 +42,44 @@ export default function Header(props: HeaderProps) {
   const [isVisible, setVisibleMenu] = React.useState(false);
 
   return (
-    // <React.Fragment>
-    <div>
-      <Toolbar className={classes.toolbar}>
-        <div onClick={() => setVisibleMenu(!isVisible)}>
-          <MenuIcon/>
-        </div>
-        <Typography
-          component="h2"
-          variant="h5"
-          color="inherit"
-          align="center"
-          noWrap
-          className={classes.toolbarTitle}
-        >
-          <Link color="inherit" href="/">
-            {title}
-          </Link>
-        </Typography>
-        <Button variant="outlined" size="small" color="primary">
-          Sign up
-        </Button>
-      </Toolbar>
-      <Toolbar
-        component="nav"
-        variant="dense"
-        className={classes.toolbarSecondary}
-      >        
-        {isVisible && sections.map((section) => (
-          <Link
+    // <React.Fragment>    
+      <div className="myHeader">
+        <Toolbar className={classes.toolbar}>
+          <div onClick={() => setVisibleMenu(!isVisible)}>
+            <MenuIcon/>
+          </div>
+          <Typography
+            component="h2"
+            variant="h5"
             color="inherit"
+            align="center"
             noWrap
-            key={section.title}
-            variant="body2"
-            href={section.url}
-            className={classes.toolbarLink}            
+            className={classes.toolbarTitle}
           >
-            {section.title}
-          </Link>
-        ))}
-      </Toolbar>
-      </div>
+            <Link color="inherit" href="/">
+              {title}
+            </Link>
+          </Typography>
+          <Login/>
+        </Toolbar>
+        <Toolbar
+          component="nav"
+          variant="dense"
+          className={classes.toolbarSecondary}
+        >        
+          {isVisible && sections.map((section) => (
+            <Link
+              color="inherit"
+              noWrap
+              key={section.title}
+              variant="body2"
+              href={section.url}
+              className={classes.toolbarLink}            
+            >
+              {section.title}
+            </Link>
+          ))}
+        </Toolbar>
+      </div>    
   );
 }

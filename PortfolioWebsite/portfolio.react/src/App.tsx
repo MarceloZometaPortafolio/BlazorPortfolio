@@ -4,6 +4,8 @@ import './App.css';
 import Main from './components/Main';
 import Projects from './components/Projects/Projects';
 import Resume from './components/Resume';
+import Auth from "./components/Auth";
+import Callback from './components/Callback'
 
 interface FormContextProps {
   values: {},
@@ -19,14 +21,20 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Route exact path="/" 
-               render={(props) => (<Main title="From the firehose" posts={posts}/>)}
-        />
-        <Route exact path="/resume" 
-               component={Resume}/>
-        <Route exact path="/projects" component={Projects}/>
-      </BrowserRouter>
+      <Auth>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" 
+                  render={(props) => (<Main title="From the firehose" posts={posts}/>)}/>
+            <Route exact path="/resume" 
+                  component={Resume}/>
+            <Route exact path="/projects" 
+                  component={Projects}/>
+            <Route path="/callback" 
+                  component={Callback}/>
+          </Switch>
+        </BrowserRouter>
+      </Auth>
     </div>
   );
 }

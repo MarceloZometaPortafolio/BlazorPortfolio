@@ -1,5 +1,10 @@
-import React from 'react'
 import axios from 'axios'
+import Project from '../Models/Project'
+
+
+interface NewProjectProps{
+    project : Project
+}
 
 export async function getProjects(){
         return axios.get("https://portfolio-api-marcelo.herokuapp.com/api/project/")
@@ -10,5 +15,9 @@ export async function getProjects(){
                 return projectsFound;
             })
     }
+
+export async function addNewProject(props: NewProjectProps){
+    
+}
 
 
