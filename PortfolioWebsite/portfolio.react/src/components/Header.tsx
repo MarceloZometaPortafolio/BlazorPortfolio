@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import { AuthConsumer } from "../authContext";
-import Login from './Login';
+import AuthenticateButton from './AuthenticateButton';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -60,7 +60,7 @@ export default function Header(props: HeaderProps) {
               {title}
             </Link>
           </Typography>
-          <Login/>
+          <AuthenticateButton/>
         </Toolbar>
         <Toolbar
           component="nav"
