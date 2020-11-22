@@ -35,103 +35,46 @@ const Projects = () => {
         <div id="Projects">
         <AuthConsumer>
             {({ user }) => (
-                <Can
-                    role={user.role}
-                    perform="posts:create"
-                    yes={()=>(
-                        <div>
-                         <Card className={classes.body}>                
-                             <CardContent>
-                                 <CardHeader title="Projects"/>     
-                                 <Container maxWidth="sm">
-                                    {projects.map((item) => 
-                                        <div key={item.id}>
-                                            {item.title}
-                                            <Button>Edit</Button> 
-                                            <Button>Delete</Button> 
-                                        </div>)}    
+                <div>
+                    <Card className={classes.body}>                
+                        <CardContent>
+                            <CardHeader title="Projects"/>     
+                                <Container maxWidth="sm">
+                                {projects.map((item) => 
+                                    <div key={item.id}>
+                                        {item.title}
+                                        <Can
+                                            role={user.role}
+                                            perform="posts:edit"
+                                            yes={()=>(
+                                                <Button>Edit</Button> 
+                                            )}
+                                        />
+                                        <Can
+                                            role={user.role}
+                                            perform="posts:delete"
+                                            yes={()=>(
+                                                <Button>Delete</Button> 
+                                            )}
+                                        />
+                                    </div>)}    
                                 </Container>                                       
-                            </CardContent>                
-                        </Card>         
-                        <Button variant="contained" color="primary" startIcon={<AddCircle/>}
-                                onClick={()=> setAddButtonWasClicked(!addButtonWasClicked)}
-                        >
-                            Add New Project
-                        </Button>    
-                    </div>
-                    )}
-
-                    no={()=>(
-                        <div>
-                         <Card className={classes.body}>                
-                             <CardContent>
-                                 <CardHeader title="Projects"/>     
-                                 <Container maxWidth="sm">
-                                    {projects.map((item) => 
-                                        <div key={item.id}>
-                                            {item.title}                                            
-                                        </div>)}            
-                                </Container>                                       
-                            </CardContent>                
-                        </Card>                                     
-                    </div>
-                    )}
-                />
-            )}
+                        </CardContent>
+                        <Can
+                            role={user.role}
+                            perform="posts:create"
+                            yes={()=>(
+                                <Button variant="contained" color="primary" startIcon={<AddCircle/>}
+                                    onClick={()=> setAddButtonWasClicked(!addButtonWasClicked)}>
+                                        Add New Project
+                                </Button> 
+                            )}
+                        />                
+                    </Card> 
+                </div>)}
         </AuthConsumer>
         </div>
     );
 }
-
-// {addButtonWasClicked ? 
-//     //True
-//     <AddNewProject />
-//     :
-//     //False
-//     <div>
-//         <Card className={classes.body}>                
-//             <CardContent>
-//                 <CardHeader title="Projects"/>     
-//                 <Container maxWidth="sm">
-//                     {projects.map((item : Project) => 
-//                         <div key={item.id}>{item.title}</div>)}            
-//                 </Container>                                       
-//             </CardContent>                
-//         </Card>         
-//         <Button variant="contained" color="primary" startIcon={<AddCircle/>}
-//                 onClick={()=> setAddButtonWasClicked(!addButtonWasClicked)}
-//         >
-//             Add New Project
-//         </Button>    
-//     </div>
-// }
-// const ProjectsPage = () => (
-//     <AuthConsumer>
-//         {({ user }) => (
-//             <Can
-//                 role={user.role}
-//                 perform="posts:create"
-//                 yes={()=>(
-//                     <div>
-//         //             <Card className={classes.body}>                
-//         //                 <CardContent>
-//         //                     <CardHeader title="Projects"/>     
-//         //                     <Container maxWidth="sm">
-//         //                         {projects.map((item : Project) => 
-//                                     <div key={item.id}>{item.title}</div>)}            
-//                             </Container>                                       
-//                         </CardContent>                
-//                     </Card>         
-//                     <Button variant="contained" color="primary" startIcon={<AddCircle/>}
-//                             onClick={()=> setAddButtonWasClicked(!addButtonWasClicked)}
-//                     >
-//                         Add New Project
-//                     </Button>    
-//                 </div>
-//                 )}
-//             />
-//         )}
-//     </AuthConsumer>
-// );
 
 export default Projects;
