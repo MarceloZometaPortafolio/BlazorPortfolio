@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Button, Card, CardContent, CardHeader, Container, Paper } from '@material-ui/core';
+import { Button, Card, CardContent, CardHeader, Container } from '@material-ui/core';
 import { AddCircle } from '@material-ui/icons';
 import AddNewProject from './AddProject';
 import {getProjects} from '../../Data/APIService';
-import Project from '../../Models/Project';
 import { makeStyles } from '@material-ui/core/styles';
 import { AuthConsumer } from '../../authContext';
 import Can from '../../Can';

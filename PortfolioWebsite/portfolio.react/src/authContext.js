@@ -1,4 +1,5 @@
 import { createContext } from "react";
+import Auth  from './components/Auth'
 
 const authContext = createContext({
   authenticated: false, // to check if authenticated or not

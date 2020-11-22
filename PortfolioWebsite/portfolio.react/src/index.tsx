@@ -8,6 +8,7 @@ import Blog from './components/Blog';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { makeStyles } from '@material-ui/core/styles';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,12 +33,17 @@ const sections = [
 ];
 
 ReactDOM.render(
-
-  <React.StrictMode>
-    <Header sections={sections} title={"Marcelo Zometa's Portfolio"}/>
-    <App/>
-    <Footer />
-  </React.StrictMode>,
+  <Auth0Provider
+    domain="dev--qt6q8jb.us.auth0.com"
+    clientId="g3xe8dMB0u1PIq1EdPzRjpqZXDEUt0Yh"
+    redirectUri={window.location.origin}
+  >
+    <React.StrictMode>
+      <Header sections={sections} title={"Marcelo Zometa's Portfolio"}/>
+      <App/>
+      <Footer />
+    </React.StrictMode>  
+  </Auth0Provider>,  
   document.getElementById('root')
 );
 
