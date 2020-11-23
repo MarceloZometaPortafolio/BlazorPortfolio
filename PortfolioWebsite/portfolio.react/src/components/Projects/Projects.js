@@ -6,6 +6,7 @@ import {getProjects} from '../../Data/APIService';
 import { makeStyles } from '@material-ui/core/styles';
 import { AuthConsumer } from '../authContext';
 import Can from '../Can';
+import ProjectLink from './ProjectLink'
 
 const useStyles = makeStyles((theme) => ({
     body: {
@@ -31,7 +32,17 @@ const Projects = () => {
 
     return (
         <div id="Projects">
-        <AuthConsumer>
+            <Card className={classes.body}>
+                <CardHeader title="Projects"/>
+                <CardContent>
+                    {projects.map((p) => 
+                        <div key={p.id}>
+                            <ProjectLink project={p} {...p}/>
+                        </div>
+                    )}
+                </CardContent>
+            </Card>
+        {/* <AuthConsumer>
             {({ user }) => (
                 <div>
                     <Card className={classes.body}>                
@@ -40,7 +51,7 @@ const Projects = () => {
                                 <Container maxWidth="sm">
                                 {projects.map((item) => 
                                     <div key={item.id}>
-                                        {item.title}
+                                        <ProjectLink project={item}/>
                                         <Can
                                             role={user.role}
                                             perform="posts:edit"
@@ -70,7 +81,7 @@ const Projects = () => {
                         />                
                     </Card> 
                 </div>)}
-        </AuthConsumer>
+        </AuthConsumer> */}
         </div>
     );
 }

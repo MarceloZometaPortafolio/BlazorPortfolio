@@ -6,6 +6,7 @@ import Projects from './components/Projects/Projects';
 import Resume from './components/Resume';
 import Auth from "./components/Auth";
 import Callback from './components/Callback'
+import DetailProject from './components/Projects/DetailProject'
 
 interface FormContextProps {
   values: {},
@@ -32,6 +33,8 @@ function App() {
                   component={Projects}/>
             <Route path="/callback" 
                   component={Callback}/>
+            <Route exact path="/projects/:slug" 
+                  component={DetailProject}/>
           </Switch>
         </BrowserRouter>
       </Auth>
