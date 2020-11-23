@@ -4,8 +4,8 @@ import { AddCircle } from '@material-ui/icons';
 import AddNewProject from './AddProject';
 import {getProjects} from '../../Data/APIService';
 import { makeStyles } from '@material-ui/core/styles';
-import { AuthConsumer } from '../../authContext';
-import Can from '../../Can';
+import { AuthConsumer } from '../authContext';
+import Can from '../Can';
 
 const useStyles = makeStyles((theme) => ({
     body: {

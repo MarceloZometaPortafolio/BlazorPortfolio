@@ -7,8 +7,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
-import { AuthConsumer } from "../authContext";
-import AuthenticateButton from './AuthenticateButton';
+import { AuthConsumer } from "./authContext";
+import AuthenticateButton from './Authentication/AuthenticateButton';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {

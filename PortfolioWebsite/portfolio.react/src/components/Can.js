@@ -1,4 +1,4 @@
-import rules from "./rules";
+import rules from "../rules";
 
 const check = (rules, role, action, data) => {
   const permissions = rules[role];
