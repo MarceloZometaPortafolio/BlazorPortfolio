@@ -2,12 +2,8 @@ import axios from 'axios'
 import Project from '../Models/Project'
 
 
-interface NewProjectProps{
-    project : Project
-}
-
 export async function getProjects(){
-        return axios.get("https://portfolio-api-marcelo.herokuapp.com/api/project/")
+        return await axios.get("https://portfolio-api-marcelo.herokuapp.com/api/project/")
             .then(response => {
                 const projectsFound =  response.data;
                 console.log(projectsFound);
@@ -16,7 +12,13 @@ export async function getProjects(){
             })
     }
 
-export async function addNewProject(props: NewProjectProps){
+export async function getProjectBySlug(slugParam){
+    const projects = await getProjects();
+    
+    return projects.find(p  => p.slug === slugParam);
+}
+
+export async function addNewProject(){
     
 }
 
