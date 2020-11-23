@@ -3,10 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Main from './components/Main';
-import Blog from './components/Blog';
 import Header from './components/Header';
-import Footer from './components/Footer';
 import { makeStyles } from '@material-ui/core/styles';
 import { Auth0Provider } from '@auth0/auth0-react';
 
@@ -40,8 +37,7 @@ ReactDOM.render(
   >
     <React.StrictMode>
       <Header sections={sections} title={"Marcelo Zometa's Portfolio"}/>
-      <App/>
-      <Footer />
+      <App/>      
     </React.StrictMode>  
   </Auth0Provider>,  
   document.getElementById('root')
