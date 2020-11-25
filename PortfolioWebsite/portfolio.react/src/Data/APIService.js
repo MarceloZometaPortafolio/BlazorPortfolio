@@ -1,5 +1,5 @@
 import axios from 'axios'
-import Project from '../Models/Project'
+//import Project from '../Models/Project'
 
 const APIService = {
     getProjects: async function(){
@@ -49,6 +49,16 @@ const APIService = {
 
                 return platformsFound;
         })
+    },
+
+    getLanguages: async function () {
+        return await axios.get("https://portfolio-api-marcelo.herokuapp.com/api/language/")
+            .then(response => {
+                const languagesFound = response.data;
+                console.log("Languages found " + languagesFound);
+
+                return languagesFound;
+            })
     }
 }
 

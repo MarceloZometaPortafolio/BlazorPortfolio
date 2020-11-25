@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const sections = [
-  { title: 'Resume', url: 'resume' },
+  { title: 'Resume', url: '/resume' },
   { title: 'Skills', url: 'skills' },
   { title: 'Posts', url: 'posts' },
   { title: 'Projects', url: 'projects' },

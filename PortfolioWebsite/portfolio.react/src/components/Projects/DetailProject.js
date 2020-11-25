@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card, CardContent, CardHeader, Container } from '@material-ui/core';
+import { Card, CardContent, CardHeader, Container } from '@material-ui/core';
 import ReactMarkdown from 'react-markdown'
 import APIService from '../../Data/APIService'
 import { makeStyles } from '@material-ui/core/styles';
@@ -22,7 +22,7 @@ const DetailProject = (props) => {
 
     const getProject = async () => {
         const projectFound = await APIService.getProjectBySlug(slug);
-        APIService.getProjectBySlug(slug)
+        //APIService.getProjectBySlug(slug)
         return projectFound;
     }
 

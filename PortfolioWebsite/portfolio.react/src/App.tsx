@@ -7,6 +7,7 @@ import Resume from './components/Resume';
 import Auth from "./components/Auth";
 import Callback from './components/Callback'
 import DetailProject from './components/Projects/DetailProject'
+import Languages from './components/Categories/Languages'
 
 interface FormContextProps {
   values: {},
@@ -35,6 +36,8 @@ function App() {
                   component={Callback}/>
             <Route exact path="/projects/:slug" 
                   component={DetailProject}/>
+            <Route exact path="/languages"
+                  component={Languages}/>
           </Switch>
         </BrowserRouter>
       </Auth>
