@@ -3,7 +3,7 @@ import { Button, Card, CardContent, CardHeader, Container } from '@material-ui/c
 import ReactMarkdown from 'react-markdown'
 import APIService from '../../Data/APIService'
 import { makeStyles } from '@material-ui/core/styles';
-import { getAllJSDocTags } from 'typescript';
+import CategoryCard from './CategoryCard';
 
 const useStyles = makeStyles((theme) => ({
     leftAligned: {
@@ -44,16 +44,19 @@ const DetailProject = (props) => {
         return platformsFound;
     }
 
-    const getData = async() => {
-        setProject(await getProject());
+    const getData = async() => {        
         setLanguages(await getLanguages());
         setTechnologies(await getTechnologies());
-        setPlatforms(await getPlatforms());
+        setPlatforms(await getPlatforms());        
     }
 
     useEffect(() => {       
-        getData();
-    }, [slug, project.id]);
+        getProject()
+        .then(project => {
+            setProject(project);
+            getData();
+        })                    
+    }, [project.id]);
 
     return(
         <div>
@@ -70,31 +73,14 @@ const DetailProject = (props) => {
                     <label className={classes.leftAligned}>{project.completionDate}</label>   
 
                     <CardHeader title="Languages" className={classes.leftAligned}/>
-                    {languages.map(l => 
-                        <ul key={l.id}>
-                            <div>
-                                <li className={classes.leftAligned}>{l.name}</li>
-                            </div>
-                        </ul>
-                    )}
+                    <CategoryCard category={languages}/>
+                   
 
                     <CardHeader title="Technologies" className={classes.leftAligned}/>
-                    {technologies.map(t => 
-                        <ul key={t.id}>
-                            <div>
-                                <li className={classes.leftAligned}>{t.name}</li>
-                            </div>
-                        </ul>
-                    )}
+                    <CategoryCard category={technologies}/>
 
                     <CardHeader title="Platforms" className={classes.leftAligned}/>
-                    {platforms.map(p => 
-                        <ul key={p.id}>
-                            <div>
-                                <li className={classes.leftAligned}>{p.name}</li>
-                            </div>
-                        </ul>
-                    )}
+                    <CategoryCard category={platforms}/>
                 </CardContent>
             </Card>
         </div>
