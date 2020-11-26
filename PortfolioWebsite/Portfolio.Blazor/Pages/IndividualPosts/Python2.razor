@@ -1,8 +1,46 @@
 ﻿@page "/codewars-python-2"
-<h3>Journey through CodeWars with Python Part 2</h3>
+<h3>Codewars: Find the parity outlier</h3>
 <br />
 
+    Codewars is a great portal for programmers to challenge themselves by doing Katas. You can find more information on
+<a href="https://www.codewars.com/">this site</a>
 
+<br />
+<br />
+
+<h5>Challenge:</h5>
+<br />
+
+    In a nutshell, this challenge is about having a list of numbers, either all even or all odd, but in the list, there is one outlier. In the even list, there is going
+to be one odd, and viceversa. The challenge was to find it. We know these lists are going to be at least 3 numbers long.
+
+<br />
+<img src="images/Python2/propmt2.jpg" alt="Propmt" style="margin:2em; justify-self:center" />
+
+<br />
+
+<h5>Implementation:</h5>
+<br />
+
+    To solve this challenge, I came up with the following algorithm:
+
+<ol>
+    <li>
+        Figure out what we are dealing with. If we add the mods of the first three elements we can tell if its an odd or even list. Result > 1, odd, else even
+    </li>
+    <li>Loop through each number. If its odd, mod 2 and if the answer is zero, return the number</li>
+    <li>Loop through each number. If its even, mod 2 and if the answer is not zero, return the number</li>
+</ol>
+<br />
+
+<img src="images/Python2/code2.jpg" alt="Code" style="margin:2em; justify-self:center" />
+<br />
+
+<h5>Review:</h5>
+<br />
+    I had fun solving this exercise because it required some mathematics to come up with the algorithm. I am sure there are easier ways to do it, but I am proud of my algorithm
+for it uses only mod, addition, and one loop in either case to come up with the answer. 
+<br />
 @code {
 
 }

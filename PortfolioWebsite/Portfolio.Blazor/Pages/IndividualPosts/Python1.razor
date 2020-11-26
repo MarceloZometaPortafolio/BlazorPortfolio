@@ -1,7 +1,43 @@
 ﻿@page "/codewars-python"
-<h3>Journey through Codewars with Python</h3>
-<br />
+    <h3>Codewars Kata: Duplicate Encoder</h3>
+    <br />
 
-@code {
+    Codewars is a great portal for programmers to challenge themselves by doing Katas. You can find more information on
+    <a href="https://www.codewars.com/">this site</a>
 
-}
+    <br />
+    <br />
+
+    <h5>Challenge:</h5>
+    <br />
+
+    In a nutshell, this challenge is about encoding a given word to a series of "(" and ")". If the letter is not repeated, use "(", else ")"
+
+    <br />
+    <img src="images/Python1/propmt1.jpg" alt="Propmt" style="margin:2em; justify-self:center" />
+
+    <br />
+
+    <h5>Implementation:</h5>
+    <br />
+
+    To solve this challenge, I came up with the following algorithm:
+
+    <ol>
+        <li>
+            Loop through each letter of the word and start adding each letter to a dictionary. If the letter is not there, add it and set a value of 1, else just
+            increment the value by 1
+        </li>
+        <li>Loop again through each letter again but this time search for the letter in the dictionary, if the value is 1, add a "(" to a string, else add a ")"</li>
+        <li>Return the string</li>
+    </ol>
+    <br />
+
+    <img src="images/Python1/code1.jpg" alt="Code" style="margin:2em; justify-self:center" />
+    <br />
+
+    <h5>Review:</h5>
+    <br />
+    This game was a great oportunity for working with strings and dictionaries. The process was not the most efficient, but I decided to go this way for it was a great opportunity
+    for me to practice my dictionaries on Python.
+    <br />

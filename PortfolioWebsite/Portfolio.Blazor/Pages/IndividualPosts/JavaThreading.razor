@@ -2,6 +2,36 @@
 <h3>Threading in Java</h3>
 <br />
 
+For the GasStation project, I used threads to run the process and make the classes change state. This is how it was done.
+<br />
+
+<h4>Process</h4>
+<br />
+First, we have to define a class to implement the Runnable class
+<br />
+
+<img src="images/threads/cardefinition.jpg" alt="Definition of Car class" style="margin:2em; justify-self:center" />
+<br />
+
+Second, this class has to override a method called run. This is where the magic happens. When the thread is asked to start this is what will run
+<br />
+
+<img src="images/threads/run.jpg" alt="Definition of run method inside Car class" style="margin:2em; justify-self:center" />
+<br />
+
+Then, we navigate to where we want the threads to start. In my case, they are to run in the tests, so in the test method I create a new thread object and I pass a car object
+as an argument. Then its a matter of calling thread object start and the run method inside car will run.
+<br />
+
+<img src="images/threads/thread.jpg" alt="Initialization of thread" style="margin:2em; justify-self:center" />
+<br />
+
+The threads will run until the code inside the run method finishes, but our main thread will continue, that is why we use the thread.join method, which tells my main thread to
+wait for the specified thread to end before moving on. Because these could throw an exception, it is a good idea to wrap them in a try catch block
+<br />
+
+<img src="images/threads/join.jpg" alt="Wait for child threads to stop" style="margin:2em; justify-self:center" />
+<br />
 
 @code {
 

@@ -1,0 +1,37 @@
+﻿@page "/python-overloading-constructor"
+<h3>Python overloading the constructor</h3>
+<br />
+
+    This is a tutorial for overloading a class' constructor using Python. Source code can be found <a href="https://github.com/MarceloZometaPortafolio/PythonRestaurant">here</a>
+
+<br />
+<br />
+
+<h5>Challenge:</h5>
+<br />
+
+    The typical Python class constructor "def __init__()" cannot be overloaded like in C based languages where you only need to change the amount of
+    parameters assigned to it.
+<br />
+<br />
+
+<h5>Solution:</h5>
+<br />
+
+    After some research, I read that the best way to overload a constructor is by having it expect a "**kwargs" parameter. Kwargs is a "key word arguments"
+passed to the class. This parameter behaves like a dictionary by using keys and values. This are defined when the function is called. This is superior (in my 
+opinion) to "*args" in that having a dictionary gives you more control when assigning a specific value to the variable you want to initialize. Args, on the other
+hand, pass arguments as a list, so you have to keep in mind which argument is in which index, making it easier to have the wrong value assigned to the variable. 
+
+Here is my implementation of kwargs on my Restaurant project:
+
+<br />
+
+<img src="images/pythonOverloading/implementation.jpg" alt="Implementation of kwargs" style="margin:2em; justify-self:center" />
+<br />
+
+And here is how you call the constructor from a test:
+<br />
+
+<img src="images/pythonOverloading/calling.jpg" alt="Calling constructor from a module" style="margin:2em; justify-self:center" />
+<br />
