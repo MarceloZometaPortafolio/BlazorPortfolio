@@ -3,30 +3,30 @@ import { Card, CardContent, CardHeader } from '@material-ui/core';
 import APIService from '../../Data/APIService'
 import CategoryCard from './CategoryCard';
 
-const Languages = () => {              
-    const [languages, setLanguages] = useState([]);        
+const Technologies = () => {              
+    const [technologies, setTechnologies] = useState([]);        
 
-    const getLanguages = async() => {
-        return await APIService.getLanguages();        
+    const getTechnologies = async() => {
+        return await APIService.getTechnologies();        
     }
 
     useEffect(() => {       
-        getLanguages()
-        .then(languagesFound => {
-            setLanguages(languagesFound);
+        getTechnologies()
+        .then(techsFound => {
+            setTechnologies(techsFound);
         })                        
     }, []);
 
     return(
         <div>
             <Card>
-                <CardHeader title={"Languages"}/>
+                <CardHeader title={"Technologies"}/>
                 <CardContent>                    
-                    <CategoryCard category={languages}/>               
+                    <CategoryCard category={technologies}/>               
                 </CardContent>
             </Card>
         </div>
     );
 }
 
-export default Languages
+export default Technologies

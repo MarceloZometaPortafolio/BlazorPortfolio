@@ -59,6 +59,26 @@ const APIService = {
 
                 return languagesFound;
             })
+    },
+
+    getTechnologies: async function () {
+        return await axios.get("https://portfolio-api-marcelo.herokuapp.com/api/technology/")
+            .then(response => {
+                const techsFound = response.data;
+                console.log("Technologies found " + techsFound);
+
+                return techsFound;
+            })
+    },
+
+    getPlatforms: async function () {
+        return await axios.get("https://portfolio-api-marcelo.herokuapp.com/api/platform/")
+            .then(response => {
+                const platformsFound = response.data;
+                console.log("Platforms found " + platformsFound);
+
+                return platformsFound;
+            })
     }
 }
 

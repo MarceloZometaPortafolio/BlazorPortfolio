@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, Container } from '@material-ui/core';
 import ReactMarkdown from 'react-markdown'
 import APIService from '../../Data/APIService'
 import { makeStyles } from '@material-ui/core/styles';
-import CategoryCard from './CategoryCard';
+import CategoryCard from '../Categories/CategoryCard';
 
 const useStyles = makeStyles((theme) => ({
     leftAligned: {

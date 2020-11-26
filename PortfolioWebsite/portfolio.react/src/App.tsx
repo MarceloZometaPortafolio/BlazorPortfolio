@@ -8,6 +8,8 @@ import Auth from "./components/Auth";
 import Callback from './components/Callback'
 import DetailProject from './components/Projects/DetailProject'
 import Languages from './components/Categories/Languages'
+import Technologies from './components/Categories/Technologies'
+import Platforms from './components/Categories/Platforms'
 
 interface FormContextProps {
   values: {},
@@ -38,6 +40,10 @@ function App() {
                   component={DetailProject}/>
             <Route exact path="/languages"
                   component={Languages}/>
+            <Route exact path="/technologies"
+                  component={Technologies}/>
+            <Route exact path="/platforms"
+                  component={Platforms}/>
           </Switch>
         </BrowserRouter>
       </Auth>

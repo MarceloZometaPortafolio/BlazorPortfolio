@@ -13,12 +13,10 @@ const CategoryCard = (props) => {
 
     return(
         <div>
-            {props.category.map(c => 
-               
-                    <ul key={c.id}>
-                        <li className={classes.leftAligned}>{c.name}</li>
-                    </ul>
-               
+            {category.map(c => 
+                <ul key={c.id}>
+                    <li className={classes.leftAligned}>{c.name}</li>
+                </ul>
             )}
         </div>
     );
