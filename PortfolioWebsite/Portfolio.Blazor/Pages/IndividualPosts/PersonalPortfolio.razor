@@ -1,0 +1,52 @@
+﻿@page "/personal-portfolio"
+<h3>C# and SQL: Personal Portfolio</h3>
+<br />
+    This project is a personal interpretation of the popular Game Show: Who wants to be a
+    Millionaire? This is a teardown of its components and architecture. The project's source code
+    can be found in this <a href="https://github.com/MarceloZometaPortafolio/WhoWantsToBeAMillionaire">link</a>.
+
+    This is a work in progress, so some functionality, features and design is subject to change or currently missing.
+<br />
+<br />
+
+<h5>Architecture:</h5>
+<br />
+    The project is expected to have a React.js front end which holds an HttpClient that talks to
+    a Node.js API running in Heroku (a free public hosting site.). The API will hold a series of
+    JSON files and serve them to the frontend on a request basis. This is subject to change. Depending
+    on time constraints this might change to talk to a fully functional database.
+
+    The frontend will take the response, possibly cache it (WIP) and serve it to the user, who, as the game,
+    will progress answering right answers and reaching checkpoints.
+
+    My twist would be that the user does not count with any lifeline, but still have a limit of 1 minute to answewr
+    the question correctly. The questions, however, will be substantially less difficult than in the game
+    show.
+<br />
+<br />
+
+<h5>Implementation:</h5>
+<br />
+<br />
+
+<strong>Front end</strong>
+<br />
+<br />
+
+    The front end is composed of 3 pages: Home, Leaderboards, and Game. The Home page is the landing
+    page. The user is able to navigate to the Leaderboard from here and from the NavBar (present in each page).
+
+    From the Home page, the user can start a new game by filling the dialog message. The message will not
+    proceed until a name has been stablished.
+
+<br />
+
+<img src="images/millionaire/start.jpg" alt="Dialog box to start new game" style="margin:2em; justify-self:center" />
+<br />
+
+    After the user has entered a name, the user will be redirected to a new page labeled Game. Here, first the user will 
+    see a board communicating his progress and where are the checkpoints. This board will be displayed for 30 seconds. After this,
+    it will fade and the user will be presented the question and possible answers to which the user will have to answer in the first
+    minute. Failure to do so will result in a game over. 
+    
+    (This is a work in progress)
