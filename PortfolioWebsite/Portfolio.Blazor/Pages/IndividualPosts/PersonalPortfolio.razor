@@ -1,28 +1,39 @@
 ﻿@page "/personal-portfolio"
 <h3>C# and SQL: Personal Portfolio</h3>
 <br />
-    Work in progress
+
+<h5>Objective:</h5>
+<br />
+    <ul>
+        <li>
+            Describe internal structure of personal portfolio
+        </li>
+    </ul>
+<br />
+
 <br />
 <br />
 
 <h5>Architecture:</h5>
 <br />
-    The project is expected to have a React.js front end which holds an HttpClient that talks to
-    a Node.js API running in Heroku (a free public hosting site.). The API will hold a series of
-    JSON files and serve them to the frontend on a request basis. This is subject to change. Depending
-    on time constraints this might change to talk to a fully functional database.
-
-    The frontend will take the response, possibly cache it (WIP) and serve it to the user, who, as the game,
-    will progress answering right answers and reaching checkpoints.
-
-    My twist would be that the user does not count with any lifeline, but still have a limit of 1 minute to answewr
-    the question correctly. The questions, however, will be substantially less difficult than in the game
-    show.
+    This personal portfolio is composed of 3 major parts:
+    <ul>
+        <li>
+            <strong>Front End:</strong> Blazor Web Assembly project published on Github pages
+        </li>
+        <li>
+            <strong>Back End:</strong> ASP.NET REST API published using Heroku
+        </li>
+        <li>
+            <strong>Database: </strong> Postgres Database published using Heroku
+        </li>
+    </ul>
 <br />
 <br />
 
-<h5>Implementation:</h5>
+<h5>Breakdown:</h5>
 <br />
+    
 <br />
 
 <strong>Front end</strong>
@@ -40,9 +51,9 @@
 <img src="images/millionaire/start.jpg" alt="Dialog box to start new game" style="margin:2em; justify-self:center" />
 <br />
 
-    After the user has entered a name, the user will be redirected to a new page labeled Game. Here, first the user will 
+    After the user has entered a name, the user will be redirected to a new page labeled Game. Here, first the user will
     see a board communicating his progress and where are the checkpoints. This board will be displayed for 30 seconds. After this,
     it will fade and the user will be presented the question and possible answers to which the user will have to answer in the first
-    minute. Failure to do so will result in a game over. 
-    
+    minute. Failure to do so will result in a game over.
+
     (This is a work in progress)
