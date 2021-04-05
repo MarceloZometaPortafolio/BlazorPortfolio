@@ -213,11 +213,12 @@ app {
         width: 100%; /* Full width */
     }
 
-    .topNavBar header {
-        width: auto;
-        height: 70px;
-        background-color: black;
-    }
+        .topNavBar header {
+            width: auto;
+            height: 70px;
+            background-color: black;
+            vertical-align: central;
+        }
 
     .topNavBar h1 {
         position: absolute;
@@ -234,13 +235,14 @@ app {
         margin-top: 8px;
     }
 
-    .topNavBar a{
-        display: inline-block;
-        margin: 0 5px;
-        padding: 7px 13px;
-        border-radius: 3px;
-        color: #66FCF1;
-    }
+        .topNavBar a {
+            display: inline-block;
+            margin: 0 5px;
+            padding: 7px 13px;
+            border-radius: 3px;
+            color: #66FCF1;
+            vertical-align: middle;
+        }
 
     .topNavBar a:hover, .dropdownNavBar:hover .dropbtn {
         background-color: #1F2833;
