@@ -72,7 +72,7 @@ The Back End uses 4 different controllers to generate different endpoints for th
 <ul>
     <li>
         <strong>Project Controller: "api/project"</strong>
-        <br/>
+        <br />
         <ul>
             <li>
                 <strong>api/project: GET</strong>
@@ -119,10 +119,55 @@ The Back End uses 4 different controllers to generate different endpoints for th
                 This endpoint executes a GET request to the database, getting all the technologies from a specific project.
             </li>
         </ul>
-            
+        <br />
     </li>
     <li>
-        <strong></strong>
+        <strong>Language Controller: "api/language"</strong>
+        <br />
+        <ul>
+            <li>
+                <strong>api/language: GET</strong>
+                <br />
+                This endpoint executes a GET request to the database, getting all the languages from the database.
+            </li>
+            <li>
+                <strong>api/language/getprojects/{id}: GET</strong>
+                <br />
+                This endpoint executes a GET request to the database, getting all the projects from a specific language.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Platform Controller: "api/platform"</strong>
+        <br />
+        <ul>
+            <li>
+                <strong>api/platform: GET</strong>
+                <br />
+                This endpoint executes a GET request to the database, getting all the platforms from the database.
+            </li>
+            <li>
+                <strong>api/platform/getprojects/{id}: GET</strong>
+                <br />
+                This endpoint executes a GET request to the database, getting all the projects from a specific platform.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Technology Controller: "api/technology"</strong>
+        <br />
+        <ul>
+            <li>
+                <strong>api/technology: GET</strong>
+                <br />
+                This endpoint executes a GET request to the database, getting all the technologies from the database.
+            </li>
+            <li>
+                <strong>api/technology/getprojects/{id}: GET</strong>
+                <br />
+                This endpoint executes a GET request to the database, getting all the projects from a specific technology.
+            </li>
+        </ul>
     </li>
 </ul>
 <img src="images/millionaire/start.jpg" alt="Dialog box to start new game" style="margin:2em; justify-self:center" />
