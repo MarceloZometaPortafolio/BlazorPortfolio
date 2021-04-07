@@ -29,7 +29,6 @@
 <br />
 
 <h4>Breakdown:</h4>
-<br />
 
 <h5>Front End</h5>
 <br />
@@ -39,6 +38,7 @@ page. Since Blazor WASM generate a static HTML file, it can be read and publishe
 
 The UI is composed of 3 main tabs:
 
+<br/>
 <ol>
     <li>
         <strong>Resume:</strong>
@@ -60,7 +60,6 @@ The UI is composed of 3 main tabs:
 </ol>
 
 <h5>Back End</h5>
-<br />
 
 The Back End is composed of a REST API based on ASP.NET that allows the administrator to add new posts specifying which languages, platforms and what 
 technologies are being used in that specific post. 
@@ -69,6 +68,7 @@ NOTE: this feature is currently being refactored, so its been hidden from the pu
 
 The Back End uses 4 different controllers to generate different endpoints for the API: 
 
+<br/>
 <ul>
     <li>
         <strong>Project Controller: "api/project"</strong>
@@ -136,6 +136,7 @@ The Back End uses 4 different controllers to generate different endpoints for th
                 This endpoint executes a GET request to the database, getting all the projects from a specific language.
             </li>
         </ul>
+        <br/>
     </li>
     <li>
         <strong>Platform Controller: "api/platform"</strong>
@@ -152,6 +153,7 @@ The Back End uses 4 different controllers to generate different endpoints for th
                 This endpoint executes a GET request to the database, getting all the projects from a specific platform.
             </li>
         </ul>
+        <br/>
     </li>
     <li>
         <strong>Technology Controller: "api/technology"</strong>
@@ -168,13 +170,14 @@ The Back End uses 4 different controllers to generate different endpoints for th
                 This endpoint executes a GET request to the database, getting all the projects from a specific technology.
             </li>
         </ul>
+        <br/>
     </li>
 </ul>
 
 The Back End is able to talk to the database by using Entity Framework. This ORM not only 
 facilitates working with a database on C#, but also helps us protect it from SQL injection and 
 other attacks. 
-
+<br/>
 <h5>Database:</h5>
 
 The database used for this project is running on a PostgreSQL server, hosted on 
