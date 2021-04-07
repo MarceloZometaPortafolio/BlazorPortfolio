@@ -4,38 +4,38 @@
 
 <h5>Objective:</h5>
 <br />
-    <ul>
-        <li>
-            Describe internal structure of personal portfolio
-        </li>
-    </ul>
+<ul>
+    <li>
+        Describe internal structure of personal portfolio
+    </li>
+</ul>
 <br />
 
 <h5>Architecture:</h5>
 <br />
     This personal portfolio is composed of 3 major parts:
-    <ul>
-        <li>
-            <strong>Front End:</strong> Blazor Web Assembly project published on Github pages
-        </li>
-        <li>
-            <strong>Back End:</strong> ASP.NET REST API published using Heroku
-        </li>
-        <li>
-            <strong>Database: </strong> Postgres Database published using Heroku
-        </li>
-    </ul>
+<ul>
+    <li>
+        <strong>Front End:</strong> Blazor Web Assembly project published on Github pages
+    </li>
+    <li>
+        <strong>Back End:</strong> ASP.NET REST API published using Heroku
+    </li>
+    <li>
+        <strong>Database: </strong> Postgres Database published using Heroku
+    </li>
+</ul>
 <br />
 <br />
 
 <h4>Breakdown:</h4>
 <br />
 
-<h5>Front End</h5>    
+<h5>Front End</h5>
 <br />
 
-The front end is composed of a Blazor WASM (Web Assembly) project published in Github pages. This is possible thanks to it being a static 
-page. Since Blazor WASM generate a static HTML file, it can be read and published as a static page by Github. 
+The front end is composed of a Blazor WASM (Web Assembly) project published in Github pages. This is possible thanks to it being a static
+page. Since Blazor WASM generate a static HTML file, it can be read and published as a static page by Github.
 
 The UI is composed of 3 main tabs:
 
@@ -43,22 +43,86 @@ The UI is composed of 3 main tabs:
     <li>
         <strong>Resume:</strong>
         <br />
-        In this section, the users can find my resume inside of an iframe tag, and they can even download it if so desired. 
+        In this section, the users can find my resume inside of an iframe tag, and they can even download it if so desired.
     </li>
     <li>
         <strong>Skills</strong>
         <br />
-        In this section, the users can find a list of all my different skills separated into 2 different categories: the present 
-        skills and the skills in progress. 
+        In this section, the users can find a list of all my different skills separated into 2 different categories: the present
+        skills and the skills in progress.
     </li>
     <li>
         <strong>Posts</strong>
-        <br/>
-        In this section, the users can find a list of all my different skills applied into real world applications, and a brief 
-        post explaining the projects. 
+        <br />
+        In this section, the users can find a list of all my different skills applied into real world applications, and a brief
+        post explaining the projects.
     </li>
 </ol>
 
 <h5>Back End</h5>
+<br />
 
+The Back End is composed of a REST API based on ASP.NET that allows the administrator to add new posts specifying which languages, platforms and what 
+technologies are being used in that specific post. 
+
+NOTE: this feature is currently being refactored, so its been hidden from the public. Expect a "Login" option next to the "Posts" tab in the future.
+
+The Back End uses 4 different controllers to generate different endpoints for the API: 
+
+<ul>
+    <li>
+        <strong>Project Controller: "api/project"</strong>
+        <br/>
+        <ul>
+            <li>
+                <strong>api/project: GET</strong>
+                <br />
+                This endpoints executes a GET request to the database, returning an IEnumerable of the existing Projects.
+            </li>
+            <li>
+                <strong>api/project: POST</strong>
+                <br />
+                This endpoints executes a POST request to the database, adding a project to the database.
+                This action is only possible if logged in
+            </li>
+            <li>
+                <strong>api/project/update: POST</strong>
+                <br />
+                This endpoint executes a POST request to the database, updating a project in the database.
+                This action is only possible if logged in
+            </li>
+            <li>
+                <strong>api/project/{number}: DELETE</strong>
+                <br />
+                This endpoint executes a DELETE request to the database, deleting a project with the passed ID in the database.
+                This action is only possible if logged in.
+            </li>
+            <li>
+                <strong>api/project/assign: POST</strong>
+                <br />
+                This endpoint executes a POST request to the database, assigning a category to an existing project.
+                This action is only possible if logged in
+            </li>
+            <li>
+                <strong>api/project/getlanguages/{id}: GET</strong>
+                <br />
+                This endpoint executes a GET request to the database, getting all the languages from a specific project.
+            </li>
+            <li>
+                <strong>api/project/getplatforms/{id}: GET</strong>
+                <br />
+                This endpoint executes a GET request to the database, getting all the platforms from a specific project.
+            </li>
+            <li>
+                <strong>api/project/gettechnologies/{id}: GET</strong>
+                <br />
+                This endpoint executes a GET request to the database, getting all the technologies from a specific project.
+            </li>
+        </ul>
+            
+    </li>
+    <li>
+        <strong></strong>
+    </li>
+</ul>
 <img src="images/millionaire/start.jpg" alt="Dialog box to start new game" style="margin:2em; justify-self:center" />
